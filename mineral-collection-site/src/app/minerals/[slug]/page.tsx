@@ -7,12 +7,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const SPECIMEN_QUERY = defineQuery(`*[
-    _type == "specimen" &&
+const MINERAL_QUERY = defineQuery(`*[
+    _type == "mineral" &&
     slug.current == $slug
   ][0]{
-  ...,
-  minerals->
+  ...
 }`);
 
 const { projectId, dataset } = client.config();
@@ -21,39 +20,39 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-export default async function SpecimenPage({
+export default async function MineralPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { data: specimen } = await sanityFetch({
-    query: SPECIMEN_QUERY,
+  const { data: mineral } = await sanityFetch({
+    query: MINERAL_QUERY,
     params: await params,
   });
-  if (!specimen) {
+  if (!mineral) {
     notFound();
   }
-  const imageUrl = specimen.previewImage
-    ? urlFor(specimen.previewImage)?.width(550).height(310).url()
+  const imageUrl = mineral.previewImage
+    ? urlFor(mineral.previewImage)?.width(550).height(310).url()
     : null;
 
   return (
     <main>
       <div>
-        <Link href="/specimens">← Back to Specimens</Link>
+        <Link href="/minerals">← Back to Minerals</Link>
       </div>
       <div>
         <Image
           src={imageUrl || "https://placehold.co/550x310/png"}
-          alt={specimen.name || "Specimen"}
+          alt={mineral.name || "Mineral"}
           height="310"
           width="550"
         />
         <div>
-          {specimen.name ? <h1>{specimen.name}</h1> : null}
-          {specimen.notes && specimen.notes.length > 0 && (
+          {mineral.name ? <h1>{mineral.name}</h1> : null}
+          {mineral.notes && mineral.notes.length > 0 && (
             <div>
-              <PortableText value={specimen.notes} />
+              <PortableText value={mineral.notes} />
             </div>
           )}
         </div>
