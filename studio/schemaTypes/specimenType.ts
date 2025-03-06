@@ -1,5 +1,6 @@
 import {DiamondIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
+import { colors, specimenSizes } from './constants'
 
 export const specimenType = defineType({
   name: 'specimen',
@@ -48,6 +49,9 @@ export const specimenType = defineType({
       name: 'sizeCategory',
       type: 'string',
       group: 'properties',
+      options: {
+        list: specimenSizes
+      }
     }),
     defineField({
       name: 'size',
@@ -65,7 +69,11 @@ export const specimenType = defineType({
       name: 'colors',
       type: 'array',
       group: 'properties',
-      of: [{type: 'string'}],
+      of: [{type: 'string',
+        options: {
+          list: colors
+        }
+      }],
     }),
     defineField({
       name: 'origin',
