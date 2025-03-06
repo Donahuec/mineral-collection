@@ -14,7 +14,7 @@ const SPECIMEN_QUERY = defineQuery(`*[
     slug.current == $slug
   ][0]{
   ...,
-  minerals->{name, slug, previewImage}
+  minerals[]->{name, _id, slug, previewImage}
 }`);
 
 const { projectId, dataset } = client.config();
@@ -55,13 +55,27 @@ export default async function SpecimenPage({
         />
         <div className={styles.primaryDetails}>
           {<h1 className={styles.title}>{specimen.name} {specimen.numericId && (<>- #{specimen.numericId}</>)}</h1>}
+          <ul className={styles.minerals}>
+            {specimen.minerals &&
+              specimen.minerals?.map((mineral: any) => (
+                <li
+                key={mineral._id}>
+                  <Link
+                  key={mineral.slug.current}
+                  href={`/minerals/${mineral.slug.current}`}
+                >
+                  {mineral.name}
+                </Link>
+                </li>
+              ))}
+          </ul>
         </div>
       </div>
-      {specimen.notes && specimen.notes.length > 0 && (
-        <div>
-          <PortableText value={specimen.notes} />
-        </div>
-      )}
+        {specimen.notes && specimen.notes.length > 0 && (
+          <div>
+            <PortableText value={specimen.notes} />
+          </div>
+        )}
     </main>
   );
 }

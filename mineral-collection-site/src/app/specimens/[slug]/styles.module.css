@@ -13,6 +13,12 @@
     padding-inline: clamp(16px, 5%, 64px);
     padding-block: 16px;
     width: 100%;
+    
+}
+
+.container a {
+    color: var(--lightAccent);
+    text-decoration: none;
 }
 
 .infoBlock {
@@ -20,7 +26,13 @@
     background-color: var(--darkAccent);
     margin: 32px;
     border-radius: 16px;
+}
 
+.minerals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding-block: 16px;
 }
 
 .infoBlock > .primaryDetails {
