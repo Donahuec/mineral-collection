@@ -7,9 +7,39 @@ export const specimenType = defineType({
   title: 'Specimen',
   type: 'document',
   groups: [
-    {name: 'details', title: 'Details'},
+    {name: 'details', title: 'Details', default: true},
     {name: 'properties', title: 'Properties'},
     {name: 'purchase', title: 'Purchase'},
+  ],
+  orderings: [
+    {
+      title: 'Name, Asc',
+      name: 'nameAsc',
+      by: [
+        {field: 'name', direction: 'asc'}
+      ]
+    },
+    {
+      title: 'Name, Desc',
+      name: 'nameDesc',
+      by: [
+        {field: 'name', direction: 'desc'}
+      ]
+    },
+    {
+      title: 'numericId, Asc',
+      name: 'numericIdAsc',
+      by: [
+        {field: 'numericId', direction: 'asc'}
+      ]
+    },
+    {
+      title: 'numericId, Desc',
+      name: 'numericIdDesc',
+      by: [
+        {field: 'numericId', direction: 'desc'}
+      ]
+    }
   ],
   fields: [
     defineField({
@@ -20,7 +50,7 @@ export const specimenType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      options: {source: 'name'},
+      options: {source: (doc, options) => `${doc.name}-${doc.numericId}`},
       group: 'details',
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
@@ -36,9 +66,33 @@ export const specimenType = defineType({
       of: [{type: 'reference', to: [{type: 'mineral'}]}],
     }),
     defineField({
+      name: 'mineralsText',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'rocks',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'reference', to: [{type: 'rock'}]}],
+    }),
+    defineField({
+      name: 'rocksText',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'string'}],
+    }),
+    defineField({
       name: 'hesitantId',
       type: 'boolean',
       group: 'properties',
+    }),
+    defineField({
+      name: 'tags',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'string'}],
     }),
     defineField({
       name: 'shape',
@@ -69,11 +123,7 @@ export const specimenType = defineType({
       name: 'colors',
       type: 'array',
       group: 'properties',
-      of: [{type: 'string',
-        options: {
-          list: colors
-        }
-      }],
+      of: [{type: 'string'}],
     }),
     defineField({
       name: 'origin',

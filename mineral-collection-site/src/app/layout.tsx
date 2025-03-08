@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/live";
+import styles from "./layout.module.css";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -26,6 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`{montserrat.className} {volkorn.className}`}>
+        <nav className={styles.nav}>
+        <span>CrystalDB</span>
+        <a href="/minerals">Minerals</a>
+        <a href="/specimens">Specimens</a>
+        </nav>
         {children}
         <SanityLive />
       </body>

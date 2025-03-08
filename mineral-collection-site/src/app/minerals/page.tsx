@@ -10,7 +10,7 @@ import ResultGrid from "../_shared/components/resultGrid/resultGrid";
 const MINERALS_QUERY = defineQuery(`*[
   _type == "mineral"
   && defined(slug.current)
-]{_id, name, slug, previewImage}|order(name desc)`);
+]{_id, name, slug, previewImage}|order(name asc)`);
 
 const { projectId, dataset } = client.config();
 function urlFor(mineral: Mineral) {
@@ -20,7 +20,7 @@ function urlFor(mineral: Mineral) {
     projectId && dataset
       ? imageUrlBuilder({ projectId, dataset }).image(source)
       : null;
-  return imageUrl?.width(300).height(300).url();
+  return imageUrl?.width(600).height(600).url();
 }
 
 export default async function MineralsPage() {

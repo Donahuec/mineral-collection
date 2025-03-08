@@ -8,4 +8,5 @@ export const structure: StructureResolver = (S) =>
     .items([
       S.documentTypeListItem('specimen').title('Specimens').icon(DiamondIcon),
       S.documentTypeListItem('mineral').title('Minerals').icon(FolderIcon),
+      S.documentTypeListItem('rock').title('Rocks').icon(FolderIcon),
     ])

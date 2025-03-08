@@ -15,7 +15,7 @@ const ResultCard: FC<ResultCardProps> = ({ title, imageUrl, link }) => (
   <li className={styles.card}>
     <Link href={link}>
       <Image
-        src={imageUrl || "https://placehold.co/300x300/png"}
+        src={imageUrl}
         alt={title}
         className={styles.image}
         width={300}

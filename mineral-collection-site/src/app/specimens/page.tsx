@@ -10,22 +10,19 @@ import ResultGrid from "../_shared/components/resultGrid/resultGrid";
 
 const SPECIMENS_QUERY = defineQuery(`*[
   _type == "specimen"
-  && defined(slug.current)
-]{_id,  name, slug, previewImage}|order(name desc)`);
+  && defined(slug.current) && numericId > $lastId
+]{_id,  name, numericId, slug, previewImage}|order(numericId asc)`);
 
 const { projectId, dataset } = client.config();
 function urlFor(specimen: Specimen) {
   const source = specimen.previewImage;
-  if (!source) return "https://placehold.co/300x300/png";
-  let imageUrl =
-    projectId && dataset
-      ? imageUrlBuilder({ projectId, dataset }).image(source)
-      : null;
-  return imageUrl?.width(300).height(300).url();
+  return projectId && dataset && source
+      ? imageUrlBuilder({ projectId, dataset }).image(source).width(600).height(600).url()
+      : "https://placehold.co/300x300/png";
 }
 
 export default async function SpecimensPage() {
-  const { data: specimens } = await sanityFetch({ query: SPECIMENS_QUERY });
+  const { data: specimens } = await sanityFetch({ query: SPECIMENS_QUERY, params: { lastId: 0 } });
 
   return (
     <main>
@@ -34,8 +31,8 @@ export default async function SpecimensPage() {
         {specimens.map((specimen: Specimen) => (
           <ResultCard
             key={specimen._id}
-            title={specimen.name || "Missing Title"}
-            imageUrl={urlFor(specimen) || "https://placehold.co/300x300/png"}
+            title={`${specimen.name} - #${specimen.numericId}` || "Missing Title"}
+            imageUrl={urlFor(specimen)}
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}

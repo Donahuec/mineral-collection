@@ -6,7 +6,7 @@ export const mineralType = defineType({
   title: 'Mineral',
   type: 'document',
   groups: [
-    {name: 'details', title: 'Details'},
+    {name: 'details', title: 'Details', default: true},
     {name: 'properties', title: 'Properties'},
     {name: 'relationships', title: 'Relationships'},
   ],
@@ -31,6 +31,12 @@ export const mineralType = defineType({
     defineField({
       name: 'mindatUrl',
       type: 'url',
+      group: 'details',
+    }),
+    defineField({
+      name: 'tags',
+      type: 'array',
+      of: [{type: 'string'}],
       group: 'details',
     }),
     defineField({
@@ -78,9 +84,8 @@ export const mineralType = defineType({
     }),
     defineField({
       name: 'care',
-      type: 'array',
+      type: 'string',
       group: 'details',
-      of: [{type: 'block'}],
     }),
     defineField({
       name: 'notes',
@@ -100,12 +105,27 @@ export const mineralType = defineType({
       group: 'relationships',
     }),
     defineField({
+      name: 'accessoryTo',
+      type: 'string',
+      group: 'relationships',
+    }),
+    defineField({
       name: 'mineralClass',
       type: 'string',
       group: 'relationships',
     }),
     defineField({
       name: 'mineralGroup',
+      type: 'string',
+      group: 'relationships',
+    }),
+    defineField({
+      name: 'mineralSeries',
+      type: 'string',
+      group: 'relationships',
+    }),
+    defineField({
+      name: 'endMemberOf',
       type: 'string',
       group: 'relationships',
     }),
@@ -122,7 +142,7 @@ export const mineralType = defineType({
         defineField({
           name: 'colors',
           type: 'array',
-          of: [{type: 'string', options: {list: colors}}],
+          of: [{type: 'string'}],
         }),
         defineField({
           name: 'colorDescription',
@@ -182,9 +202,8 @@ export const mineralType = defineType({
       group: 'properties',
       fields: [
         defineField({
-          name: 'Average',
-          type: 'number',
-          options: {list: mohsScale},
+          name: 'text',
+          type: 'string'
         }),
         defineField({
           name: 'min',
@@ -234,6 +253,11 @@ export const mineralType = defineType({
     }),
     defineField({
       name: 'effervescence',
+      type: 'string',
+      group: 'properties',
+    }),
+    defineField({
+      name: 'morphology',
       type: 'string',
       group: 'properties',
     }),
