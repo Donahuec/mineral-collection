@@ -48,6 +48,11 @@ export const specimenType = defineType({
       group: 'details',
     }),
     defineField({
+      name: 'numericId',
+      type: 'number',
+      group: 'details',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
       options: {source: (doc, options) => `${doc.name}-${doc.numericId}`},
@@ -55,8 +60,14 @@ export const specimenType = defineType({
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
-      name: 'numericId',
-      type: 'number',
+      name: 'images',
+      type: 'array',
+      of: [{type: 'image'}],
+      group: 'details',
+    }),
+    defineField({
+      name: 'previewImage',
+      type: 'image',
       group: 'details',
     }),
     defineField({
@@ -70,6 +81,8 @@ export const specimenType = defineType({
       type: 'array',
       group: 'details',
       of: [{type: 'string'}],
+      readOnly: true,
+      hidden: ({document}) => {return (!document?.mineralsText || (!!document?.minerals && (document.minerals as any[]).length >= (document.mineralsText as any[]).length))},
     }),
     defineField({
       name: 'rocks',
@@ -82,17 +95,13 @@ export const specimenType = defineType({
       type: 'array',
       group: 'details',
       of: [{type: 'string'}],
+      readOnly: true,
+      hidden: ({document}) => {return (!document?.rocksText || (!!document?.rocks && (document.rocks as any[]).length >= (document.rocksText as any[]).length))},
     }),
     defineField({
       name: 'hesitantId',
       type: 'boolean',
       group: 'properties',
-    }),
-    defineField({
-      name: 'tags',
-      type: 'array',
-      group: 'details',
-      of: [{type: 'string'}],
     }),
     defineField({
       name: 'shape',
@@ -172,15 +181,10 @@ export const specimenType = defineType({
       of: [{type: 'block'}],
     }),
     defineField({
-      name: 'images',
+      name: 'tags',
       type: 'array',
-      of: [{type: 'image'}],
       group: 'details',
-    }),
-    defineField({
-      name: 'previewImage',
-      type: 'image',
-      group: 'details',
+      of: [{type: 'string'}],
     }),
   ],
   preview: {

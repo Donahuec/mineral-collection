@@ -1,21 +1,21 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/live";
-import { Mineral } from "@/sanity/types";
+import { Mineral, Rock } from "@/sanity/types";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import ResultCard from "../_shared/components/resultCard/resultCard";
 import styles from "./styles.module.css";
 import ResultGrid from "../_shared/components/resultGrid/resultGrid";
 
-const MINERALS_QUERY = defineQuery(`*[
-  _type == "mineral"
+const ROCKS_QUERY = defineQuery(`*[
+  _type == "rock"
   && defined(slug.current) 
   && count(*[_type == "specimen" && references(^._id)]) > 0
 ]{_id, name, slug, previewImage}|order(name asc)`);
 
 const { projectId, dataset } = client.config();
-function urlFor(mineral: Mineral) {
-  const source = mineral.previewImage;
+function urlFor(rock: Rock) {
+  const source = rock.previewImage;
   if (!source) return "https://placehold.co/300x300/png";
   let imageUrl =
     projectId && dataset
@@ -24,18 +24,18 @@ function urlFor(mineral: Mineral) {
   return imageUrl?.width(600).height(600).url();
 }
 
-export default async function MineralsPage() {
-  const { data: minerals } = await sanityFetch({ query: MINERALS_QUERY });
+export default async function RocksPage() {
+  const { data: rocks } = await sanityFetch({ query: ROCKS_QUERY });
   return (
     <main>
-      <h1>Minerals</h1>
+      <h1>Rocks</h1>
       <ResultGrid>
-      {minerals.map((mineral: any) => (
+      {rocks.map((rock: any) => (
           <ResultCard
-            key={mineral._id}
-            title={mineral.name || "Missing Title"}
-            imageUrl={urlFor(mineral) || "https://placehold.co/300x300/png"}
-            link={`/minerals/${mineral?.slug?.current}`}
+            key={rock._id}
+            title={rock.name || "Missing Title"}
+            imageUrl={urlFor(rock) || "https://placehold.co/300x300/png"}
+            link={`/rocks/${rock?.slug?.current}`}
           />
         ))}
       </ResultGrid>

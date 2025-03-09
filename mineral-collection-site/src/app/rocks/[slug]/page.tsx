@@ -8,12 +8,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { Mineral } from "@/sanity/types";
+import { Mineral, Rock } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultCard/resultCard";
 
-const MINERAL_QUERY = defineQuery(`*[
-    _type == "mineral" &&
+const ROCK_QUERY = defineQuery(`*[
+    _type == "rock" &&
     slug.current == $slug
   ][0]{
   ...,
@@ -31,50 +31,34 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-export default async function MineralPage({
+export default async function RockPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const result = await sanityFetch({
-    query: MINERAL_QUERY,
+    query: ROCK_QUERY,
     params: await params,
   });
 
-  const mineral = result?.data as Mineral;
-  if (!mineral) {
+  const rock = result?.data as Rock;
+  if (!rock) {
     notFound();
   }
-  const imageUrl = mineral.previewImage
-    ? urlFor(mineral.previewImage)?.url()
+  const imageUrl = rock.previewImage
+    ? urlFor(rock.previewImage)?.url()
     : undefined;
 
   return (
     <main className={styles.container}>
       <div>
-        <Link href="/minerals">← Back to Minerals</Link>
+        <Link href="/rocks">← Back to Rocks</Link>
       </div>
-      <ImageHeader title={mineral.name || ""} imageUrl={imageUrl} alt={mineral.name || "Mineral"}>
-        <dl>
-          <dt>Scientific Name</dt>
-          <dd>{mineral.scientificName}</dd>
-          <dt>Alt Names</dt>
-          <dd>{mineral.altNames}</dd>
-          <dt>Mindat Url</dt>
-          <dd>{mineral.mindatUrl}</dd>
-          <dt>Colors</dt>
-          <dd>{mineral.color?.colorDescription}</dd>
-        </dl>
+      <ImageHeader title={rock.name || ""} imageUrl={imageUrl} alt={rock.name || "Rock"}>
       </ImageHeader>
-      <div>
-        {mineral.notes && mineral.notes.length > 0 && (
-          <div>
-            <PortableText value={mineral.notes} />
-          </div>
-        )}
-      </div>
+
       <ResultGrid>
-        {(mineral as any).specimens?.map((specimen: any) => (
+        {(rock as any).specimens?.map((specimen: any) => (
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}

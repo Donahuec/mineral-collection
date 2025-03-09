@@ -14,16 +14,19 @@ type ResultCardProps = {
 const ResultCard: FC<ResultCardProps> = ({ title, imageUrl, link }) => (
   <li className={styles.card}>
     <Link href={link}>
+    <div className={styles.container}>
       <Image
-        src={imageUrl}
-        alt={title}
-        className={styles.image}
-        width={300}
-        height={300}
-      />
-      <div className={styles.content}>
-        <div className={styles.title}>
-          <h2>{title}</h2>
+          src={imageUrl}
+          alt={title}
+          className={styles.image}
+          width={300}
+          height={300}
+        />
+        <div className={styles.divider} />
+        <div className={styles.content}>
+          <div className={styles.title}>
+            <h2>{title}</h2>
+          </div>
         </div>
       </div>
     </Link>
