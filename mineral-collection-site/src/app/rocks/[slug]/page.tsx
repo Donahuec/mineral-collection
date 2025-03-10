@@ -1,6 +1,4 @@
-import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
-import imageUrlBuilder from "@sanity/image-url";
 import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,6 +7,7 @@ import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { ROCK_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
+import { urlFor } from "@/app/_shared/utils/urlService";
 
 const ROCK_QUERY = defineQuery(`*[
     _type == "rock" &&
@@ -22,13 +21,6 @@ const ROCK_QUERY = defineQuery(`*[
     previewImage
 }
 }`);
-
-const { projectId, dataset } = client.config();
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-const urlFor = (source: any) =>
-  projectId && dataset && source
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
 
 export default async function RockPage({
   params,
@@ -61,7 +53,7 @@ export default async function RockPage({
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}
-            imageUrl={urlFor(specimen.previewImage)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={urlFor(specimen.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}

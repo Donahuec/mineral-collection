@@ -1,8 +1,5 @@
-import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
 import { SPECIMEN_QUERYResult } from "@/sanity/types";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery, PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,6 +7,7 @@ import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { title } from "process";
 import Image from "next/image";
+import { urlFor } from "@/app/_shared/utils/urlService";
 
 const SPECIMEN_QUERY = defineQuery(`*[
     _type == "specimen" &&
@@ -19,12 +17,6 @@ const SPECIMEN_QUERY = defineQuery(`*[
   minerals[]->{name, _id, slug, previewImage},
   rocks[]->{name, _id, slug, previewImage}
 }`);
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
 
 export default async function SpecimenPage({
   params,
@@ -187,7 +179,7 @@ export default async function SpecimenPage({
         {specimen.images && specimen.images.length > 0 &&
           specimen.images?.map((image) => (
             <Image
-              src={urlFor(image)?.width(300).height(300).url() || "https://placehold.co/300x300/png"}
+              src={urlFor(image, 600, 600)?.url() || "https://placehold.co/300x300/png"}
               alt={title}
               className={styles.image}
               width={300}

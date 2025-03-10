@@ -1,7 +1,4 @@
-import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery, PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -10,6 +7,7 @@ import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { MINERAL_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
+import { urlFor } from "@/app/_shared/utils/urlService";
 
 const MINERAL_QUERY = defineQuery(`*[
     _type == "mineral" &&
@@ -23,12 +21,6 @@ const MINERAL_QUERY = defineQuery(`*[
     previewImage
 }
 }`);
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource | null) =>
-  projectId && dataset && source
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
 
 export default async function MineralPage({
   params,
@@ -77,7 +69,7 @@ export default async function MineralPage({
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}
-            imageUrl={urlFor(specimen.previewImage)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={urlFor(specimen.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}
