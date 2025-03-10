@@ -1,6 +1,5 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/live";
-import { Mineral } from "@/sanity/types";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import ResultCard from "../_shared/components/resultCard/resultCard";
@@ -14,10 +13,11 @@ const MINERALS_QUERY = defineQuery(`*[
 ]{_id, name, slug, previewImage}|order(name asc)`);
 
 const { projectId, dataset } = client.config();
-function urlFor(mineral: Mineral) {
-  const source = mineral.previewImage;
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+function urlFor(mineral: any) {
+  const source = mineral?.previewImage;
   if (!source) return "https://placehold.co/300x300/png";
-  let imageUrl =
+  const imageUrl =
     projectId && dataset
       ? imageUrlBuilder({ projectId, dataset }).image(source)
       : null;
@@ -30,7 +30,7 @@ export default async function MineralsPage() {
     <main>
       <h1 className={styles.title}>Minerals</h1>
       <ResultGrid>
-      {minerals.map((mineral: any) => (
+      {minerals.map((mineral) => (
           <ResultCard
             key={mineral._id}
             title={mineral.name || "Missing Title"}

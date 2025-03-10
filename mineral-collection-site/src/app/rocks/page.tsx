@@ -1,6 +1,5 @@
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/live";
-import { Mineral, Rock } from "@/sanity/types";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 import ResultCard from "../_shared/components/resultCard/resultCard";
@@ -14,10 +13,11 @@ const ROCKS_QUERY = defineQuery(`*[
 ]{_id, name, slug, previewImage}|order(name asc)`);
 
 const { projectId, dataset } = client.config();
-function urlFor(rock: Rock) {
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+function urlFor(rock: any) {
   const source = rock.previewImage;
   if (!source) return "https://placehold.co/300x300/png";
-  let imageUrl =
+  const imageUrl =
     projectId && dataset
       ? imageUrlBuilder({ projectId, dataset }).image(source)
       : null;
@@ -30,7 +30,8 @@ export default async function RocksPage() {
     <main>
       <h1 className={styles.title}>Rocks</h1>
       <ResultGrid>
-      {rocks.map((rock: any) => (
+        
+      {rocks.map((rock) => (
           <ResultCard
             key={rock._id}
             title={rock.name || "Missing Title"}

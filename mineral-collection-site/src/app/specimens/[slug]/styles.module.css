@@ -24,10 +24,11 @@
     display: flex;
     gap: 8px;
     align-items: center;
-    dt {
-        font-weight: bold;
-        white-space: nowrap;
-    }
+}
+
+dt.label {
+    font-weight: bold;
+    white-space: nowrap;
 }
 
 .additionalProperties {

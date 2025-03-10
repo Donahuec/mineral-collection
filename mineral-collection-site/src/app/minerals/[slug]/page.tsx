@@ -3,12 +3,11 @@ import { sanityFetch } from "@/sanity/live";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery, PortableText } from "next-sanity";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { Mineral } from "@/sanity/types";
+import { MINERAL_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultCard/resultCard";
 
@@ -26,8 +25,8 @@ const MINERAL_QUERY = defineQuery(`*[
 }`);
 
 const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
+const urlFor = (source: SanityImageSource | null) =>
+  projectId && dataset && source
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
@@ -41,7 +40,7 @@ export default async function MineralPage({
     params: await params,
   });
 
-  const mineral = result?.data as Mineral;
+  const mineral = result?.data as MINERAL_QUERYResult;
   if (!mineral) {
     notFound();
   }
@@ -74,7 +73,7 @@ export default async function MineralPage({
         )}
       </div>
       <ResultGrid>
-        {(mineral as any).specimens?.map((specimen: any) => (
+        {(mineral).specimens?.map((specimen) => (
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}

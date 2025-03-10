@@ -51,28 +51,28 @@ export default async function SpecimenPage({
       <ImageHeader title={`${specimen.name} - #${specimen.numericId}`} imageUrl={imageUrl} alt={specimen.name || "Specimen"}>
         <dl className={styles.primaryProperties}>
           <div className={styles.property}>
-            <dt>Classifications:</dt>
+            <dt className={styles.label}>Classifications:</dt>
             <dd>
               <ul className={styles.minerals}>
                 {specimen.minerals &&
-                  specimen.minerals?.map((mineral: any) => (
+                  specimen.minerals?.map((mineral) => (
                     <li
                       key={mineral._id}>
                       <Link
-                        key={mineral.slug.current}
-                        href={`/minerals/${mineral.slug.current}`}
+                        key={mineral.slug?.current}
+                        href={`/minerals/${mineral.slug?.current}`}
                       >
                         {mineral.name}
                       </Link>
                     </li>
                   ))}
                 {specimen.rocks &&
-                  specimen.rocks?.map((rock: any) => (
+                  specimen.rocks?.map((rock) => (
                     <li
                       key={rock._id}>
                       <Link
-                        key={rock.slug.current}
-                        href={`/rocks/${rock.slug.current}`}
+                        key={rock.slug?.current}
+                        href={`/rocks/${rock.slug?.current}`}
                       >
                         {rock.name}
                       </Link>
@@ -83,20 +83,20 @@ export default async function SpecimenPage({
           </div>
           {specimen.origin &&
             <div className={styles.property}>
-              <dt>Origin:</dt>
+              <dt className={styles.label}>Origin:</dt>
               <dd>{specimen.origin || '---'}</dd>
             </div>
           }
           {specimen.sizeCategory &&
             <div className={styles.property}>
-              <dt>Size Category:</dt>
+              <dt className={styles.label}>Size Category:</dt>
               <dd>{specimen.sizeCategory || '---'}</dd>
             </div>
           }
 
           {specimen.size &&
             <div className={styles.property}>
-              <dt>Size:</dt>
+              <dt className={styles.label}>Size:</dt>
               <dd>
                 {`${specimen.size} centimeters`}
               </dd>
@@ -104,7 +104,7 @@ export default async function SpecimenPage({
           }
           {specimen.weight &&
             <div className={styles.property}>
-              <dt>Weight:</dt>
+              <dt className={styles.label}>Weight:</dt>
               <dd>{`${specimen.weight} grams`}</dd>
             </div>
           }
@@ -114,33 +114,33 @@ export default async function SpecimenPage({
         <div className={styles.metadataSection}>
           <dl className={styles.properties}>
             <div className={styles.property}>
-              <dt>Created At:</dt>
+              <dt className={styles.label}>Created At:</dt>
               <dd>{specimen._createdAt || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Updated At:</dt>
+              <dt className={styles.label}>Updated At:</dt>
               <dd>{specimen._createdAt || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Hesitant Id:</dt>
+              <dt className={styles.label}>Hesitant Id:</dt>
               <dd>{specimen.hesitantId?.toString() || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Shape:</dt>
+              <dt className={styles.label}>Shape:</dt>
               <dd>{specimen.shape || '---'}</dd>
             </div>
 
             <div className={styles.property}>
-              <dt>Colors:</dt>
+              <dt className={styles.label}>Colors:</dt>
               <dd>{specimen.colors || '---'}</dd>
             </div>
 
             <div className={styles.property}>
-              <dt>Artificially Modified:</dt>
+              <dt className={styles.label}>Artificially Modified:</dt>
               <dd>{specimen.artificiallyModified?.toString() || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Man Made:</dt>
+              <dt className={styles.label}>Man Made:</dt>
               <dd>{specimen.manMade?.toString() || '---'}</dd>
             </div>
           </dl>
@@ -148,27 +148,27 @@ export default async function SpecimenPage({
         <div className={styles.metadataSection}>
           <dl>
             <div className={styles.property}>
-              <dt>Price:</dt>
+              <dt className={styles.label}>Price:</dt>
               <dd>{specimen.price || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Exact Price:</dt>
+              <dt className={styles.label}>Exact Price:</dt>
               <dd>{specimen.exactPrice?.toString() || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Purchase Date:</dt>
+              <dt className={styles.label}>Purchase Date:</dt>
               <dd>{specimen.purchaseDate || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Purchase Source:</dt>
+              <dt className={styles.label}>Purchase Source:</dt>
               <dd>{specimen.purchaseSource || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Purchase Listing:</dt>
+              <dt className={styles.label}>Purchase Listing:</dt>
               <dd>{specimen.purchaseListing || '---'}</dd>
             </div>
             <div className={styles.property}>
-              <dt>Tags:</dt>
+              <dt className={styles.label}>Tags:</dt>
               <dd>{specimen.tags || '---'}</dd>
             </div>
           </dl>
@@ -185,7 +185,7 @@ export default async function SpecimenPage({
 
       <div className={styles.imageGrid}>
         {specimen.images && specimen.images.length > 0 &&
-          specimen.images?.map((image: any) => (
+          specimen.images?.map((image) => (
             <Image
               src={urlFor(image)?.width(300).height(300).url() || "https://placehold.co/300x300/png"}
               alt={title}
