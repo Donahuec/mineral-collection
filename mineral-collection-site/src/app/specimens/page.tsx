@@ -27,7 +27,7 @@ export default async function SpecimensPage() {
 
   return (
     <main>
-      <h1>Specimens</h1>
+      <h1 className={styles.title}>Specimens</h1>
       <ResultGrid>
         {specimens.map((specimen: any) => (
           <ResultCard

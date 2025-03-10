@@ -108,82 +108,95 @@ export default async function SpecimenPage({
               <dd>{`${specimen.weight} grams`}</dd>
             </div>
           }
-
-
         </dl>
       </ImageHeader>
-      {specimen.notes && specimen.notes.length > 0 && (
-        <div>
-          <PortableText value={specimen.notes} />
-        </div>
-      )}
-      <dl className={styles.properties}>
-        <div className={styles.property}>
-          <dt>Created At:</dt>
-          <dd>{specimen._createdAt || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Updated At:</dt>
-          <dd>{specimen._createdAt || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Hesitant Id:</dt>
-          <dd>{specimen.hesitantId?.toString() || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Shape:</dt>
-          <dd>{specimen.shape || '---'}</dd>
-        </div>
+      <div className={styles.additionalProperties}>
+        <div className={styles.metadataSection}>
+          <dl className={styles.properties}>
+            <div className={styles.property}>
+              <dt>Created At:</dt>
+              <dd>{specimen._createdAt || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Updated At:</dt>
+              <dd>{specimen._createdAt || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Hesitant Id:</dt>
+              <dd>{specimen.hesitantId?.toString() || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Shape:</dt>
+              <dd>{specimen.shape || '---'}</dd>
+            </div>
 
-        <div className={styles.property}>
-          <dt>Colors:</dt>
-          <dd>{specimen.colors || '---'}</dd>
-        </div>
+            <div className={styles.property}>
+              <dt>Colors:</dt>
+              <dd>{specimen.colors || '---'}</dd>
+            </div>
 
-        <div className={styles.property}>
-          <dt>Artificially Modified:</dt>
-          <dd>{specimen.artificiallyModified?.toString() || '---'}</dd>
+            <div className={styles.property}>
+              <dt>Artificially Modified:</dt>
+              <dd>{specimen.artificiallyModified?.toString() || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Man Made:</dt>
+              <dd>{specimen.manMade?.toString() || '---'}</dd>
+            </div>
+          </dl>
         </div>
-        <div className={styles.property}>
-          <dt>Man Made:</dt>
-          <dd>{specimen.manMade?.toString() || '---'}</dd>
+        <div className={styles.metadataSection}>
+          <dl>
+            <div className={styles.property}>
+              <dt>Price:</dt>
+              <dd>{specimen.price || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Exact Price:</dt>
+              <dd>{specimen.exactPrice?.toString() || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Purchase Date:</dt>
+              <dd>{specimen.purchaseDate || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Purchase Source:</dt>
+              <dd>{specimen.purchaseSource || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Purchase Listing:</dt>
+              <dd>{specimen.purchaseListing || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Tags:</dt>
+              <dd>{specimen.tags || '---'}</dd>
+            </div>
+          </dl>
         </div>
-        <div className={styles.property}>
-          <dt>Price:</dt>
-          <dd>{specimen.price || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Exact Price:</dt>
-          <dd>{specimen.exactPrice?.toString() || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Purchase Date:</dt>
-          <dd>{specimen.purchaseDate || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Purchase Source:</dt>
-          <dd>{specimen.purchaseSource || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Purchase Listing:</dt>
-          <dd>{specimen.purchaseListing || '---'}</dd>
-        </div>
-        <div className={styles.property}>
-          <dt>Tags:</dt>
-          <dd>{specimen.tags || '---'}</dd>
-        </div>
-      </dl>
-      {specimen.images && specimen.images.length > 0 &&
-        specimen.images?.map((image: any) => (
-          <Image
-            src={urlFor(image)?.url() || "https://placehold.co/300x300/png"}
-            alt={title}
-            className={styles.image}
-            width={300}
-            height={300}
-            key={image._key}
-          />
-        ))}
+      </div>
+      <div className={styles.notes}>
+        {specimen.notes && specimen.notes.length > 0 && (
+          <div>
+            <PortableText value={specimen.notes} />
+          </div>
+        )}
+      </div>
+
+
+      <div className={styles.imageGrid}>
+        {specimen.images && specimen.images.length > 0 &&
+          specimen.images?.map((image: any) => (
+            <Image
+              src={urlFor(image)?.width(300).height(300).url() || "https://placehold.co/300x300/png"}
+              alt={title}
+              className={styles.image}
+              width={300}
+              height={300}
+              key={image._key}
+            />
+          ))}
+      </div>
+
     </main>
   );
 }

@@ -28,7 +28,7 @@ export default async function MineralsPage() {
   const { data: minerals } = await sanityFetch({ query: MINERALS_QUERY });
   return (
     <main>
-      <h1>Minerals</h1>
+      <h1 className={styles.title}>Minerals</h1>
       <ResultGrid>
       {minerals.map((mineral: any) => (
           <ResultCard

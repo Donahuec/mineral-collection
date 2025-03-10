@@ -3,9 +3,16 @@
     display: flex;
     gap: 10px;
     align-items: center;
-    padding: 16px 20px;
+    padding: 16px 64px;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    a {
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+    }
+    a:hover {
+        color: var(--lightAccent);  
+    }
 }
