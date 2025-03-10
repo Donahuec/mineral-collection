@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { MINERAL_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
-import ResultCard from "@/app/_shared/components/resultCard/resultCard";
+import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
 
 const MINERAL_QUERY = defineQuery(`*[
     _type == "mineral" &&

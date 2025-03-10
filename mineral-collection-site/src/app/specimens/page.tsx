@@ -2,7 +2,7 @@ import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/live";
 import { client } from "@/sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
-import ResultCard from "../_shared/components/resultCard/resultCard";
+import ResultCard from "../_shared/components/resultGrid/resultCard/resultCard";
 import styles from "./styles.module.css";
 import ResultGrid from "../_shared/components/resultGrid/resultGrid";
 
