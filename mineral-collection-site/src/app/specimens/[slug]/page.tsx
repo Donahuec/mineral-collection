@@ -173,8 +173,6 @@ export default async function SpecimenPage({
           </div>
         )}
       </div>
-
-
       <div className={styles.imageGrid}>
         {specimen.images && specimen.images.length > 0 &&
           specimen.images?.map((image) => (
