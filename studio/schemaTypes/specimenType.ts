@@ -1,14 +1,45 @@
 import {DiamondIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
+import { colors, specimenSizes } from './constants'
 
 export const specimenType = defineType({
   name: 'specimen',
   title: 'Specimen',
   type: 'document',
   groups: [
-    {name: 'details', title: 'Details'},
+    {name: 'details', title: 'Details', default: true},
     {name: 'properties', title: 'Properties'},
     {name: 'purchase', title: 'Purchase'},
+  ],
+  orderings: [
+    {
+      title: 'Name, Asc',
+      name: 'nameAsc',
+      by: [
+        {field: 'name', direction: 'asc'}
+      ]
+    },
+    {
+      title: 'Name, Desc',
+      name: 'nameDesc',
+      by: [
+        {field: 'name', direction: 'desc'}
+      ]
+    },
+    {
+      title: 'numericId, Asc',
+      name: 'numericIdAsc',
+      by: [
+        {field: 'numericId', direction: 'asc'}
+      ]
+    },
+    {
+      title: 'numericId, Desc',
+      name: 'numericIdDesc',
+      by: [
+        {field: 'numericId', direction: 'desc'}
+      ]
+    }
   ],
   fields: [
     defineField({
@@ -17,15 +48,26 @@ export const specimenType = defineType({
       group: 'details',
     }),
     defineField({
+      name: 'numericId',
+      type: 'number',
+      group: 'details',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
-      options: {source: 'name'},
+      options: {source: (doc, options) => `${doc.name}-${doc.numericId}`},
       group: 'details',
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
-      name: 'numericId',
-      type: 'number',
+      name: 'images',
+      type: 'array',
+      of: [{type: 'image'}],
+      group: 'details',
+    }),
+    defineField({
+      name: 'previewImage',
+      type: 'image',
       group: 'details',
     }),
     defineField({
@@ -33,6 +75,28 @@ export const specimenType = defineType({
       type: 'array',
       group: 'details',
       of: [{type: 'reference', to: [{type: 'mineral'}]}],
+    }),
+    defineField({
+      name: 'mineralsText',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'string'}],
+      readOnly: true,
+      hidden: ({document}) => {return (!document?.mineralsText || (!!document?.minerals && (document.minerals as any[]).length >= (document.mineralsText as any[]).length))},
+    }),
+    defineField({
+      name: 'rocks',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'reference', to: [{type: 'rock'}]}],
+    }),
+    defineField({
+      name: 'rocksText',
+      type: 'array',
+      group: 'details',
+      of: [{type: 'string'}],
+      readOnly: true,
+      hidden: ({document}) => {return (!document?.rocksText || (!!document?.rocks && (document.rocks as any[]).length >= (document.rocksText as any[]).length))},
     }),
     defineField({
       name: 'hesitantId',
@@ -48,6 +112,9 @@ export const specimenType = defineType({
       name: 'sizeCategory',
       type: 'string',
       group: 'properties',
+      options: {
+        list: specimenSizes
+      }
     }),
     defineField({
       name: 'size',
@@ -114,15 +181,10 @@ export const specimenType = defineType({
       of: [{type: 'block'}],
     }),
     defineField({
-      name: 'images',
+      name: 'tags',
       type: 'array',
-      of: [{type: 'image'}],
       group: 'details',
-    }),
-    defineField({
-      name: 'previewImage',
-      type: 'image',
-      group: 'details',
+      of: [{type: 'string'}],
     }),
   ],
   preview: {

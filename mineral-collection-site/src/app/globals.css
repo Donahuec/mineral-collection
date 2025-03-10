@@ -1,1 +1,74 @@
-@import "tailwindcss";
+:root {
+  --fontBody: 1rem;
+  --fontWeight: 400;
+  --headerFontFamily: "Vollkorn", serif;
+  --fontFamily: "Montserrat", serif;
+
+  /* Colors */
+  /* palette built with http://colormind.io/ */
+  --timberGreen: hsl(189, 78%, 9%);
+  --athensGray: hsl(200, 19%, 94%);
+  --gumbo: hsl(178, 24%, 56%);
+  --steelBlue: hsl(195, 89%, 29%);
+  --lightsteelBlue: hsl(195, 89%, 42%);
+  --plantation: hsl(193, 56%, 15%);
+  --fruitSalad: hsl(141, 38%, 47%);
+  --marigold: hsl(40, 60%, 49%);
+  --pomegranate: hsl(4, 90%, 58%);
+
+  --darkShade: var(--timberGreen);
+  --lightShade: var(--athensGray);
+  --primary: var(--steelBlue);
+  --primaryLight: var(--lightsteelBlue);
+  --lightAccent: var(--gumbo);
+  --darkAccent: var(--plantation);
+
+  --success: var(--fruitSalad);
+  --warning: var(--marigold);
+  --error: var(--pomegranate);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--fontFamily);
+  font-size: var(--fontBody);
+  font-weight: var(--fontWeight);
+  font-style: normal;
+  font-optical-sizing: auto;
+  letter-spacing: 0px;
+  color: var(--lightShade);
+  background-color: var(--darkShade);
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header {
+  font-family: var(--headerFontFamily);
+}
+
+a:visited {
+  color: inherit;
+}

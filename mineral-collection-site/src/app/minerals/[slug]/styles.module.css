@@ -1,0 +1,11 @@
+.container {
+    padding-inline: clamp(16px, 5%, 64px);
+    padding-block: 16px;
+    width: 100%;
+    
+  }
+  
+  .container a {
+    color: var(--lightAccent);
+    text-decoration: none;
+  }

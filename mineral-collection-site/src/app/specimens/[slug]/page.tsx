@@ -1,19 +1,23 @@
 import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
+import { SPECIMEN_QUERYResult } from "@/sanity/types";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery, PortableText } from "next-sanity";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { spec } from "node:test/reporters";
+import styles from "./styles.module.css";
+import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
+import { title } from "process";
+import Image from "next/image";
 
 const SPECIMEN_QUERY = defineQuery(`*[
     _type == "specimen" &&
     slug.current == $slug
   ][0]{
   ...,
-  minerals->
+  minerals[]->{name, _id, slug, previewImage},
+  rocks[]->{name, _id, slug, previewImage}
 }`);
 
 const { projectId, dataset } = client.config();
@@ -22,50 +26,177 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-export default async function EventPage({
+export default async function SpecimenPage({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { data: specimen } = await sanityFetch({
+  const result = await sanityFetch({
     query: SPECIMEN_QUERY,
     params: await params,
   });
+  const specimen = result?.data as SPECIMEN_QUERYResult;
   if (!specimen) {
     notFound();
   }
   const imageUrl = specimen.previewImage
-    ? urlFor(specimen.previewImage)?.width(550).height(310).url()
-    : null;
+    ? urlFor(specimen.previewImage)?.url()
+    : undefined;
 
   return (
-    <main className="container mx-auto grid gap-12 p-12">
-      <div className="mb-4">
-        <Link href="/">← Back to Specimens</Link>
+    <main className={styles.container}>
+      <div>
+        <Link href="/specimens">← Back to Specimens</Link>
       </div>
-      <div className="grid items-top gap-12 sm:grid-cols-2">
-        <Image
-          src={imageUrl || "https://placehold.co/550x310/png"}
-          alt={specimen.name || "Specimen"}
-          className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full"
-          height="310"
-          width="550"
-        />
-        <div className="flex flex-col justify-center space-y-4">
-          <div className="space-y-4">
-            {specimen.name ? (
-              <h1 className="text-4xl font-bold tracking-tighter mb-8">
-                {specimen.name}
-              </h1>
-            ) : null}
-            {specimen.notes && specimen.notes.length > 0 && (
-              <div className="prose max-w-none">
-                <PortableText value={specimen.notes} />
-              </div>
-            )}
+      <ImageHeader title={`${specimen.name} - #${specimen.numericId}`} imageUrl={imageUrl} alt={specimen.name || "Specimen"}>
+        <dl className={styles.primaryProperties}>
+          <div className={styles.property}>
+            <dt>Classifications:</dt>
+            <dd>
+              <ul className={styles.minerals}>
+                {specimen.minerals &&
+                  specimen.minerals?.map((mineral: any) => (
+                    <li
+                      key={mineral._id}>
+                      <Link
+                        key={mineral.slug.current}
+                        href={`/minerals/${mineral.slug.current}`}
+                      >
+                        {mineral.name}
+                      </Link>
+                    </li>
+                  ))}
+                {specimen.rocks &&
+                  specimen.rocks?.map((rock: any) => (
+                    <li
+                      key={rock._id}>
+                      <Link
+                        key={rock.slug.current}
+                        href={`/rocks/${rock.slug.current}`}
+                      >
+                        {rock.name}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </dd>
           </div>
+          {specimen.origin &&
+            <div className={styles.property}>
+              <dt>Origin:</dt>
+              <dd>{specimen.origin || '---'}</dd>
+            </div>
+          }
+          {specimen.sizeCategory &&
+            <div className={styles.property}>
+              <dt>Size Category:</dt>
+              <dd>{specimen.sizeCategory || '---'}</dd>
+            </div>
+          }
+
+          {specimen.size &&
+            <div className={styles.property}>
+              <dt>Size:</dt>
+              <dd>
+                {`${specimen.size} centimeters`}
+              </dd>
+            </div>
+          }
+          {specimen.weight &&
+            <div className={styles.property}>
+              <dt>Weight:</dt>
+              <dd>{`${specimen.weight} grams`}</dd>
+            </div>
+          }
+        </dl>
+      </ImageHeader>
+      <div className={styles.additionalProperties}>
+        <div className={styles.metadataSection}>
+          <dl className={styles.properties}>
+            <div className={styles.property}>
+              <dt>Created At:</dt>
+              <dd>{specimen._createdAt || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Updated At:</dt>
+              <dd>{specimen._createdAt || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Hesitant Id:</dt>
+              <dd>{specimen.hesitantId?.toString() || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Shape:</dt>
+              <dd>{specimen.shape || '---'}</dd>
+            </div>
+
+            <div className={styles.property}>
+              <dt>Colors:</dt>
+              <dd>{specimen.colors || '---'}</dd>
+            </div>
+
+            <div className={styles.property}>
+              <dt>Artificially Modified:</dt>
+              <dd>{specimen.artificiallyModified?.toString() || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Man Made:</dt>
+              <dd>{specimen.manMade?.toString() || '---'}</dd>
+            </div>
+          </dl>
+        </div>
+        <div className={styles.metadataSection}>
+          <dl>
+            <div className={styles.property}>
+              <dt>Price:</dt>
+              <dd>{specimen.price || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Exact Price:</dt>
+              <dd>{specimen.exactPrice?.toString() || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Purchase Date:</dt>
+              <dd>{specimen.purchaseDate || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Purchase Source:</dt>
+              <dd>{specimen.purchaseSource || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Purchase Listing:</dt>
+              <dd>{specimen.purchaseListing || '---'}</dd>
+            </div>
+            <div className={styles.property}>
+              <dt>Tags:</dt>
+              <dd>{specimen.tags || '---'}</dd>
+            </div>
+          </dl>
         </div>
       </div>
+      <div className={styles.notes}>
+        {specimen.notes && specimen.notes.length > 0 && (
+          <div>
+            <PortableText value={specimen.notes} />
+          </div>
+        )}
+      </div>
+
+
+      <div className={styles.imageGrid}>
+        {specimen.images && specimen.images.length > 0 &&
+          specimen.images?.map((image: any) => (
+            <Image
+              src={urlFor(image)?.width(300).height(300).url() || "https://placehold.co/300x300/png"}
+              alt={title}
+              className={styles.image}
+              width={300}
+              height={300}
+              key={image._key}
+            />
+          ))}
+      </div>
+
     </main>
   );
 }
