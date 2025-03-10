@@ -17,7 +17,6 @@ export default async function RocksPage() {
     <main>
       <h1 className={styles.title}>Rocks</h1>
       <ResultGrid>
-        
       {rocks.map((rock) => (
           <ResultCard
             key={rock._id}
