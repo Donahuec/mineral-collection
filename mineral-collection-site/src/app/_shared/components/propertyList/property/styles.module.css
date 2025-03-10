@@ -1,0 +1,10 @@
+.property {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+dt.label {
+    font-weight: bold;
+    white-space: nowrap;
+}

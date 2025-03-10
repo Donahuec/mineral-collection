@@ -15,22 +15,6 @@
     gap: 32px;
     list-style: none;
 }
-.primaryProperties {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-.property {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-dt.label {
-    font-weight: bold;
-    white-space: nowrap;
-}
-
 .additionalProperties {
     display: flex;
     gap: 32px;
@@ -42,9 +26,6 @@ dt.label {
 .metadataSection {
     flex: 1;
     background-color: var(--darkAccent);
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
     padding: 32px;
     border-radius: 16px;
     min-width: 300px;

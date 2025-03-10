@@ -8,6 +8,8 @@ import { MINERAL_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
 import { urlFor } from "@/app/_shared/utils/urlService";
+import PropertyList from "@/app/_shared/components/propertyList/propertyList";
+import Property from "@/app/_shared/components/propertyList/property/property";
 
 const MINERAL_QUERY = defineQuery(`*[
     _type == "mineral" &&
@@ -46,16 +48,22 @@ export default async function MineralPage({
         <Link href="/minerals">← Back to Minerals</Link>
       </div>
       <ImageHeader title={mineral.name || ""} imageUrl={imageUrl} alt={mineral.name || "Mineral"}>
-        <dl>
-          <dt>Scientific Name</dt>
-          <dd>{mineral.scientificName}</dd>
-          <dt>Alt Names</dt>
-          <dd>{mineral.altNames}</dd>
-          <dt>Mindat Url</dt>
-          <dd>{mineral.mindatUrl}</dd>
-          <dt>Colors</dt>
-          <dd>{mineral.color?.colorDescription}</dd>
-        </dl>
+        <PropertyList>
+          <Property title="Scientific Name">
+            {mineral.scientificName || '---'}
+          </Property>
+          <Property title="Alt Names">
+            {mineral.altNames?.join(', ') || '---'}
+          </Property>
+          {mineral.mindatUrl &&
+            <Property title="Mindat">
+              <Link href={mineral.mindatUrl} target="blank">{mineral.mindatUrl}</Link>
+            </Property>
+          }
+          <Property title="Colors">
+            {mineral.color?.colorDescription}
+          </Property>
+        </PropertyList>
       </ImageHeader>
       <div>
         {mineral.notes && mineral.notes.length > 0 && (
