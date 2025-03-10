@@ -3,6 +3,7 @@ import { Montserrat, Vollkorn } from "next/font/google";
 import "./globals.css";
 import { SanityLive } from "@/sanity/live";
 import styles from "./layout.module.css";
+import Link from "next/link";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -26,12 +27,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`{montserrat.className} {volkorn.className}`}>
+      <body className={`${montserrat.style} ${volkorn.style}`}>
         <nav className={styles.nav}>
-        <a href="/">CrystalDB</a>
-        <a href="/minerals">Minerals</a>
-        <a href="/rocks">Rocks</a>
-        <a href="/specimens">Specimens</a>
+        <Link href="/">CrystalDB</Link>
+        <Link href="/minerals">Minerals</Link>
+        <Link href="/rocks">Rocks</Link>
+        <Link href="/specimens">Specimens</Link>
         </nav>
         {children}
         <SanityLive />

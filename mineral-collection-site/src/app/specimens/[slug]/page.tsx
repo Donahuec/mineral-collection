@@ -55,24 +55,24 @@ export default async function SpecimenPage({
             <dd>
               <ul className={styles.minerals}>
                 {specimen.minerals &&
-                  specimen.minerals?.map((mineral: any) => (
+                  specimen.minerals?.map((mineral) => (
                     <li
                       key={mineral._id}>
                       <Link
-                        key={mineral.slug.current}
-                        href={`/minerals/${mineral.slug.current}`}
+                        key={mineral.slug?.current}
+                        href={`/minerals/${mineral.slug?.current}`}
                       >
                         {mineral.name}
                       </Link>
                     </li>
                   ))}
                 {specimen.rocks &&
-                  specimen.rocks?.map((rock: any) => (
+                  specimen.rocks?.map((rock) => (
                     <li
                       key={rock._id}>
                       <Link
-                        key={rock.slug.current}
-                        href={`/rocks/${rock.slug.current}`}
+                        key={rock.slug?.current}
+                        href={`/rocks/${rock.slug?.current}`}
                       >
                         {rock.name}
                       </Link>
@@ -185,7 +185,7 @@ export default async function SpecimenPage({
 
       <div className={styles.imageGrid}>
         {specimen.images && specimen.images.length > 0 &&
-          specimen.images?.map((image: any) => (
+          specimen.images?.map((image) => (
             <Image
               src={urlFor(image)?.width(300).height(300).url() || "https://placehold.co/300x300/png"}
               alt={title}

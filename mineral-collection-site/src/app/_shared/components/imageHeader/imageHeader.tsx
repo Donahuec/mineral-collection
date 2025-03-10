@@ -10,9 +10,9 @@ interface imageHeaderProps {
 }
 
 export default async function imageHeader(props: PropsWithChildren<imageHeaderProps>) {
-    let title = props.title;
-    let alt = props.alt;
-    let imageUrl = props.imageUrl || "https://placehold.co/550x410/png";
+    const title = props.title;
+    const alt = props.alt;
+    const imageUrl = props.imageUrl || "https://placehold.co/550x410/png";
     return <div className={styles.infoBlock}>
     <Image
       src={imageUrl || "https://placehold.co/550x410/png"}

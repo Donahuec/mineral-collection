@@ -7,7 +7,6 @@ interface ResultGridProps {
 }
 
 export default async function ResultGrid(props: PropsWithChildren<ResultGridProps>) {
-    let size = props.size;
     return <ul className={styles.grid}>
         {props.children}
     </ul>
