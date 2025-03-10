@@ -2,13 +2,12 @@ import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { defineQuery, PortableText } from "next-sanity";
-import Image from "next/image";
+import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { Mineral, Rock } from "@/sanity/types";
+import { Rock, ROCK_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultCard/resultCard";
 
@@ -26,8 +25,9 @@ const ROCK_QUERY = defineQuery(`*[
 }`);
 
 const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+const urlFor = (source: any) =>
+  projectId && dataset && source
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
@@ -41,7 +41,7 @@ export default async function RockPage({
     params: await params,
   });
 
-  const rock = result?.data as Rock;
+  const rock = result?.data as ROCK_QUERYResult;
   if (!rock) {
     notFound();
   }
@@ -58,7 +58,7 @@ export default async function RockPage({
       </ImageHeader>
 
       <ResultGrid>
-        {(rock as any).specimens?.map((specimen: any) => (
+        {rock.specimens?.map((specimen) => (
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}
