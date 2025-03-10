@@ -10,6 +10,7 @@ import Image from "next/image";
 import { urlFor } from "@/app/_shared/utils/urlService";
 import Property from "@/app/_shared/components/propertyList/property/property";
 import PropertyList from "@/app/_shared/components/propertyList/propertyList";
+import BackLink from "@/app/_shared/components/backLink/backLink";
 
 const SPECIMEN_QUERY = defineQuery(`*[
     _type == "specimen" &&
@@ -39,9 +40,7 @@ export default async function SpecimenPage({
 
   return (
     <main className={styles.container}>
-      <div>
-        <Link href="/specimens">← Back to Specimens</Link>
-      </div>
+      <BackLink title="Back to Specimens" href="/specimens" />
       <ImageHeader title={`${specimen.name} - #${specimen.numericId}`} imageUrl={imageUrl} alt={specimen.name || "Specimen"}>
         <PropertyList>
           <Property title="Classifications">

@@ -10,6 +10,7 @@ import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCar
 import { urlFor } from "@/app/_shared/utils/urlService";
 import PropertyList from "@/app/_shared/components/propertyList/propertyList";
 import Property from "@/app/_shared/components/propertyList/property/property";
+import BackLink from "@/app/_shared/components/backLink/backLink";
 
 const MINERAL_QUERY = defineQuery(`*[
     _type == "mineral" &&
@@ -44,9 +45,7 @@ export default async function MineralPage({
 
   return (
     <main className={styles.container}>
-      <div>
-        <Link href="/minerals">← Back to Minerals</Link>
-      </div>
+      <BackLink title="Back to Minerals" href="/minerals" />
       <ImageHeader title={mineral.name || ""} imageUrl={imageUrl} alt={mineral.name || "Mineral"}>
         <PropertyList>
           <Property title="Scientific Name">

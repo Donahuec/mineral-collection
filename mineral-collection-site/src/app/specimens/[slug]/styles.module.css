@@ -4,11 +4,6 @@
     width: 100%;
 }
 
-.container a {
-    color: var(--lightAccent);
-    text-decoration: none;
-}
-
 .minerals {
     display: flex;
     flex-wrap: wrap;
