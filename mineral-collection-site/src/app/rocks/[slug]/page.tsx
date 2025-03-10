@@ -1,13 +1,12 @@
 import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
 import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { Rock, ROCK_QUERYResult } from "@/sanity/types";
+import { ROCK_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultCard/resultCard";
 
