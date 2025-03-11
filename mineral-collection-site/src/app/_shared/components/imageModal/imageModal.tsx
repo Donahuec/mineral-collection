@@ -7,8 +7,8 @@ import { urlFor } from "@/app/_shared/utils/urlService";
 import { PropsWithChildren, useState } from "react";
 
 interface ImageModalProps {
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     image: any;
-
     maxWidth?: number;
     maxHeight?: number;
     minWidth?: number;
@@ -31,7 +31,7 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
                             width={1000}
                             height={500}
                             className={styles.modalImage}
-                            onLoad={(e) => {
+                            onLoad={() => {
                                 setImageLoaded(true);
                             }} />
                         <Button slot="close" className={styles.closeButton}>

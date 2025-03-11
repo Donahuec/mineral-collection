@@ -4,6 +4,7 @@ import styles from "./styles.module.css";
 import ImageGalleryItem from "./imageGalleryItem/imageGalleryItem";
 
 interface ImageGalleryProps {
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     images: any[];
     previewWidth?: number;
     previewHeight?: number;

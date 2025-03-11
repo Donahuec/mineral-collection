@@ -7,6 +7,7 @@ import { urlFor } from "@/app/_shared/utils/urlService";
 import ImageModal from "../../imageModal/imageModal";
 
 interface ImageGalleryItemProps {
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     image: any;
     previewWidth?: number;
     previewHeight?: number;
