@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { Button, Dialog, DialogTrigger, Modal, ModalOverlay } from 'react-aria-components';
-import { urlFor } from "@/app/_shared/utils/urlService";
+import { urlFor, getImageDimensions } from "@/app/_shared/utils/imageService";
 import { PropsWithChildren, useState } from "react";
 
 interface ImageModalProps {
@@ -17,7 +17,7 @@ interface ImageModalProps {
 
 export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
     const [imageLoaded, setImageLoaded] = useState(false);
-
+    let { width, height } = getImageDimensions(props.image);
     return (
         <DialogTrigger>
             {props.children}
@@ -28,8 +28,8 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
                         <Image
                             src={urlFor(props.image)?.url() || "https://placehold.co/300x300/png"}
                             alt=""
-                            width={1000}
-                            height={500}
+                            width={width}
+                            height={height}
                             className={styles.modalImage}
                             onLoad={() => {
                                 setImageLoaded(true);

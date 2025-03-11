@@ -7,7 +7,7 @@ import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { MINERAL_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
-import { urlFor } from "@/app/_shared/utils/urlService";
+import { urlFor } from "@/app/_shared/utils/imageService";
 import PropertyList from "@/app/_shared/components/propertyList/propertyList";
 import Property from "@/app/_shared/components/propertyList/property/property";
 import BackLink from "@/app/_shared/components/backLink/backLink";

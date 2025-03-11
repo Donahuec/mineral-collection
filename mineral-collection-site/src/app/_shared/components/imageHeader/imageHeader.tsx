@@ -20,6 +20,7 @@ export default async function imageHeader(props: PropsWithChildren<imageHeaderPr
       className={styles.previewImage}
       height="410"
       width="550"
+      priority
     />
     <div className={styles.primaryDetails}>
       {<h1 className={styles.title}>{title}</h1>}

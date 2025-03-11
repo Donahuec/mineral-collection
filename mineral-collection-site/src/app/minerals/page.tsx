@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/live";
 import ResultCard from "../_shared/components/resultGrid/resultCard/resultCard";
 import styles from "./styles.module.css";
 import ResultGrid from "../_shared/components/resultGrid/resultGrid";
-import { urlFor } from "../_shared/utils/urlService";
+import { urlFor } from "../_shared/utils/imageService";
 
 const MINERALS_QUERY = defineQuery(`*[
   _type == "mineral"

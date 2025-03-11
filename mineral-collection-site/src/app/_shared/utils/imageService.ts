@@ -15,4 +15,13 @@ export function urlFor(source: any, width?: number, height?: number): ImageUrlBu
     builder = builder.fit("max");
     return builder;
 }
+
+export function getImageDimensions(image: any, defaultWidth: number = 300, defaultHeight: number = 300) {
+  const ref = image?.asset?._ref;
+  const regex = /-(\d*)x(\d*)-/;
+  const match = ref?.match(regex);
+  const width = parseInt(match?.[1]) || defaultWidth;
+  const height = parseInt(match?.[2]) || defaultHeight;
+  return { width, height };
+}
     
