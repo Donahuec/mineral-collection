@@ -5,12 +5,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { title } from "process";
-import Image from "next/image";
 import { urlFor } from "@/app/_shared/utils/urlService";
 import Property from "@/app/_shared/components/propertyList/property/property";
 import PropertyList from "@/app/_shared/components/propertyList/propertyList";
 import BackLink from "@/app/_shared/components/backLink/backLink";
+import ImageGallery from "@/app/_shared/components/imageGallery/imageGallery";
 
 const SPECIMEN_QUERY = defineQuery(`*[
     _type == "specimen" &&
@@ -149,20 +148,8 @@ export default async function SpecimenPage({
           </div>
         )}
       </div>
-      <div className={styles.imageGrid}>
-        {specimen.images && specimen.images.length > 0 &&
-          specimen.images?.map((image) => (
-            <Image
-              src={urlFor(image, 600, 600)?.url() || "https://placehold.co/300x300/png"}
-              alt={title}
-              className={styles.image}
-              width={300}
-              height={300}
-              key={image._key}
-            />
-          ))}
-      </div>
-
+      {specimen.images && specimen.images.length > 0 &&
+          <ImageGallery images={specimen.images} />}
     </main>
   );
 }

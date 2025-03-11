@@ -11,6 +11,8 @@ export function urlFor(source: any, width?: number, height?: number): ImageUrlBu
     if (!builder) return null;
     if (width) builder = builder.width(width);
     if (height) builder = builder.height(height);
+    builder = builder.auto("format");
+    builder = builder.fit("max");
     return builder;
 }
     
