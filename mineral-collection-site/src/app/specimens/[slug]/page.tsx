@@ -1,15 +1,15 @@
-import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
 import { SPECIMEN_QUERYResult } from "@/sanity/types";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery, PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { title } from "process";
-import Image from "next/image";
+import { urlFor } from "@/app/_shared/utils/urlService";
+import Property from "@/app/_shared/components/propertyList/property/property";
+import PropertyList from "@/app/_shared/components/propertyList/propertyList";
+import BackLink from "@/app/_shared/components/backLink/backLink";
+import ImageGallery from "@/app/_shared/components/imageGallery/imageGallery";
 
 const SPECIMEN_QUERY = defineQuery(`*[
     _type == "specimen" &&
@@ -19,12 +19,6 @@ const SPECIMEN_QUERY = defineQuery(`*[
   minerals[]->{name, _id, slug, previewImage},
   rocks[]->{name, _id, slug, previewImage}
 }`);
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource) =>
-  projectId && dataset
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
 
 export default async function SpecimenPage({
   params,
@@ -45,133 +39,106 @@ export default async function SpecimenPage({
 
   return (
     <main className={styles.container}>
-      <div>
-        <Link href="/specimens">← Back to Specimens</Link>
-      </div>
+      <BackLink title="Back to Specimens" href="/specimens" />
       <ImageHeader title={`${specimen.name} - #${specimen.numericId}`} imageUrl={imageUrl} alt={specimen.name || "Specimen"}>
-        <dl className={styles.primaryProperties}>
-          <div className={styles.property}>
-            <dt className={styles.label}>Classifications:</dt>
-            <dd>
-              <ul className={styles.minerals}>
-                {specimen.minerals &&
-                  specimen.minerals?.map((mineral) => (
-                    <li
-                      key={mineral._id}>
-                      <Link
-                        key={mineral.slug?.current}
-                        href={`/minerals/${mineral.slug?.current}`}
-                      >
-                        {mineral.name}
-                      </Link>
-                    </li>
-                  ))}
-                {specimen.rocks &&
-                  specimen.rocks?.map((rock) => (
-                    <li
-                      key={rock._id}>
-                      <Link
-                        key={rock.slug?.current}
-                        href={`/rocks/${rock.slug?.current}`}
-                      >
-                        {rock.name}
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </dd>
-          </div>
+        <PropertyList>
+          <Property title="Classifications">
+            <ul className={styles.minerals}>
+              {specimen.minerals &&
+                specimen.minerals?.map((mineral) => (
+                  <li
+                    key={mineral._id}>
+                    <Link
+                      key={mineral.slug?.current}
+                      href={`/minerals/${mineral.slug?.current}`}
+                    >
+                      {mineral.name}
+                    </Link>
+                  </li>
+                ))}
+              {specimen.rocks &&
+                specimen.rocks?.map((rock) => (
+                  <li
+                    key={rock._id}>
+                    <Link
+                      key={rock.slug?.current}
+                      href={`/rocks/${rock.slug?.current}`}
+                    >
+                      {rock.name}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </Property>
           {specimen.origin &&
-            <div className={styles.property}>
-              <dt className={styles.label}>Origin:</dt>
-              <dd>{specimen.origin || '---'}</dd>
-            </div>
+            <Property title="Origin">
+              {specimen.origin || '---'}
+            </Property>
           }
           {specimen.sizeCategory &&
-            <div className={styles.property}>
-              <dt className={styles.label}>Size Category:</dt>
-              <dd>{specimen.sizeCategory || '---'}</dd>
-            </div>
+            <Property title="Size Category">
+              {specimen.sizeCategory || '---'}
+            </Property>
           }
-
           {specimen.size &&
-            <div className={styles.property}>
-              <dt className={styles.label}>Size:</dt>
-              <dd>
-                {`${specimen.size} centimeters`}
-              </dd>
-            </div>
+            <Property title="Size">
+              {`${specimen.size} centimeters`}
+            </Property>
           }
           {specimen.weight &&
-            <div className={styles.property}>
-              <dt className={styles.label}>Weight:</dt>
-              <dd>{`${specimen.weight} grams`}</dd>
-            </div>
+            <Property title="Weight">
+              {`${specimen.weight} grams`}
+            </Property>
           }
-        </dl>
+        </PropertyList>
       </ImageHeader>
       <div className={styles.additionalProperties}>
         <div className={styles.metadataSection}>
-          <dl className={styles.properties}>
-            <div className={styles.property}>
-              <dt className={styles.label}>Created At:</dt>
-              <dd>{specimen._createdAt || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Updated At:</dt>
-              <dd>{specimen._createdAt || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Hesitant Id:</dt>
-              <dd>{specimen.hesitantId?.toString() || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Shape:</dt>
-              <dd>{specimen.shape || '---'}</dd>
-            </div>
-
-            <div className={styles.property}>
-              <dt className={styles.label}>Colors:</dt>
-              <dd>{specimen.colors || '---'}</dd>
-            </div>
-
-            <div className={styles.property}>
-              <dt className={styles.label}>Artificially Modified:</dt>
-              <dd>{specimen.artificiallyModified?.toString() || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Man Made:</dt>
-              <dd>{specimen.manMade?.toString() || '---'}</dd>
-            </div>
-          </dl>
+          <PropertyList spacing={.5}>
+            <Property title="Created At">
+              {specimen._createdAt || '---'}
+            </Property>
+            <Property title="Updated At">
+              {specimen._updatedAt || '---'}
+            </Property>
+            <Property title="Hesitant Id">
+              {specimen.hesitantId?.toString() || '---'}
+            </Property>
+            <Property title="Shape">
+              {specimen.shape || '---'}
+            </Property>
+            <Property title="Colors">
+              {specimen.colors || '---'}
+            </Property>
+            <Property title="Artificially Modified">
+              {specimen.artificiallyModified?.toString() || '---'}
+            </Property>
+            <Property title="Man Made">
+              {specimen.manMade?.toString() || '---'}
+            </Property>
+            <Property title="Tags">
+              {specimen.tags || '---'}
+            </Property>
+          </PropertyList>
         </div>
         <div className={styles.metadataSection}>
-          <dl>
-            <div className={styles.property}>
-              <dt className={styles.label}>Price:</dt>
-              <dd>{specimen.price || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Exact Price:</dt>
-              <dd>{specimen.exactPrice?.toString() || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Purchase Date:</dt>
-              <dd>{specimen.purchaseDate || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Purchase Source:</dt>
-              <dd>{specimen.purchaseSource || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Purchase Listing:</dt>
-              <dd>{specimen.purchaseListing || '---'}</dd>
-            </div>
-            <div className={styles.property}>
-              <dt className={styles.label}>Tags:</dt>
-              <dd>{specimen.tags || '---'}</dd>
-            </div>
-          </dl>
+          <PropertyList spacing={.5}>
+            <Property title="Price">
+              {specimen.price || '---'}
+            </Property>
+            <Property title="Exact Price">
+              {specimen.exactPrice?.toString() || '---'}
+            </Property>
+            <Property title="Purchase Date">
+              {specimen.purchaseDate || '---'}
+            </Property>
+            <Property title="Purchase Source">
+              {specimen.purchaseSource || '---'}
+            </Property>
+            <Property title="Purchase Listing">
+              {specimen.purchaseListing || '---'}
+            </Property>
+          </PropertyList>
         </div>
       </div>
       <div className={styles.notes}>
@@ -181,22 +148,8 @@ export default async function SpecimenPage({
           </div>
         )}
       </div>
-
-
-      <div className={styles.imageGrid}>
-        {specimen.images && specimen.images.length > 0 &&
-          specimen.images?.map((image) => (
-            <Image
-              src={urlFor(image)?.width(300).height(300).url() || "https://placehold.co/300x300/png"}
-              alt={title}
-              className={styles.image}
-              width={300}
-              height={300}
-              key={image._key}
-            />
-          ))}
-      </div>
-
+      {specimen.images && specimen.images.length > 0 &&
+          <ImageGallery images={specimen.images} />}
     </main>
   );
 }

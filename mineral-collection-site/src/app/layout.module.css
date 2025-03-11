@@ -1,9 +1,9 @@
 .nav {
     background-color: var(--darkAccent);
     display: flex;
-    gap: 10px;
+    gap: 16px;
     align-items: center;
-    padding: 16px 64px;
+    padding: 16px clamp(16px, 10%, 64px);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -12,8 +12,14 @@
 
 .nav a {
     text-decoration: none;
-    transition: all 0.3s ease-in-out;
+    transition: all 250ms ease-in-out;
 }
 .nav a:hover {
     color: var(--lightAccent);  
+}
+
+.home {
+    font-family: var(--headerFontFamily);
+    font-size: 1.5rem;
+    font-weight: 700;
 }

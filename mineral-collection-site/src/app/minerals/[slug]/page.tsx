@@ -1,7 +1,4 @@
-import { client } from "@/sanity/client";
 import { sanityFetch } from "@/sanity/live";
-import imageUrlBuilder from "@sanity/image-url";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery, PortableText } from "next-sanity";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -9,7 +6,11 @@ import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { MINERAL_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
-import ResultCard from "@/app/_shared/components/resultCard/resultCard";
+import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
+import { urlFor } from "@/app/_shared/utils/urlService";
+import PropertyList from "@/app/_shared/components/propertyList/propertyList";
+import Property from "@/app/_shared/components/propertyList/property/property";
+import BackLink from "@/app/_shared/components/backLink/backLink";
 
 const MINERAL_QUERY = defineQuery(`*[
     _type == "mineral" &&
@@ -23,12 +24,6 @@ const MINERAL_QUERY = defineQuery(`*[
     previewImage
 }
 }`);
-
-const { projectId, dataset } = client.config();
-const urlFor = (source: SanityImageSource | null) =>
-  projectId && dataset && source
-    ? imageUrlBuilder({ projectId, dataset }).image(source)
-    : null;
 
 export default async function MineralPage({
   params,
@@ -50,20 +45,24 @@ export default async function MineralPage({
 
   return (
     <main className={styles.container}>
-      <div>
-        <Link href="/minerals">← Back to Minerals</Link>
-      </div>
+      <BackLink title="Back to Minerals" href="/minerals" />
       <ImageHeader title={mineral.name || ""} imageUrl={imageUrl} alt={mineral.name || "Mineral"}>
-        <dl>
-          <dt>Scientific Name</dt>
-          <dd>{mineral.scientificName}</dd>
-          <dt>Alt Names</dt>
-          <dd>{mineral.altNames}</dd>
-          <dt>Mindat Url</dt>
-          <dd>{mineral.mindatUrl}</dd>
-          <dt>Colors</dt>
-          <dd>{mineral.color?.colorDescription}</dd>
-        </dl>
+        <PropertyList>
+          <Property title="Scientific Name">
+            {mineral.scientificName || '---'}
+          </Property>
+          <Property title="Alt Names">
+            {mineral.altNames?.join(', ') || '---'}
+          </Property>
+          {mineral.mindatUrl &&
+            <Property title="Mindat">
+              <Link href={mineral.mindatUrl} target="blank">{mineral.mindatUrl}</Link>
+            </Property>
+          }
+          <Property title="Colors">
+            {mineral.color?.colorDescription}
+          </Property>
+        </PropertyList>
       </ImageHeader>
       <div>
         {mineral.notes && mineral.notes.length > 0 && (
@@ -77,7 +76,7 @@ export default async function MineralPage({
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}
-            imageUrl={urlFor(specimen.previewImage)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={urlFor(specimen.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}

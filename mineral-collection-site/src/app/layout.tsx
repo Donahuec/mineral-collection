@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${montserrat.style} ${volkorn.style}`}>
         <nav className={styles.nav}>
-        <Link href="/">CrystalDB</Link>
+        <Link href="/" className={styles.home}>CrystalDB</Link>
         <Link href="/minerals">Minerals</Link>
         <Link href="/rocks">Rocks</Link>
         <Link href="/specimens">Specimens</Link>

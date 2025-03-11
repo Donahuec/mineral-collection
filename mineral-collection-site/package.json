@@ -13,6 +13,7 @@
     "next": "15.2.1",
     "next-sanity": "^9.8.61",
     "react": "^19.0.0",
+    "react-aria-components": "^1.7.1",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {

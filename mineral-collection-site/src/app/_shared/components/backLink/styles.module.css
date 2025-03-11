@@ -1,0 +1,8 @@
+a.backLink {
+    color: var(--lightAccent);
+    text-decoration: none;
+    transition: color 250ms ease-in-out;
+    &:hover {
+        color: var(--lightShade);
+    }
+}
