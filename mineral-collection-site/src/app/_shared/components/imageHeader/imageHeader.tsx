@@ -4,16 +4,16 @@ import Image from "next/image";
 import styles from "./styles.module.css";
 
 interface imageHeaderProps {
-    title: string;
-    alt?: string;
-    imageUrl?: string;
+  title: string;
+  alt?: string;
+  imageUrl?: string;
 }
 
 export default async function imageHeader(props: PropsWithChildren<imageHeaderProps>) {
-    const title = props.title;
-    const alt = props.alt;
-    const imageUrl = props.imageUrl || "https://placehold.co/550x410/png";
-    return <div className={styles.infoBlock}>
+  const title = props.title;
+  const alt = props.alt;
+  const imageUrl = props.imageUrl || "https://placehold.co/550x410/png";
+  return <div className={styles.infoBlock}>
     <Image
       src={imageUrl || "https://placehold.co/550x410/png"}
       alt={alt || ""}
@@ -21,6 +21,8 @@ export default async function imageHeader(props: PropsWithChildren<imageHeaderPr
       height="410"
       width="550"
       priority
+      placeholder="blur"
+      blurDataURL="/blur.png"
     />
     <div className={styles.primaryDetails}>
       {<h1 className={styles.title}>{title}</h1>}

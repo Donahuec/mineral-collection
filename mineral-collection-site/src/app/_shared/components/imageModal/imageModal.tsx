@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { Button, Dialog, DialogTrigger, Modal, ModalOverlay } from 'react-aria-components';
 import { urlFor, getImageDimensions } from "@/app/_shared/utils/imageService";
 import { PropsWithChildren, useState } from "react";
+import LoadingSpinner from "../loadingSpinner/loadingSpinner";
 
 interface ImageModalProps {
     /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -24,7 +25,7 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
             <ModalOverlay className={styles.modalOverlay}>
                 <Modal className={styles.modal}>
                     <Dialog className={styles.modalDialog}>
-                        {!imageLoaded && <div className={styles.loader}></div>}
+                        {!imageLoaded && <LoadingSpinner />}
                         <Image
                             src={urlFor(props.image)?.url() || "https://placehold.co/300x300/png"}
                             alt=""
