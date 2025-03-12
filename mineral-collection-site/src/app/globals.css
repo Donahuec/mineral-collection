@@ -2,7 +2,22 @@
   --fontBody: 1rem;
   --fontWeight: 400;
   --headerFontFamily: "Vollkorn", serif;
-  --fontFamily: "Montserrat", serif;
+  --fontFamily: "Montserrat", sans-serif;
+
+  /* Sizing */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 16px;
+  --s4: 24px;
+  --s5: 32px;
+  --s6: 64px;
+  --s7: 96px;
+  --s8: 128px;
+  --s9: 256px;
+
+  /* Border Radius */
+  --br1: 8px;
+  --br2: 16px;
 
   /* Colors */
   /* palette built with http://colormind.io/ */
@@ -79,4 +94,8 @@ a:-webkit-any-link {
 a:hover,
 a:focus-visible {
   color: var(--lightShade);
+}
+
+a:active {
+  color: var(--darkShade);
 }

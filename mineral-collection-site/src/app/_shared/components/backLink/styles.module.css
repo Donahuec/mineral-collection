@@ -3,7 +3,12 @@ a.backLink {
   text-decoration: none;
   transition: color 250ms ease-in-out;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: var(--lightShade);
+  }
+
+  &:active {
+    color: var(--darkShade);
   }
 }

@@ -1,6 +1,6 @@
 .property {
   display: flex;
-  gap: 8px;
+  gap: var(--s2);
   align-items: flex-start;
   flex-wrap: wrap;
 }

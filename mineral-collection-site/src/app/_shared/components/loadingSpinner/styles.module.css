@@ -20,10 +20,10 @@
 }
 
 .loader {
-  border: 8px solid var(--lightAccent);
-  border-top: 8px solid var(--darkAccent);
+  border: var(--s2) solid var(--lightAccent);
+  border-top: var(--s2) solid var(--darkAccent);
   border-radius: 50%;
-  width: 64px;
-  height: 64px;
+  width: var(--s6);
+  height: var(--s6);
   animation: spin 2s ease infinite;
 }

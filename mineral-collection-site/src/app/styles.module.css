@@ -1,9 +1,9 @@
 .headerContent {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: var(--s3);
   justify-content: flex-start;
-  width: clamp(150px, 50%, 250px);
+  width: clamp(var(--s8), 50%, var(--s9));
 }
 
 a.link,
@@ -17,11 +17,15 @@ a.link:focus-visible {
   color: var(--lightAccent);
 }
 
+a.link:active {
+  color: var(--darkShade);
+}
+
 .link .linkUnderline {
-  height: 4px;
+  height: var(--s1);
   width: 0px;
-  background-color: var(--lightAccent);
-  transition: width 0.3s ease-in-out;
+  background-color: currentColor;
+  transition: width 0.3s ease-out;
 }
 
 .link:hover .linkUnderline,
