@@ -1,29 +1,29 @@
 @keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
 
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .loader {
-    border: 8px solid var(--lightAccent);
-    border-top: 8px solid var(--darkAccent);
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    animation: spin 2s ease infinite;
+  border: var(--s2) solid var(--lightAccent);
+  border-top: var(--s2) solid var(--darkAccent);
+  border-radius: 50%;
+  width: var(--s6);
+  height: var(--s6);
+  animation: spin 2s ease infinite;
 }

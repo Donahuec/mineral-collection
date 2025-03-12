@@ -46,22 +46,25 @@ export default async function MineralPage({
   return (
     <main className={styles.container}>
       <BackLink title="Back to Minerals" href="/minerals" />
-      <ImageHeader title={mineral.name || ""} imageUrl={imageUrl} alt={mineral.name || "Mineral"}>
+      <ImageHeader
+        title={mineral.name || ""}
+        imageUrl={imageUrl}
+        alt={mineral.name || "Mineral"}>
         <PropertyList>
           <Property title="Scientific Name">
-            {mineral.scientificName || '---'}
+            {mineral.scientificName || "---"}
           </Property>
           <Property title="Alt Names">
-            {mineral.altNames?.join(', ') || '---'}
+            {mineral.altNames?.join(", ") || "---"}
           </Property>
-          {mineral.mindatUrl &&
+          {mineral.mindatUrl && (
             <Property title="Mindat">
-              <Link href={mineral.mindatUrl} target="blank">{mineral.mindatUrl}</Link>
+              <Link href={mineral.mindatUrl} target="blank">
+                {mineral.mindatUrl}
+              </Link>
             </Property>
-          }
-          <Property title="Colors">
-            {mineral.color?.colorDescription}
-          </Property>
+          )}
+          <Property title="Colors">{mineral.color?.colorDescription}</Property>
         </PropertyList>
       </ImageHeader>
       <div>
@@ -72,11 +75,14 @@ export default async function MineralPage({
         )}
       </div>
       <ResultGrid>
-        {(mineral).specimens?.map((specimen) => (
+        {mineral.specimens?.map((specimen) => (
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}
-            imageUrl={urlFor(specimen.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={
+              urlFor(specimen.previewImage, 600, 600)?.url() ||
+              "https://placehold.co/300x300/png"
+            }
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}

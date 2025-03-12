@@ -1,25 +1,31 @@
 .nav {
-    background-color: var(--darkAccent);
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding: 16px clamp(16px, 10%, 64px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: var(--darkAccent);
+  display: flex;
+  gap: var(--s3);
+  align-items: center;
+  padding: var(--s3) clamp(var(--s3), 10%, var(--s6));
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .nav a {
-    color: var(--lightShade);
-    text-decoration: none;
+  color: var(--lightShade);
+  text-decoration: none;
+  transition: all 250ms ease;
 }
+
 .nav a:hover {
-    color: var(--lightAccent);  
+  color: var(--lightAccent);
+}
+
+.nav a:active {
+  transform: scale(0.95);
 }
 
 .home {
-    font-family: var(--headerFontFamily);
-    font-size: 1.5rem;
-    font-weight: 700;
+  font-family: var(--headerFontFamily);
+  font-size: 1.5rem;
+  font-weight: 700;
 }

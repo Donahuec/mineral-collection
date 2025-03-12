@@ -1,5 +1,5 @@
 .title {
-    text-align: center;
-    margin-block: 16px;
-    font-size: 3rem;
+  text-align: center;
+  margin-block: var(--s3);
+  font-size: 3rem;
 }

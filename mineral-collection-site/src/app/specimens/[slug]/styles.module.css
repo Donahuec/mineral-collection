@@ -1,27 +1,27 @@
 .container {
-    padding-inline: clamp(16px, 5%, 64px);
-    padding-block: 32px;
-    width: 100%;
+  padding-inline: clamp(var(--s3), 5%, var(--s6));
+  padding-block: var(--s5);
+  width: 100%;
 }
 
 .minerals {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-    list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s5);
+  list-style: none;
 }
 .additionalProperties {
-    display: flex;
-    gap: 32px;
-    flex-wrap: wrap;
-    margin-inline: 32px;
-    margin-block: 64px;
+  display: flex;
+  gap: var(--s5);
+  flex-wrap: wrap;
+  margin-inline: var(--s5);
+  margin-block: var(--s6);
 }
 
 .metadataSection {
-    flex: 1;
-    background-color: var(--darkAccent);
-    padding: 32px;
-    border-radius: 16px;
-    min-width: 300px;
+  flex: 1;
+  background-color: var(--darkAccent);
+  padding: var(--s5);
+  border-radius: var(--br2);
+  min-width: 300px;
 }

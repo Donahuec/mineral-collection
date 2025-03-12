@@ -65,6 +65,6 @@ export const rockType = defineType({
       type: 'array',
       group: 'details',
       of: [{type: 'block'}],
-    })
+    }),
   ],
 })

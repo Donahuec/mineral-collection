@@ -1,6 +1,5 @@
 .container {
-    padding-inline: clamp(16px, 5%, 64px);
-    padding-block: 16px;
-    width: 100%;
-    
-  }
+  padding-inline: clamp(var(--s3), 5%, var(--s6));
+  padding-block: var(--s3);
+  width: 100%;
+}

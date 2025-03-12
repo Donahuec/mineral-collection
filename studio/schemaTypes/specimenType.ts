@@ -1,6 +1,6 @@
 import {DiamondIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
-import { colors, specimenSizes } from './constants'
+import {specimenSizes} from './constants'
 
 export const specimenType = defineType({
   name: 'specimen',
@@ -15,31 +15,23 @@ export const specimenType = defineType({
     {
       title: 'Name, Asc',
       name: 'nameAsc',
-      by: [
-        {field: 'name', direction: 'asc'}
-      ]
+      by: [{field: 'name', direction: 'asc'}],
     },
     {
       title: 'Name, Desc',
       name: 'nameDesc',
-      by: [
-        {field: 'name', direction: 'desc'}
-      ]
+      by: [{field: 'name', direction: 'desc'}],
     },
     {
       title: 'numericId, Asc',
       name: 'numericIdAsc',
-      by: [
-        {field: 'numericId', direction: 'asc'}
-      ]
+      by: [{field: 'numericId', direction: 'asc'}],
     },
     {
       title: 'numericId, Desc',
       name: 'numericIdDesc',
-      by: [
-        {field: 'numericId', direction: 'desc'}
-      ]
-    }
+      by: [{field: 'numericId', direction: 'desc'}],
+    },
   ],
   fields: [
     defineField({
@@ -82,7 +74,13 @@ export const specimenType = defineType({
       group: 'details',
       of: [{type: 'string'}],
       readOnly: true,
-      hidden: ({document}) => {return (!document?.mineralsText || (!!document?.minerals && (document.minerals as any[]).length >= (document.mineralsText as any[]).length))},
+      hidden: ({document}) => {
+        return (
+          !document?.mineralsText ||
+          (!!document?.minerals &&
+            (document.minerals as any[]).length >= (document.mineralsText as any[]).length)
+        )
+      },
     }),
     defineField({
       name: 'rocks',
@@ -96,7 +94,13 @@ export const specimenType = defineType({
       group: 'details',
       of: [{type: 'string'}],
       readOnly: true,
-      hidden: ({document}) => {return (!document?.rocksText || (!!document?.rocks && (document.rocks as any[]).length >= (document.rocksText as any[]).length))},
+      hidden: ({document}) => {
+        return (
+          !document?.rocksText ||
+          (!!document?.rocks &&
+            (document.rocks as any[]).length >= (document.rocksText as any[]).length)
+        )
+      },
     }),
     defineField({
       name: 'hesitantId',
@@ -113,8 +117,8 @@ export const specimenType = defineType({
       type: 'string',
       group: 'properties',
       options: {
-        list: specimenSizes
-      }
+        list: specimenSizes,
+      },
     }),
     defineField({
       name: 'size',
