@@ -18,11 +18,11 @@ interface ImageModalProps {
 
 export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
     const [imageLoaded, setImageLoaded] = useState(false);
-    let { width, height } = getImageDimensions(props.image);
+    const { width, height } = getImageDimensions(props.image);
     return (
         <DialogTrigger>
             {props.children}
-            <ModalOverlay className={styles.modalOverlay}>
+            <ModalOverlay className={styles.modalOverlay} isDismissable>
                 <Modal className={styles.modal}>
                     <Dialog className={styles.modalDialog}>
                         {!imageLoaded && <LoadingSpinner />}

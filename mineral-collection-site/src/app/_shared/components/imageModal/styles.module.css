@@ -89,4 +89,17 @@
     color: var(--lightAccent);
     font-size: 24px;
     cursor: pointer;
+    box-shadow: -2px 2px 0 var(--darkShade);
+    transition: all 0.2s ease-in-out;
+}
+
+.closeButton:hover, .closeButton:focus-visible {
+    transform: scale(1.03);
+    box-shadow: -2px 3px 0 var(--darkShade);
+    color: var(--lightShade);
+}
+
+.closeButton:active {
+    transform: scale(0.97);
+    box-shadow: -2px 1px 0 var(--darkShade);
 }
