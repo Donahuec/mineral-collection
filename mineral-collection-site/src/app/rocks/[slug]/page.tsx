@@ -6,7 +6,7 @@ import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { ROCK_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
 import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
-import { urlFor } from "@/app/_shared/utils/urlService";
+import { urlFor } from "@/app/_shared/utils/imageService";
 import BackLink from "@/app/_shared/components/backLink/backLink";
 
 const ROCK_QUERY = defineQuery(`*[

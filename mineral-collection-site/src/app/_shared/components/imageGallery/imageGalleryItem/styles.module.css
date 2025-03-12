@@ -16,6 +16,6 @@
 }
 
 .imageButton:hover .image {
-    transform: scale(1.01);
+    transform: scale(1.02);
     box-shadow: 10px 12px 0 var(--darkAccent);
 }

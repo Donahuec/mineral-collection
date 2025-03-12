@@ -1,0 +1,25 @@
+.headerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: flex-start;
+    width: clamp(150px, 50%, 250px);
+}
+
+a.link, a.link:visited, a.link:-webkit-any-link {
+    color: var(--lightShade);
+}
+a.link:hover, a.link:focus-visible {
+    color: var(--lightAccent);
+}
+
+.link .linkUnderline {
+    height: 4px;
+    width: 0px;
+    background-color: var(--lightAccent);
+    transition: width 0.3s ease-in-out;
+}
+
+.link:hover .linkUnderline, a.link:focus-visible  .linkUnderline{
+    width: 100%;
+}

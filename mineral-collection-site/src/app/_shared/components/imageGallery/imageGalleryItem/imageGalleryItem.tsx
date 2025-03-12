@@ -3,7 +3,7 @@
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { Button } from 'react-aria-components';
-import { urlFor } from "@/app/_shared/utils/urlService";
+import { urlFor } from "@/app/_shared/utils/imageService";
 import ImageModal from "../../imageModal/imageModal";
 
 interface ImageGalleryItemProps {

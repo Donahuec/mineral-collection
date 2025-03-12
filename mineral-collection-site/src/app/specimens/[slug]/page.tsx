@@ -5,7 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { urlFor } from "@/app/_shared/utils/urlService";
+import { urlFor } from "@/app/_shared/utils/imageService";
 import Property from "@/app/_shared/components/propertyList/property/property";
 import PropertyList from "@/app/_shared/components/propertyList/propertyList";
 import BackLink from "@/app/_shared/components/backLink/backLink";
