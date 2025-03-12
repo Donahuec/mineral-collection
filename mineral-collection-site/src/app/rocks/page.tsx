@@ -17,11 +17,14 @@ export default async function RocksPage() {
     <main>
       <h1 className={styles.title}>Rocks</h1>
       <ResultGrid>
-      {rocks.map((rock) => (
+        {rocks.map((rock) => (
           <ResultCard
             key={rock._id}
             title={rock.name || "Missing Title"}
-            imageUrl={urlFor(rock.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={
+              urlFor(rock.previewImage, 600, 600)?.url() ||
+              "https://placehold.co/300x300/png"
+            }
             link={`/rocks/${rock?.slug?.current}`}
           />
         ))}

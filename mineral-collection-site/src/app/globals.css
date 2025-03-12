@@ -69,11 +69,14 @@ h6,
   font-family: var(--headerFontFamily);
 }
 
-a, a:visited, a:-webkit-any-link {
+a,
+a:visited,
+a:-webkit-any-link {
   color: var(--lightAccent);
   text-decoration: none;
   transition: color 250ms ease;
 }
-a:hover, a:focus-visible {
+a:hover,
+a:focus-visible {
   color: var(--lightShade);
 }

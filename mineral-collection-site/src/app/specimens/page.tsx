@@ -11,7 +11,10 @@ const SPECIMENS_QUERY = defineQuery(`*[
 ]{_id,  name, numericId, slug, previewImage}|order(numericId asc)`);
 
 export default async function SpecimensPage() {
-  const { data: specimens } = await sanityFetch({ query: SPECIMENS_QUERY, params: { lastId: 0 } });
+  const { data: specimens } = await sanityFetch({
+    query: SPECIMENS_QUERY,
+    params: { lastId: 0 },
+  });
   return (
     <main>
       <h1 className={styles.title}>Specimens</h1>
@@ -19,8 +22,13 @@ export default async function SpecimensPage() {
         {specimens.map((specimen) => (
           <ResultCard
             key={specimen._id}
-            title={`${specimen.name} - #${specimen.numericId}` || "Missing Title"}
-            imageUrl={urlFor(specimen.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
+            title={
+              `${specimen.name} - #${specimen.numericId}` || "Missing Title"
+            }
+            imageUrl={
+              urlFor(specimen.previewImage, 600, 600)?.url() ||
+              "https://placehold.co/300x300/png"
+            }
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}

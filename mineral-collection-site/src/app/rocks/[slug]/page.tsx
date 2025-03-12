@@ -43,15 +43,20 @@ export default async function RockPage({
   return (
     <main className={styles.container}>
       <BackLink title="Back to Rocks" href="/rocks" />
-      <ImageHeader title={rock.name || ""} imageUrl={imageUrl} alt={rock.name || "Rock"}>
-      </ImageHeader>
+      <ImageHeader
+        title={rock.name || ""}
+        imageUrl={imageUrl}
+        alt={rock.name || "Rock"}></ImageHeader>
 
       <ResultGrid>
         {rock.specimens?.map((specimen) => (
           <ResultCard
             key={specimen._id}
             title={specimen.name || "Missing Title"}
-            imageUrl={urlFor(specimen.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={
+              urlFor(specimen.previewImage, 600, 600)?.url() ||
+              "https://placehold.co/300x300/png"
+            }
             link={`/specimens/${specimen?.slug?.current}`}
           />
         ))}

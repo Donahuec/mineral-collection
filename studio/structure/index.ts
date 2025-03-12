@@ -10,11 +10,11 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('mineral').title('Minerals').icon(FolderIcon),
       S.documentTypeListItem('rock').title('Rocks').icon(FolderIcon),
       S.listItem()
-      .title('Entry Specimens')
-      .child(
-        S.documentList()
-              .title('Specimens')
-              .filter('_type == "specimen" && !defined(previewImage)')
-              .defaultOrdering([{field: 'numericId', direction: 'asc'}])
-      )
+        .title('Entry Specimens')
+        .child(
+          S.documentList()
+            .title('Specimens')
+            .filter('_type == "specimen" && !defined(previewImage)')
+            .defaultOrdering([{field: 'numericId', direction: 'asc'}]),
+        ),
     ])

@@ -1,5 +1,5 @@
 import {defineField, defineType} from 'sanity'
-import { colors, luster, mohsScale } from './constants'
+import {luster, mohsScale} from './constants'
 
 export const mineralType = defineType({
   name: 'mineral',
@@ -64,7 +64,7 @@ export const mineralType = defineType({
     defineField({
       name: 'toxicity',
       type: 'string',
-      group: ['details','properties'],
+      group: ['details', 'properties'],
     }),
     defineField({
       name: 'handling',
@@ -133,7 +133,7 @@ export const mineralType = defineType({
       name: 'manMade',
       type: 'boolean',
       group: 'properties',
-    }),  
+    }),
     defineField({
       name: 'color',
       type: 'object',
@@ -148,8 +148,8 @@ export const mineralType = defineType({
           name: 'colorDescription',
           type: 'string',
         }),
-      ]
-    }),  
+      ],
+    }),
     defineField({
       name: 'luster',
       type: 'object',
@@ -158,13 +158,13 @@ export const mineralType = defineType({
         defineField({
           name: 'luster',
           type: 'array',
-        of: [{type: 'string', options: {list: luster}}], 
+          of: [{type: 'string', options: {list: luster}}],
         }),
         defineField({
           name: 'description',
           type: 'string',
-        })
-      ]
+        }),
+      ],
     }),
     defineField({
       name: 'cleavage',
@@ -203,7 +203,7 @@ export const mineralType = defineType({
       fields: [
         defineField({
           name: 'text',
-          type: 'string'
+          type: 'string',
         }),
         defineField({
           name: 'min',
@@ -215,7 +215,7 @@ export const mineralType = defineType({
           type: 'number',
           options: {list: mohsScale},
         }),
-      ]
+      ],
     }),
     defineField({
       name: 'specificGravity',

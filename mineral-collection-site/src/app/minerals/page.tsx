@@ -17,11 +17,14 @@ export default async function MineralsPage() {
     <main>
       <h1 className={styles.title}>Minerals</h1>
       <ResultGrid>
-      {minerals.map((mineral) => (
+        {minerals.map((mineral) => (
           <ResultCard
             key={mineral._id}
             title={mineral.name || "Missing Title"}
-            imageUrl={urlFor(mineral.previewImage, 600, 600)?.url() || "https://placehold.co/300x300/png"}
+            imageUrl={
+              urlFor(mineral.previewImage, 600, 600)?.url() ||
+              "https://placehold.co/300x300/png"
+            }
             link={`/minerals/${mineral?.slug?.current}`}
           />
         ))}
