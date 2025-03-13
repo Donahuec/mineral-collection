@@ -96,6 +96,12 @@ a:focus-visible {
   color: var(--lightShade);
 }
 
+a:focus-visible {
+  outline: 2px solid var(--lightAccent);
+  outline-offset: var(--s1);
+  border-radius: 2px;
+}
+
 a:active {
   color: var(--darkShade);
 }

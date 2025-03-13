@@ -12,13 +12,29 @@
 .card a {
   text-decoration: none;
   color: inherit;
+  &:focus {
+    outline: none;
+  }
 }
-
-.card:hover {
+.card:hover,
+.card:focus-within {
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
   transform: scale(1.03);
   .divider {
     width: 75%;
+  }
+}
+
+.card:has(a:focus-visible) {
+  outline: 2px solid var(--lightAccent);
+  outline-offset: var(--s1);
+}
+
+.card:has(a:active) {
+  transform: scale(0.98);
+  box-shadow: none;
+  .divider {
+    width: 50%;
   }
 }
 
