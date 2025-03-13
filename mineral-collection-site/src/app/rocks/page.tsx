@@ -14,7 +14,7 @@ const ROCKS_QUERY = defineQuery(`*[
 export default async function RocksPage() {
   const { data: rocks } = await sanityFetch({ query: ROCKS_QUERY });
   return (
-    <main>
+    <>
       <h1 className={styles.title}>Rocks</h1>
       <ResultGrid>
         {rocks.map((rock) => (
@@ -29,6 +29,6 @@ export default async function RocksPage() {
           />
         ))}
       </ResultGrid>
-    </main>
+    </>
   );
 }

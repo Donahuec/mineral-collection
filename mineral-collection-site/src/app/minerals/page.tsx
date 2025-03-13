@@ -14,7 +14,7 @@ const MINERALS_QUERY = defineQuery(`*[
 export default async function MineralsPage() {
   const { data: minerals } = await sanityFetch({ query: MINERALS_QUERY });
   return (
-    <main>
+    <>
       <h1 className={styles.title}>Minerals</h1>
       <ResultGrid>
         {minerals.map((mineral) => (
@@ -29,6 +29,6 @@ export default async function MineralsPage() {
           />
         ))}
       </ResultGrid>
-    </main>
+    </>
   );
 }

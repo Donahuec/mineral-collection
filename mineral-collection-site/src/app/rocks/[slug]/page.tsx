@@ -41,7 +41,7 @@ export default async function RockPage({
     : undefined;
 
   return (
-    <main className={styles.container}>
+    <>
       <BackLink title="Back to Rocks" href="/rocks" />
       <ImageHeader
         title={rock.name || ""}
@@ -61,6 +61,6 @@ export default async function RockPage({
           />
         ))}
       </ResultGrid>
-    </main>
+    </>
   );
 }

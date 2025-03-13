@@ -36,7 +36,9 @@ export default function RootLayout({
           <Link href="/rocks">Rocks</Link>
           <Link href="/specimens">Specimens</Link>
         </nav>
-        {children}
+        <main className={styles.main}>
+          {children}
+        </main>
         <SanityLive />
       </body>
     </html>

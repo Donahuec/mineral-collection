@@ -16,7 +16,7 @@ export default async function SpecimensPage() {
     params: { lastId: 0 },
   });
   return (
-    <main>
+    <>
       <h1 className={styles.title}>Specimens</h1>
       <ResultGrid>
         {specimens.map((specimen) => (
@@ -33,6 +33,6 @@ export default async function SpecimensPage() {
           />
         ))}
       </ResultGrid>
-    </main>
+    </>
   );
 }

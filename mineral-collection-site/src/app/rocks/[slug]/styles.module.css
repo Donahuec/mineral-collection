@@ -1,5 +1,0 @@
-.container {
-  padding-inline: clamp(var(--s3), 5%, var(--s6));
-  padding-block: var(--s3);
-  width: 100%;
-}

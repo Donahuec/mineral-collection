@@ -29,3 +29,9 @@
   font-size: 1.5rem;
   font-weight: 700;
 }
+
+.main {
+  padding-inline: clamp(var(--s3), 5%, var(--s5));
+  padding-block: var(--s5);
+  width: 100%;
+}

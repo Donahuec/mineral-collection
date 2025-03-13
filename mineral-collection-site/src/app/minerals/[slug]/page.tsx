@@ -44,7 +44,7 @@ export default async function MineralPage({
     : undefined;
 
   return (
-    <main className={styles.container}>
+    <>
       <BackLink title="Back to Minerals" href="/minerals" />
       <ImageHeader
         title={mineral.name || ""}
@@ -87,6 +87,6 @@ export default async function MineralPage({
           />
         ))}
       </ResultGrid>
-    </main>
+    </>
   );
 }
