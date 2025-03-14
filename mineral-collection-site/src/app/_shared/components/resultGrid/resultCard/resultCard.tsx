@@ -9,7 +9,7 @@ type ResultCardProps = {
   link: string;
 };
 
-export default async function ResultCard({
+export default function ResultCard({
   title,
   imageUrl,
   link,

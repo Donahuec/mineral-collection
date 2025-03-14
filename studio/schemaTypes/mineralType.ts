@@ -1,14 +1,15 @@
-import {defineField, defineType} from 'sanity'
-import {luster, mohsScale} from './constants'
+import { defineField, defineType } from 'sanity'
+import { luster, mohsScale } from './constants'
 
 export const mineralType = defineType({
   name: 'mineral',
   title: 'Mineral',
   type: 'document',
+  liveEdit: true,
   groups: [
-    {name: 'details', title: 'Details', default: true},
-    {name: 'properties', title: 'Properties'},
-    {name: 'relationships', title: 'Relationships'},
+    { name: 'details', title: 'Details', default: true },
+    { name: 'properties', title: 'Properties' },
+    { name: 'relationships', title: 'Relationships' },
   ],
   fields: [
     defineField({
@@ -20,7 +21,7 @@ export const mineralType = defineType({
       name: 'slug',
       type: 'slug',
       group: 'details',
-      options: {source: 'name'},
+      options: { source: 'name' },
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
@@ -36,14 +37,14 @@ export const mineralType = defineType({
     defineField({
       name: 'tags',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       group: 'details',
     }),
     defineField({
       name: 'parent',
       type: 'reference',
       group: ['details', 'relationships'],
-      to: [{type: 'mineral'}],
+      to: [{ type: 'mineral' }],
     }),
     defineField({
       name: 'parentName',
@@ -59,7 +60,7 @@ export const mineralType = defineType({
       name: 'altNames',
       type: 'array',
       group: 'details',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
     }),
     defineField({
       name: 'toxicity',
@@ -78,7 +79,7 @@ export const mineralType = defineType({
         defineField({
           name: 'notes',
           type: 'array',
-          of: [{type: 'block'}],
+          of: [{ type: 'block' }],
         }),
       ],
     }),
@@ -91,13 +92,13 @@ export const mineralType = defineType({
       name: 'notes',
       type: 'array',
       group: 'details',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'commonAssociations',
       type: 'array',
       group: 'relationships',
-      of: [{type: 'reference', to: [{type: 'mineral'}]}],
+      of: [{ type: 'reference', to: [{ type: 'mineral' }] }],
     }),
     defineField({
       name: 'commonAssociationsString',
@@ -142,7 +143,7 @@ export const mineralType = defineType({
         defineField({
           name: 'colors',
           type: 'array',
-          of: [{type: 'string'}],
+          of: [{ type: 'string' }],
         }),
         defineField({
           name: 'colorDescription',
@@ -158,7 +159,7 @@ export const mineralType = defineType({
         defineField({
           name: 'luster',
           type: 'array',
-          of: [{type: 'string', options: {list: luster}}],
+          of: [{ type: 'string', options: { list: luster } }],
         }),
         defineField({
           name: 'description',
@@ -208,12 +209,12 @@ export const mineralType = defineType({
         defineField({
           name: 'min',
           type: 'number',
-          options: {list: mohsScale},
+          options: { list: mohsScale },
         }),
         defineField({
           name: 'max',
           type: 'number',
-          options: {list: mohsScale},
+          options: { list: mohsScale },
         }),
       ],
     }),
