@@ -1,14 +1,26 @@
 import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
+import { getSpecimens } from "@/app/_shared/services/specimenService";
 import { urlFor } from "@/app/_shared/utils/imageService";
-import { SPECIMENS_QUERYResult } from "@/sanity/types";
-import { use } from "react";
 
-export default function SpecimenResults({ specimens }: { specimens: Promise<SPECIMENS_QUERYResult> }) {
-  const allSpecimens = use(specimens);
+export default async function SpecimenResults({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: number | string | string[] | undefined }>
+}) {
+  const params = await searchParams;
+
+  if (params.page) {
+    params.page = parseInt(params.page as string);
+  }
+  if (params.pageSize) {
+    params.pageSize = parseInt(params.pageSize as string);
+  }
+  const specimens = await getSpecimens(params);
+
   return (
     <ResultGrid>
-      {allSpecimens.map((specimen) => (
+      {specimens.map((specimen) => (
         <ResultCard
           key={specimen._id}
           title={
