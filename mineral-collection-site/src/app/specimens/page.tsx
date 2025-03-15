@@ -1,38 +1,38 @@
-import { defineQuery } from "next-sanity";
-import { sanityFetch } from "@/sanity/live";
-import ResultCard from "../_shared/components/resultGrid/resultCard/resultCard";
+import { Suspense } from "react";
 import styles from "./styles.module.css";
-import ResultGrid from "../_shared/components/resultGrid/resultGrid";
-import { urlFor } from "../_shared/utils/imageService";
+import LoadingSpinner from "../_shared/components/loadingSpinner/loadingSpinner";
+import SpecimenResults from "./_components/specimenResults/specimenResults";
+import SpecimenFilters from "./_components/specimenFilters/specimenFilters";
+import React from "react";
+import { getSpecimens } from "../_shared/services/specimenService";
 
-const SPECIMENS_QUERY = defineQuery(`*[
-  _type == "specimen"
-  && defined(slug.current) && defined(previewImage) && numericId > $lastId
-]{_id,  name, numericId, slug, previewImage}|order(numericId asc)`);
+export default async function SpecimensPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: number | string | string[] | undefined }>
+}) {
+  const params = await searchParams;
 
-export default async function SpecimensPage() {
-  const { data: specimens } = await sanityFetch({
-    query: SPECIMENS_QUERY,
-    params: { lastId: 0 },
-  });
+  if (params.page) {
+    params.page = parseInt(params.page as string);
+  }
+  if (params.pageSize) {
+    params.pageSize = parseInt(params.pageSize as string);
+  }
+
+  const specimens = getSpecimens(params);
+
   return (
     <>
       <h1 className={styles.title}>Specimens</h1>
-      <ResultGrid>
-        {specimens.map((specimen) => (
-          <ResultCard
-            key={specimen._id}
-            title={
-              `${specimen.name} - #${specimen.numericId}` || "Missing Title"
-            }
-            imageUrl={
-              urlFor(specimen.previewImage, 600, 600)?.url() ||
-              "https://placehold.co/300x300/png"
-            }
-            link={`/specimens/${specimen?.slug?.current}`}
-          />
-        ))}
-      </ResultGrid>
+      <div className={styles.content}>
+        <SpecimenFilters />
+        <div className={styles.results}>
+          <Suspense fallback={<LoadingSpinner />}>
+            <SpecimenResults specimens={specimens} />
+          </Suspense>
+        </div>
+      </div>
     </>
   );
 }
