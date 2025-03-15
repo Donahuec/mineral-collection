@@ -1,9 +1,3 @@
-.container {
-  padding-inline: clamp(var(--s3), 5%, var(--s6));
-  padding-block: var(--s5);
-  width: 100%;
-}
-
 .minerals {
   display: flex;
   flex-wrap: wrap;

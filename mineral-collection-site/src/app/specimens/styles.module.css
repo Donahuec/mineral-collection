@@ -3,3 +3,11 @@
   margin-block: var(--s3);
   font-size: 3rem;
 }
+
+.content {
+  display: flex;
+}
+
+.results {
+  flex-grow: 1;
+}

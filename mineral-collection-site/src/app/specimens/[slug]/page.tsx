@@ -38,7 +38,7 @@ export default async function SpecimenPage({
     : undefined;
 
   return (
-    <main className={styles.container}>
+    <>
       <BackLink title="Back to Specimens" href="/specimens" />
       <ImageHeader
         title={`${specimen.name} - #${specimen.numericId}`}
@@ -136,6 +136,6 @@ export default async function SpecimenPage({
       {specimen.images && specimen.images.length > 0 && (
         <ImageGallery images={specimen.images} />
       )}
-    </main>
+    </>
   );
 }

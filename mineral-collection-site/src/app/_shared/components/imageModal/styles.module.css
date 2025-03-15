@@ -66,6 +66,10 @@
   align-items: center;
 }
 
+.modalDialog:focus-visible {
+  outline: none;
+}
+
 .modalImage {
   display: block;
   width: auto;
@@ -100,6 +104,11 @@
   transform: scale(1.03);
   box-shadow: -2px 3px 0 var(--darkShade);
   color: var(--lightShade);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--lightAccent);
+  outline-offset: var(--s1);
 }
 
 .closeButton:active {

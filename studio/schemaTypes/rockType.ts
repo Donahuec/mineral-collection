@@ -1,13 +1,14 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity'
 
 export const rockType = defineType({
   name: 'rock',
   title: 'Rock',
   type: 'document',
+  liveEdit: true,
   groups: [
-    {name: 'details', title: 'Details'},
-    {name: 'properties', title: 'Properties'},
-    {name: 'relationships', title: 'Relationships'},
+    { name: 'details', title: 'Details' },
+    { name: 'properties', title: 'Properties' },
+    { name: 'relationships', title: 'Relationships' },
   ],
   fields: [
     defineField({
@@ -19,7 +20,7 @@ export const rockType = defineType({
       name: 'slug',
       type: 'slug',
       group: 'details',
-      options: {source: 'name'},
+      options: { source: 'name' },
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
@@ -30,14 +31,14 @@ export const rockType = defineType({
     defineField({
       name: 'tags',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       group: 'details',
     }),
     defineField({
       name: 'parent',
       type: 'reference',
       group: ['details', 'relationships'],
-      to: [{type: 'rock'}],
+      to: [{ type: 'rock' }],
     }),
     defineField({
       name: 'parentName',
@@ -58,13 +59,13 @@ export const rockType = defineType({
       name: 'componentMinerals',
       type: 'array',
       group: 'details',
-      of: [{type: 'reference', to: [{type: 'mineral'}]}],
+      of: [{ type: 'reference', to: [{ type: 'mineral' }] }],
     }),
     defineField({
       name: 'notes',
       type: 'array',
       group: 'details',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
     }),
   ],
 })

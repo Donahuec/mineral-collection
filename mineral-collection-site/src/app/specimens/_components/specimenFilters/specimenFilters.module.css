@@ -1,0 +1,128 @@
+.filters {
+  flex-basis: var(--s9);
+  background-color: var(--darkAccent);
+  padding: var(--s3);
+  height: fit-content;
+  position: sticky;
+  top: var(--s6);
+  border-radius: var(--br2)
+}
+
+.filterHead {
+  border-bottom: var(--s1) solid var(--lightAccent);
+  margin-bottom: var(--s3);
+}
+.filterGroup {
+  margin-bottom: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.divider {
+  border-bottom: var(--s1) solid var(--lightAccent);
+  margin-bottom: var(--s3);
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  color: inherit;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: inherit;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    box-sizing: border-box;
+    border: 2px solid var(--lightAccent);
+    border-radius: 50%;
+    transition: all 200ms;
+  }
+
+  &:hover {
+    color: var(--lightAccent);
+  }
+
+  &:hover:before {
+    transform: scale(1.1);
+  }
+
+  &[data-pressed]:before {
+    border-color: var(--lightShade);
+    transform: scale(0.9);
+  }
+
+  &[data-selected] {
+    &:before {
+      border-color: var(--lightAccent);
+      background: var(--lightAccent);
+      border-width: 4px;
+    }
+
+    &[data-pressed]:before {
+      border-color: var(--lightShade);
+      background: var(--lightShade);
+      transform: scale(0.9);
+    }
+  } 
+
+  &[data-focus-visible]:before {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: 2px;
+  }
+}
+
+.paginator {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  align-items: center;
+}
+
+.paginatorButton {
+  flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--s5);
+  width: var(--s5);
+  padding: var(--s1);
+  border-radius: 50%;
+  background-color: var(--darkAccent);
+  color: var(--lightAccent);
+  cursor: pointer;
+  transition: all 200ms;
+  border: none;
+
+  &:hover:not([data-disabled]) {
+    background-color: var(--lightAccent);
+    color: var(--darkAccent);
+    transform: scale(1.1);
+  }
+
+  &:active:not([data-disabled]) {
+    transform: scale(0.9);
+  }
+  
+  &[data-focus-visible] {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: 2px;
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+  }
+
+}

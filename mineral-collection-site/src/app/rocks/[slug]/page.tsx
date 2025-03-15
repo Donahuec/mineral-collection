@@ -1,7 +1,6 @@
 import { sanityFetch } from "@/sanity/live";
 import { defineQuery } from "next-sanity";
 import { notFound } from "next/navigation";
-import styles from "./styles.module.css";
 import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
 import { ROCK_QUERYResult } from "@/sanity/types";
 import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
@@ -41,7 +40,7 @@ export default async function RockPage({
     : undefined;
 
   return (
-    <main className={styles.container}>
+    <>
       <BackLink title="Back to Rocks" href="/rocks" />
       <ImageHeader
         title={rock.name || ""}
@@ -61,6 +60,6 @@ export default async function RockPage({
           />
         ))}
       </ResultGrid>
-    </main>
+    </>
   );
 }
