@@ -4,10 +4,16 @@
   font-size: 3rem;
 }
 
+.filters {
+  position: relative;
+}
+
 .content {
   display: flex;
+  gap: var(--s3);
+
 }
 
 .results {
-  flex-grow: 1;
+  flex: 1;
 }
