@@ -1,22 +1,15 @@
 'use client';
-import {
-  Button,
-  Dialog,
-  DialogTrigger,
-  Heading,
-  Label,
-  Modal,
-  ModalOverlay,
-  Radio,
-  RadioGroup,
-} from 'react-aria-components';
-import styles from './specimenFilters.module.css';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
-import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { ListFilterPlus, X } from 'lucide-react';
+
+import FilterSidebar, {
+  FilterDivider, FilterGroup
+} from '@/app/_shared/components/filterSidebar/filterSidebar';
 import Paginator from '@/app/_shared/components/paginator/paginator';
+import RadioGroupWrapper, {
+  RadioWrapper
+} from '@/app/_shared/components/radioGroupWrapper/radioGroupWrapper';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
-import iconButtonStyles from '@/app/_shared/styles/iconButton.module.css';
 
 export default function SpecimenFilters() {
   const router = useRouter();
@@ -49,58 +42,29 @@ export default function SpecimenFilters() {
   }
 
   return (
-    <DialogTrigger>
-      <Button className={styles.sidebarButton} aria-label='Open Filters'>
-        <ListFilterPlus size={24} />
-      </Button>
-      <ModalOverlay className={styles.modalOverlay} isDismissable>
-        <Modal className={styles.filters}>
-          <Dialog>
-            <div className={styles.filterHead}>
-              <Heading slot='title' level={2} className={styles.title}>
-                Filters
-              </Heading>
-              <Button
-                slot='close'
-                className={`${styles.closeButton} ${iconButtonStyles.iconButton}`}>
-                <X />
-              </Button>
-            </div>
-            <div className={styles.filterGroup}>
-              <RadioGroup
-                className={styles.radioGroup}
-                name='sortBy'
-                value={sortBy}
-                onChange={updateSortBy}>
-                <Label>Sort By</Label>
-                <Radio className={styles.radio} value='name'>
-                  Name
-                </Radio>
-                <Radio className={styles.radio} value='numericId'>
-                  NumericId
-                </Radio>
-              </RadioGroup>
-              <RadioGroup
-                className={styles.radioGroup}
-                name='sortOrder'
-                value={sortOrder}
-                onChange={updateSortOrder}>
-                <Label>Sort Order</Label>
-                <Radio className={styles.radio} value='asc'>
-                  Asc
-                </Radio>
-                <Radio className={styles.radio} value='desc'>
-                  Desc
-                </Radio>
-              </RadioGroup>
-            </div>
-            <div className={styles.divider}></div>
-            <div className={styles.filterGroup}>
-              <Paginator />
-            </div>
-          </Dialog>
-        </Modal>
-      </ModalOverlay>
-    </DialogTrigger>
+    <FilterSidebar>
+      <FilterGroup>
+        <RadioGroupWrapper
+          name='sortBy'
+          value={sortBy}
+          label='Sort By'
+          onChange={updateSortBy}>
+          <RadioWrapper value='name'>Name</RadioWrapper>
+          <RadioWrapper value='numericId'>NumericId</RadioWrapper>
+        </RadioGroupWrapper>
+        <RadioGroupWrapper
+          name='sortOrder'
+          value={sortOrder}
+          label='Sort Order'
+          onChange={updateSortOrder}>
+          <RadioWrapper value='asc'>Asc</RadioWrapper>
+          <RadioWrapper value='desc'>Desc</RadioWrapper>
+        </RadioGroupWrapper>
+      </FilterGroup>
+      <FilterDivider />
+      <FilterGroup>
+        <Paginator />
+      </FilterGroup>
+    </FilterSidebar>
   );
 }

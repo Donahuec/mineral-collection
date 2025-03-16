@@ -1,0 +1,65 @@
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+  color: inherit;
+}
+
+.label {
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  padding-inline-start: var(--s3);
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: inherit;
+  cursor: pointer;
+  transition: all 200ms;
+
+  &:before {
+    content: '';
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    box-sizing: border-box;
+    border: 2px solid var(--lightAccent);
+    border-radius: 50%;
+    transition: all 200ms;
+  }
+
+  &:hover {
+    color: var(--lightAccent);
+  }
+
+  &:hover:before {
+    transform: scale(1.1);
+  }
+
+  &[data-pressed]:before {
+    border-color: var(--lightShade);
+    transform: scale(0.9);
+  }
+
+  &[data-selected] {
+    &:before {
+      border-color: var(--lightAccent);
+      background: var(--lightAccent);
+      border-width: 4px;
+    }
+
+    &[data-pressed]:before {
+      border-color: var(--lightShade);
+      background: var(--lightShade);
+      transform: scale(0.9);
+    }
+  }
+
+  &[data-focus-visible]:before {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: 2px;
+  }
+}
