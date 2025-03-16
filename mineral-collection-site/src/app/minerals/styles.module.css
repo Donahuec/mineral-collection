@@ -3,3 +3,8 @@
   margin-block: var(--s3);
   font-size: 3rem;
 }
+.paginator {
+  max-width: 300px;
+  margin-inline: auto;
+  margin-block: var(--s4);
+}
