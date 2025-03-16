@@ -38,20 +38,21 @@
   }
 }
 
-a.menuLink {
+a.menuLink,
+a.menuLink:visited,
+a.menuLink:-webkit-any-link {
   font-size: 1.25rem;
   color: var(--lightShade);
   text-decoration: none;
   padding: var(--s1);
   transition: all 250ms ease;
 }
-
 .menuButton:hover,
-a.menuLink:hover {
+a.menuLink:hover,
+a.menuLink:focus-visible {
   color: var(--lightAccent);
 }
-
 .menuButton:active,
-a.menuLink:hover {
+a.menuLink:active {
   transform: scale(0.95);
 }
