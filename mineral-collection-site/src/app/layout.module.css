@@ -24,6 +24,12 @@
   transform: scale(0.95);
 }
 
+.links {
+  display: flex;
+  gap: var(--s3);
+  align-items: center;
+}
+
 .home {
   font-family: var(--headerFontFamily);
   font-size: 1.5rem;
@@ -34,4 +40,19 @@
   padding-inline: clamp(var(--s3), 5%, var(--s5));
   padding-block: var(--s5);
   width: 100%;
+}
+
+.mobileNav {
+  display: none;
+  margin-inline-start: auto;
+}
+
+/* media query for less than 500px */
+@media (max-width: 500px) {
+  .links {
+    display: none;
+  }
+  .mobileNav {
+    display: block;
+  }
 }

@@ -1,0 +1,57 @@
+.popover {
+  padding: var(--s4);
+  background-color: var(--darkAccent);
+  width: 300px;
+  border-radius: var(--br1);
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
+
+  transition:
+    transform 200ms,
+    opacity 200ms;
+
+  &[data-entering],
+  &[data-exiting] {
+    transform: var(--origin);
+    opacity: 0;
+  }
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.menuButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--lightShade);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 250ms ease;
+  border-radius: 50%;
+  &:focus-visible {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: var(--s1);
+  }
+}
+
+a.menuLink {
+  font-size: 1.25rem;
+  color: var(--lightShade);
+  text-decoration: none;
+  padding: var(--s1);
+  transition: all 250ms ease;
+}
+
+.menuButton:hover,
+a.menuLink:hover {
+  color: var(--lightAccent);
+}
+
+.menuButton:active,
+a.menuLink:hover {
+  transform: scale(0.95);
+}
