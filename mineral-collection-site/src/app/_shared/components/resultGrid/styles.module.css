@@ -1,9 +1,9 @@
 .grid {
-  transition: all 0.3s;
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   gap: var(--s3);
   justify-items: center;
+  justify-content: center;
 }
 
 .container {

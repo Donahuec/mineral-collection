@@ -1,21 +1,21 @@
 .container {
-  position: sticky;
-  height: fit-content;
+  position: fixed;
   top: calc(var(--s6) + var(--s3));
+  left: 0;
+  z-index: 100;
 }
 .filters {
+  height: 100%;
   width: 300px;
   background-color: var(--darkAccent);
   padding: var(--s3);
-  border-radius: var(--br1);
 }
 
-.filters.open {
-  display: block;
+.filters[data-entering] {
   animation: slide-in 350ms ease-in-out forwards;
 }
 
-.filters.closed {
+.filters[data-exiting] {
   animation: slide-out 350ms ease-in-out forwards;
 }
 
@@ -159,12 +159,28 @@
   &[data-disabled] {
     opacity: 0.5;
   }
-
 }
 
 .sidebarButton {
   position: absolute;
-  top: -10px;
-  left: -10px;
-  z-index: 2;
+  top: 0;
+  z-index: 200;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--visual-viewport-height);
+  background: rgba(0 0 0 / 0.5);
+  z-index: 100;
+  backdrop-filter: blur(5px);
+  &[data-entering] {
+    animation: modal-fade 200ms;
+  }
+
+  &[data-exiting] {
+    animation: modal-fade 150ms reverse ease-in;
+  }
 }

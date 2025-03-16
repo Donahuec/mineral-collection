@@ -13,10 +13,11 @@ export default async function SpecimensPage({
   return (
     <>
       <h1 className={styles.title}>Specimens</h1>
+      <div className={styles.filters}>
+        <SpecimenFilters />
+      </div>
       <div className={styles.content}>
-        <div className={styles.filters}>
-          <SpecimenFilters />
-        </div>
+
         <div className={styles.results}>
           <Suspense fallback={<LoadingSpinner />}>
             <SpecimenResults searchParams={searchParams} />
