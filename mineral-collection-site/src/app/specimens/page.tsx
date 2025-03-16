@@ -1,10 +1,10 @@
-import { Suspense } from 'react';
-import styles from './styles.module.css';
+import React, { Suspense } from 'react';
+
 import LoadingSpinner from '../_shared/components/loadingSpinner/loadingSpinner';
-import SpecimenResults from './_components/specimenResults/specimenResults';
-import SpecimenFilters from './_components/specimenFilters/specimenFilters';
-import React from 'react';
 import Paginator from '../_shared/components/paginator/paginator';
+import SpecimenFilters from './_components/specimenFilters/specimenFilters';
+import SpecimenResults from './_components/specimenResults/specimenResults';
+import styles from './styles.module.css';
 
 export default async function SpecimensPage({
   searchParams,
@@ -16,13 +16,13 @@ export default async function SpecimensPage({
   return (
     <>
       <h1 className={styles.title}>Specimens</h1>
-      <SpecimenFilters />
       <Suspense fallback={<LoadingSpinner />}>
+        <SpecimenFilters />
         <SpecimenResults searchParams={searchParams} />
+        <div className={styles.paginator}>
+          <Paginator />
+        </div>
       </Suspense>
-      <div className={styles.paginator}>
-        <Paginator />
-      </div>
     </>
   );
 }

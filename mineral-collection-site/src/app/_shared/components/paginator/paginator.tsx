@@ -1,11 +1,12 @@
 'use client';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Button } from 'react-aria-components';
-import styles from './paginator.module.css';
-import iconButtonStyles from '../../styles/iconButton.module.css';
-import React, { useCallback } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import React, { useCallback } from 'react';
+import { Button } from 'react-aria-components';
+
+import iconButtonStyles from '../../styles/iconButton.module.css';
 import { updateQueryString } from '../../utils/urlService';
+import styles from './paginator.module.css';
 
 export default function Paginator() {
   const router = useRouter();
