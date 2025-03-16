@@ -1,0 +1,33 @@
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: var(--iconButtonSize, var(--s5));
+  width: var(--iconButtonSize, var(--s5));
+  padding: var(--iconButtonPadding, var(--s1));
+  border-radius: 50%;
+  background-color: var(--iconButtonPrimary, var(--darkAccent));
+  color: var(--iconButtonSecondary, var(--lightAccent));
+  cursor: pointer;
+  transition: all 200ms;
+  border: none;
+
+  &:hover:not([data-disabled]) {
+    background-color: var(--iconButtonSecondary, var(--lightAccent));
+    color: var(--iconButtonPrimary, var(--darkAccent));
+    transform: scale(1.1);
+  }
+
+  &:active:not([data-disabled]) {
+    transform: scale(0.9);
+  }
+
+  &[data-focus-visible] {
+    outline: 2px solid var(--iconButtonSecondary, var(--lightAccent));
+    outline-offset: 2px;
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+  }
+}

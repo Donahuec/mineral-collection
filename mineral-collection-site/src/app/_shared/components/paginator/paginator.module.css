@@ -1,0 +1,10 @@
+.paginator {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s3);
+  align-items: center;
+}
+
+.paginatorButton {
+  flex-grow: 0;
+}
