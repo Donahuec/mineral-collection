@@ -1,6 +1,5 @@
 .card {
   color: var(--lightShade);
-  margin: var(--s2);
   border-radius: var(--br1);
   box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
   display: flex;

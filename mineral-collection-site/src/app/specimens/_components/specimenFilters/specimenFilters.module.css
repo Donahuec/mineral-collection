@@ -1,17 +1,45 @@
 .filters {
-  flex-basis: var(--s9);
+  height: 100%;
+  width: 300px;
   background-color: var(--darkAccent);
   padding: var(--s3);
-  height: fit-content;
-  position: sticky;
-  top: var(--s6);
-  border-radius: var(--br2)
+}
+
+.filters[data-entering] {
+  animation: slide-in 350ms ease-in-out forwards;
+}
+
+.filters[data-exiting] {
+  animation: slide-in 350ms ease-in-out reverse;
+}
+
+@keyframes slide-in {
+  from {
+    margin-inline-start: -500px;
+    display: none;
+  }
+
+  to {
+    margin-inline-start: 0;
+    display: block;
+  }
 }
 
 .filterHead {
   border-bottom: var(--s1) solid var(--lightAccent);
   margin-bottom: var(--s3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--s1);
 }
+
+.title {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
 .filterGroup {
   margin-bottom: var(--s3);
   display: flex;
@@ -76,7 +104,7 @@
       background: var(--lightShade);
       transform: scale(0.9);
     }
-  } 
+  }
 
   &[data-focus-visible]:before {
     outline: 2px solid var(--lightAccent);
@@ -84,45 +112,62 @@
   }
 }
 
-.paginator {
+.sidebarButton {
+  position: fixed;
+  top: calc(var(--s6) + var(--s3));
+  left: 0;
+  z-index: 99;
   display: flex;
-  justify-content: space-between;
-  gap: var(--s3);
+  justify-content: flex-end;
   align-items: center;
-}
-
-.paginatorButton {
-  flex-grow: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: var(--s5);
-  width: var(--s5);
-  padding: var(--s1);
-  border-radius: 50%;
+  padding: var(--s2);
+  border: none;
   background-color: var(--darkAccent);
   color: var(--lightAccent);
+  border-top-right-radius: var(--br2);
+  border-bottom-right-radius: var(--br2);
+  transition: all 200ms ease-in-out;
   cursor: pointer;
-  transition: all 200ms;
-  border: none;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
 
-  &:hover:not([data-disabled]) {
-    background-color: var(--lightAccent);
-    color: var(--darkAccent);
-    transform: scale(1.1);
+  &:hover,
+  &:focus-visible {
+    padding-inline-start: var(--s3);
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
   }
 
-  &:active:not([data-disabled]) {
-    transform: scale(0.9);
-  }
-  
-  &[data-focus-visible] {
+  &:focus-visible {
     outline: 2px solid var(--lightAccent);
-    outline-offset: 2px;
+    outline-offset: var(--s1);
   }
 
-  &[data-disabled] {
-    opacity: 0.5;
+  &:active {
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
+    color: var(--lightShade);
+    scale: 0.9;
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--visual-viewport-height);
+  background: rgba(0 0 0 / 0.3);
+  z-index: 100;
+  backdrop-filter: blur(2px);
+  &[data-entering] {
+    animation: modal-fade 200ms ease-in forwards;
+  }
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
   }
 
+  to {
+    opacity: 1;
+  }
 }

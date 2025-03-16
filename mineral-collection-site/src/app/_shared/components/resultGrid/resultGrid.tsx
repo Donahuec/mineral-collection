@@ -8,5 +8,9 @@ interface ResultGridProps {
 export default function ResultGrid(
   props: PropsWithChildren<ResultGridProps>
 ) {
-  return <ul className={styles.grid}>{props.children}</ul>;
+  return (
+    <div className={styles.container}>
+      <ul className={styles.grid}>{props.children}</ul>
+    </div>
+  );
 }
