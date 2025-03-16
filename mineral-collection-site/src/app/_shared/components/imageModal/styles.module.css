@@ -92,11 +92,13 @@
   background-color: var(--darkAccent);
   border: none;
   color: var(--lightAccent);
-  font-size: 16px;
   cursor: pointer;
   box-shadow: -2px 2px 0 var(--darkShade);
   transition: all 0.2s ease-in-out;
   z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .closeButton:hover,

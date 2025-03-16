@@ -11,6 +11,7 @@ import {
 import { urlFor, getImageDimensions } from "@/app/_shared/utils/imageService";
 import { PropsWithChildren, useState } from "react";
 import LoadingSpinner from "../loadingSpinner/loadingSpinner";
+import { X } from "lucide-react";
 
 interface ImageModalProps {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -43,8 +44,8 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
                 setImageLoaded(true);
               }}
             />
-            <Button slot="close" className={styles.closeButton}>
-              X
+            <Button slot="close" className={styles.closeButton} aria-label="Close">
+              <X size={16} />
             </Button>
           </Dialog>
         </Modal>

@@ -1,9 +1,9 @@
 "use client";
-import { Button, Dialog, DialogTrigger, Label, Modal, ModalOverlay, OverlayArrow, Popover, Radio, RadioGroup } from "react-aria-components";
+import { Button, Dialog, DialogTrigger, Heading, Label, Modal, ModalOverlay, Radio, RadioGroup } from "react-aria-components";
 import styles from "./specimenFilters.module.css";
 import React, { useCallback } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ListFilterPlus, X } from "lucide-react";
 
 export default function SpecimenFilters() {
   const router = useRouter()
@@ -44,47 +44,50 @@ export default function SpecimenFilters() {
   }
 
   return (
-    <div className={styles.container}>
-      <DialogTrigger defaultOpen={false}>
-        <Button className={styles.sidebarButton}>toggle</Button>
-        <ModalOverlay className={styles.modalOverlay} isDismissable>
-          <Modal className={styles.filters}>
-            <Dialog >
-              <h2 className={styles.filterHead}>Filters <Button slot="close" className={styles.closeButton}>
-                X
-              </Button></h2>
-              <div className={styles.filterGroup}>
-                <RadioGroup className={styles.radioGroup} name="sortBy"
-                  value={sortBy}
-                  onChange={updateSortBy}>
-                  <Label>Sort By</Label>
-                  <Radio className={styles.radio} value="name">Name</Radio>
-                  <Radio className={styles.radio} value="numericId">NumericId</Radio>
-                </RadioGroup>
-                <RadioGroup className={styles.radioGroup} name="sortOrder"
-                  value={sortOrder}
-                  onChange={updateSortOrder}>
-                  <Label>Sort Order</Label>
-                  <Radio className={styles.radio} value="asc">Asc</Radio>
-                  <Radio className={styles.radio} value="desc">Desc</Radio>
-                </RadioGroup>
+    <DialogTrigger>
+      <Button className={styles.sidebarButton} aria-label="Open Filters">
+        <ListFilterPlus size={24} />
+      </Button>
+      <ModalOverlay className={styles.modalOverlay} isDismissable>
+        <Modal className={styles.filters}>
+          <Dialog >
+            <div className={styles.filterHead}>
+              <Heading slot="title" level={2} className={styles.title}>Filters</Heading>
+              <Button slot="close" className={styles.closeButton}>
+                <X />
+              </Button>
+            </div>
+            <div className={styles.filterGroup}>
+              <RadioGroup className={styles.radioGroup} name="sortBy"
+                value={sortBy}
+                onChange={updateSortBy}>
+                <Label>Sort By</Label>
+                <Radio className={styles.radio} value="name">Name</Radio>
+                <Radio className={styles.radio} value="numericId">NumericId</Radio>
+              </RadioGroup>
+              <RadioGroup className={styles.radioGroup} name="sortOrder"
+                value={sortOrder}
+                onChange={updateSortOrder}>
+                <Label>Sort Order</Label>
+                <Radio className={styles.radio} value="asc">Asc</Radio>
+                <Radio className={styles.radio} value="desc">Desc</Radio>
+              </RadioGroup>
+            </div>
+            <div className={styles.divider}></div>
+            <div className={styles.filterGroup}>
+              <div className={styles.paginator}>
+                <Button onPress={() => updatePage(false)} isDisabled={page <= 1} className={styles.paginatorButton}>
+                  <ArrowLeft className={styles.icon} />
+                </Button>
+                <span>Page {page}</span>
+                <Button onPress={() => updatePage(true)} className={styles.paginatorButton}>
+                  <ArrowRight size={24} className={styles.icon} />
+                </Button>
               </div>
-              <div className={styles.divider}></div>
-              <div className={styles.filterGroup}>
-                <div className={styles.paginator}>
-                  <Button onPress={() => updatePage(false)} isDisabled={page <= 1} className={styles.paginatorButton}>
-                    <ArrowLeft className={styles.icon} />
-                  </Button>
-                  <span>Page {page}</span>
-                  <Button onPress={() => updatePage(true)} className={styles.paginatorButton}>
-                    <ArrowRight size={24} className={styles.icon} />
-                  </Button>
-                </div>
-              </div>
-            </Dialog>
-          </Modal>
-        </ModalOverlay>
-      </DialogTrigger>
-    </div>
+            </div>
+          </Dialog>
+        </Modal>
+      </ModalOverlay>
+    </DialogTrigger>
   );
 }

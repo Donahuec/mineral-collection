@@ -1,9 +1,3 @@
-.container {
-  position: fixed;
-  top: calc(var(--s6) + var(--s3));
-  left: 0;
-  z-index: 100;
-}
 .filters {
   height: 100%;
   width: 300px;
@@ -16,37 +10,36 @@
 }
 
 .filters[data-exiting] {
-  animation: slide-out 350ms ease-in-out forwards;
+  animation: slide-in 350ms ease-in-out reverse;
 }
 
 @keyframes slide-in {
-  0% {
+  from {
     margin-inline-start: -500px;
     display: none;
   }
 
-  100% {
+  to {
     margin-inline-start: 0;
     display: block;
-  }
-}
-
-@keyframes slide-out {
-  0% {
-    margin-inline-start: 0;
-    display: block;
-  }
-
-  100% {
-    margin-inline-start: -380px;
-    display: none;
   }
 }
 
 .filterHead {
   border-bottom: var(--s1) solid var(--lightAccent);
   margin-bottom: var(--s3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--s1);
 }
+
+.title {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
 .filterGroup {
   margin-bottom: var(--s3);
   display: flex;
@@ -126,7 +119,7 @@
   align-items: center;
 }
 
-.paginatorButton {
+.paginatorButton, .closeButton {
   flex-grow: 0;
   display: flex;
   justify-content: center;
@@ -162,9 +155,38 @@
 }
 
 .sidebarButton {
-  position: absolute;
-  top: 0;
-  z-index: 200;
+  position: fixed;
+  top: calc(var(--s6) + var(--s3));
+  left: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: var(--s2);
+  border: none;
+  background-color: var(--darkAccent);
+  color: var(--lightAccent);
+  border-top-right-radius: var(--br2);
+  border-bottom-right-radius: var(--br2);
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
+
+  &:hover, &:focus-visible {
+    padding-inline-start: var(--s3);
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: var(--s1);
+  }
+
+  &:active {
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
+    color: var(--lightShade);
+    scale: 0.9;
+  }
 }
 
 .modalOverlay {
@@ -173,14 +195,20 @@
   left: 0;
   width: 100vw;
   height: var(--visual-viewport-height);
-  background: rgba(0 0 0 / 0.5);
+  background: rgba(0 0 0 / 0.3);
   z-index: 100;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(2px);
   &[data-entering] {
-    animation: modal-fade 200ms;
+    animation: modal-fade 200ms ease-in forwards;
+  }
+}
+
+@keyframes modal-fade {
+  from {
+    opacity: 0;
   }
 
-  &[data-exiting] {
-    animation: modal-fade 150ms reverse ease-in;
+  to {
+    opacity: 1;
   }
 }
