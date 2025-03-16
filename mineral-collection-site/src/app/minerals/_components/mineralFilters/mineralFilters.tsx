@@ -11,15 +11,12 @@ import RadioGroupWrapper, {
 } from '@/app/_shared/components/radioGroupWrapper/radioGroupWrapper';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
 
-export default function SpecimenFilters() {
+export default function MineralFilters() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const params = new URLSearchParams(searchParams.toString());
-  const [sortBy, setSortBy] = React.useState<string>(
-    params.get('sortBy') || 'numericId'
-  );
   const [sortOrder, setSortOrder] = React.useState(
     params.get('sortOrder') || 'asc'
   );
@@ -31,11 +28,6 @@ export default function SpecimenFilters() {
     [searchParams]
   );
 
-  function updateSortBy(newSortBy: string) {
-    setSortBy(newSortBy);
-    router.push(pathname + '?' + createQueryString('sortBy', newSortBy));
-  }
-
   function updateSortOrder(newSortOrder: string) {
     setSortOrder(newSortOrder);
     router.push(pathname + '?' + createQueryString('sortOrder', newSortOrder));
@@ -44,14 +36,6 @@ export default function SpecimenFilters() {
   return (
     <FilterSidebar>
       <FilterGroup>
-        <RadioGroupWrapper
-          name='sortBy'
-          value={sortBy}
-          label='Sort By'
-          onChange={updateSortBy}>
-          <RadioWrapper value='name'>Name</RadioWrapper>
-          <RadioWrapper value='numericId'>NumericId</RadioWrapper>
-        </RadioGroupWrapper>
         <RadioGroupWrapper
           name='sortOrder'
           value={sortOrder}

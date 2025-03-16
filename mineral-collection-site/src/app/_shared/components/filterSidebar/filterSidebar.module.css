@@ -1,0 +1,62 @@
+.sidebarButton {
+  position: fixed;
+  top: calc(var(--s6) + var(--s3));
+  left: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: var(--s2);
+  border: none;
+  background-color: var(--darkAccent);
+  color: var(--lightAccent);
+  border-top-right-radius: var(--br2);
+  border-bottom-right-radius: var(--br2);
+  transition: all 200ms ease-in-out;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
+
+  &:hover,
+  &:focus-visible {
+    padding-inline-start: var(--s3);
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: var(--s1);
+  }
+
+  &:active {
+    box-shadow: 2px 2px 6px 0 rgba(0, 0, 0, 0.1);
+    color: var(--lightShade);
+    scale: 0.9;
+  }
+}
+
+.filterHead {
+  border-bottom: var(--s1) solid var(--lightAccent);
+  margin-bottom: var(--s3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block-end: var(--s1);
+}
+
+.filterGroup {
+  margin-bottom: var(--s3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s3);
+}
+
+.filterDivider {
+  border-bottom: var(--s1) solid var(--lightAccent);
+  margin-bottom: var(--s3);
+}
+
+.filterTitle {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
