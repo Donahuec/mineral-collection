@@ -1,6 +1,8 @@
-import { DiamondIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
-import { specimenSizes } from './constants'
+import { defineField, defineType } from 'sanity';
+
+import { DiamondIcon } from '@sanity/icons';
+
+import { specimenSizes } from './constants';
 
 export const specimenType = defineType({
   name: 'specimen',
@@ -8,30 +10,30 @@ export const specimenType = defineType({
   type: 'document',
   liveEdit: true,
   groups: [
-    { name: 'details', title: 'Details', default: true },
-    { name: 'properties', title: 'Properties' },
-    { name: 'purchase', title: 'Purchase' },
+    {name: 'details', title: 'Details', default: true},
+    {name: 'properties', title: 'Properties'},
+    {name: 'purchase', title: 'Purchase'},
   ],
   orderings: [
     {
       title: 'Name, Asc',
       name: 'nameAsc',
-      by: [{ field: 'name', direction: 'asc' }],
+      by: [{field: 'name', direction: 'asc'}],
     },
     {
       title: 'Name, Desc',
       name: 'nameDesc',
-      by: [{ field: 'name', direction: 'desc' }],
+      by: [{field: 'name', direction: 'desc'}],
     },
     {
       title: 'numericId, Asc',
       name: 'numericIdAsc',
-      by: [{ field: 'numericId', direction: 'asc' }],
+      by: [{field: 'numericId', direction: 'asc'}],
     },
     {
       title: 'numericId, Desc',
       name: 'numericIdDesc',
-      by: [{ field: 'numericId', direction: 'desc' }],
+      by: [{field: 'numericId', direction: 'desc'}],
     },
   ],
   fields: [
@@ -46,16 +48,21 @@ export const specimenType = defineType({
       group: 'details',
     }),
     defineField({
+      name: 'favorite',
+      type: 'boolean',
+      group: 'details',
+    }),
+    defineField({
       name: 'slug',
       type: 'slug',
-      options: { source: (doc, options) => `${doc.name}-${doc.numericId}` },
+      options: {source: (doc, options) => `${doc.name}-${doc.numericId}`},
       group: 'details',
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
       name: 'images',
       type: 'array',
-      of: [{ type: 'image' }],
+      of: [{type: 'image'}],
       group: 'details',
     }),
     defineField({
@@ -67,15 +74,15 @@ export const specimenType = defineType({
       name: 'minerals',
       type: 'array',
       group: 'details',
-      of: [{ type: 'reference', to: [{ type: 'mineral' }] }],
+      of: [{type: 'reference', to: [{type: 'mineral'}]}],
     }),
     defineField({
       name: 'mineralsText',
       type: 'array',
       group: 'details',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
       readOnly: true,
-      hidden: ({ document }) => {
+      hidden: ({document}) => {
         return (
           !document?.mineralsText ||
           (!!document?.minerals &&
@@ -87,15 +94,15 @@ export const specimenType = defineType({
       name: 'rocks',
       type: 'array',
       group: 'details',
-      of: [{ type: 'reference', to: [{ type: 'rock' }] }],
+      of: [{type: 'reference', to: [{type: 'rock'}]}],
     }),
     defineField({
       name: 'rocksText',
       type: 'array',
       group: 'details',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
       readOnly: true,
-      hidden: ({ document }) => {
+      hidden: ({document}) => {
         return (
           !document?.rocksText ||
           (!!document?.rocks &&
@@ -137,7 +144,7 @@ export const specimenType = defineType({
       name: 'colors',
       type: 'array',
       group: 'properties',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
     }),
     defineField({
       name: 'origin',
@@ -183,13 +190,13 @@ export const specimenType = defineType({
     defineField({
       name: 'notes',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{type: 'block'}],
     }),
     defineField({
       name: 'tags',
       type: 'array',
       group: 'details',
-      of: [{ type: 'string' }],
+      of: [{type: 'string'}],
     }),
   ],
   preview: {
@@ -198,7 +205,7 @@ export const specimenType = defineType({
       id: 'numericId',
       image: 'previewImage',
     },
-    prepare({ name, id, image }) {
+    prepare({name, id, image}) {
       const nameFormatted = name || 'Untitled Specimen'
       const idFormatted = id ? `#${id}` : ''
       return {

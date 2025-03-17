@@ -47,8 +47,7 @@
   margin-inline-start: auto;
 }
 
-/* media query for less than 500px */
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .links {
     display: none;
   }

@@ -29,14 +29,17 @@ export default function NavMenu() {
           crossOffset={-276}>
           <RouterProvider navigate={router.push}>
             <Menu className={styles.menu}>
+              <MenuItem href='/favorites' className={styles.menuLink}>
+                Favorites
+              </MenuItem>
+              <MenuItem href='/specimens' className={styles.menuLink}>
+                Specimens
+              </MenuItem>
               <MenuItem href='/minerals' className={styles.menuLink}>
                 Minerals
               </MenuItem>
               <MenuItem href='/rocks' className={styles.menuLink}>
                 Rocks
-              </MenuItem>
-              <MenuItem href='/specimens' className={styles.menuLink}>
-                Specimens
               </MenuItem>
             </Menu>
           </RouterProvider>
