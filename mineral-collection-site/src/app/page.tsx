@@ -1,10 +1,16 @@
-import Link from "next/link";
-import ImageHeader from "./_shared/components/imageHeader/imageHeader";
-import styles from "./styles.module.css";
+import Link from 'next/link';
+
+import ImageHeader from './_shared/components/imageHeader/imageHeader';
+import styles from './styles.module.css';
+
 export default async function IndexPage() {
   return (
-    <ImageHeader title="Mineral Collection" imageUrl="/preview.jpeg" alt="">
+    <ImageHeader title='Mineral Collection' imageUrl='/preview.jpeg' alt=''>
       <div className={styles.headerContent}>
+        <Link href={`/favorites`} className={styles.link}>
+          <h2>Favorite Specimens</h2>
+          <div className={styles.linkUnderline} />
+        </Link>
         <Link href={`/specimens`} className={styles.link}>
           <h2>Specimens</h2>
           <div className={styles.linkUnderline} />

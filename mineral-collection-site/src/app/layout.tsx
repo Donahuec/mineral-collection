@@ -37,9 +37,10 @@ export default function RootLayout({
             CrystalDB
           </Link>
           <div className={styles.links}>
+            <Link href='/favorites'>Favorites</Link>
+            <Link href='/specimens'>Specimens</Link>
             <Link href='/minerals'>Minerals</Link>
             <Link href='/rocks'>Rocks</Link>
-            <Link href='/specimens'>Specimens</Link>
           </div>
           <div className={styles.mobileNav}>
             <NavMenu />
