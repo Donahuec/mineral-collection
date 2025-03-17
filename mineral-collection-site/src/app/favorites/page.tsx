@@ -13,7 +13,7 @@ export default async function FavoritesPage({
     [key: string]: number | string | string[] | undefined;
   }>;
 }) {
-  let params = await searchParams;
+  const params = await searchParams;
   params['favorites'] = 'true';
 
   return (
