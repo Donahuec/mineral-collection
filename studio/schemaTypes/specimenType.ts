@@ -2,13 +2,12 @@ import { defineField, defineType } from 'sanity';
 
 import { DiamondIcon } from '@sanity/icons';
 
-import { specimenSizes } from './constants';
+import { specimenShapes, specimenSizes } from './constants';
 
 export const specimenType = defineType({
   name: 'specimen',
   title: 'Specimen',
   type: 'document',
-  liveEdit: true,
   groups: [
     {name: 'details', title: 'Details', default: true},
     {name: 'properties', title: 'Properties'},
@@ -60,6 +59,16 @@ export const specimenType = defineType({
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
+      name: 'shortDescription',
+      type: 'text',
+      group: 'details',
+    }),
+    defineField({
+      name: 'description',
+      type: 'array',
+      of: [{type: 'block'}],
+    }),
+    defineField({
       name: 'images',
       type: 'array',
       of: [{type: 'image'}],
@@ -77,38 +86,10 @@ export const specimenType = defineType({
       of: [{type: 'reference', to: [{type: 'mineral'}]}],
     }),
     defineField({
-      name: 'mineralsText',
-      type: 'array',
-      group: 'details',
-      of: [{type: 'string'}],
-      readOnly: true,
-      hidden: ({document}) => {
-        return (
-          !document?.mineralsText ||
-          (!!document?.minerals &&
-            (document.minerals as any[]).length >= (document.mineralsText as any[]).length)
-        )
-      },
-    }),
-    defineField({
       name: 'rocks',
       type: 'array',
       group: 'details',
       of: [{type: 'reference', to: [{type: 'rock'}]}],
-    }),
-    defineField({
-      name: 'rocksText',
-      type: 'array',
-      group: 'details',
-      of: [{type: 'string'}],
-      readOnly: true,
-      hidden: ({document}) => {
-        return (
-          !document?.rocksText ||
-          (!!document?.rocks &&
-            (document.rocks as any[]).length >= (document.rocksText as any[]).length)
-        )
-      },
     }),
     defineField({
       name: 'hesitantId',
@@ -119,6 +100,19 @@ export const specimenType = defineType({
       name: 'shape',
       type: 'string',
       group: 'properties',
+    }),
+    defineField({
+      name: 'shapeCategory',
+      type: 'array',
+      group: 'properties',
+      of: [
+        {
+          type: 'string',
+          options: {
+            list: specimenShapes,
+          },
+        },
+      ],
     }),
     defineField({
       name: 'sizeCategory',
@@ -132,7 +126,14 @@ export const specimenType = defineType({
       name: 'size',
       type: 'number',
       group: 'properties',
-      description: 'Measured in cm',
+      description: 'Measured in cm, along the longest axis',
+    }),
+    defineField({
+      name: 'sizeDescription',
+      type: 'array',
+      group: 'properties',
+      of: [{type: 'string'}],
+      description: 'Measured in cm, along notable axes',
     }),
     defineField({
       name: 'weight',
@@ -193,10 +194,19 @@ export const specimenType = defineType({
       of: [{type: 'block'}],
     }),
     defineField({
+      name: 'provenance',
+      type: 'array',
+      of: [{type: 'block'}],
+    }),
+    defineField({
       name: 'tags',
       type: 'array',
       group: 'details',
       of: [{type: 'string'}],
+    }),
+    defineField({
+      name: 'lowInterest',
+      type: 'boolean',
     }),
   ],
   preview: {
