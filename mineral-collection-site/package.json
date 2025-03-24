@@ -24,6 +24,23 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "prettier": "^3.0.2"
+  },
+  "prettier": {
+    "semi": true,
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false,
+    "jsxSingleQuote": true,
+    "jsxBracketSameLine": true,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "quoteProps": "as-needed",
+    "htmlWhitespaceSensitivity": "ignore",
+    "objectWrap": "preserve"
   }
 }

@@ -34,8 +34,18 @@
   },
   "prettier": {
     "semi": true,
-    "printWidth": 150,
+    "printWidth": 80,
     "bracketSpacing": true,
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false,
+    "jsxSingleQuote": true,
+    "jsxBracketSameLine": true,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "quoteProps": "as-needed",
+    "htmlWhitespaceSensitivity": "ignore",
+    "objectWrap": "preserve"
   }
 }
