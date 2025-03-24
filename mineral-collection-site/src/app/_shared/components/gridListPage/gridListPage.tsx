@@ -18,10 +18,10 @@ export default function GridListPage({
   return (
     <>
       <h1 className={styles.title}>{title}</h1>
-      <div className={styles.searchWrapper}>
-        <SearchFilter placeholder={searchPlaceholder} />
-      </div>
       <Suspense fallback={<LoadingSpinner />}>
+        <div className={styles.searchWrapper}>
+          <SearchFilter placeholder={searchPlaceholder} />
+        </div>
         {children}
         <div className={styles.paginator}>
           <Paginator />
