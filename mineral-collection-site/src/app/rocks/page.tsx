@@ -1,4 +1,7 @@
+import { Suspense } from 'react';
+
 import GridListPage from '../_shared/components/gridListPage/gridListPage';
+import LoadingSpinner from '../_shared/components/loadingSpinner/loadingSpinner';
 import RockFilters from './_components/rockFilters/rockFilters';
 import RockResults from './_components/rockResults/rockResults';
 
@@ -11,8 +14,10 @@ export default async function RocksPage({
 }) {
   return (
     <GridListPage title='Rocks' searchPlaceholder='Basalt...'>
-      <RockFilters />
-      <RockResults searchParams={searchParams} />
+      <Suspense fallback={<LoadingSpinner />}>
+        <RockFilters />
+        <RockResults searchParams={searchParams} />
+      </Suspense>
     </GridListPage>
   );
 }
