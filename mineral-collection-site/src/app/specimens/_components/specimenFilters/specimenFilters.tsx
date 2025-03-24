@@ -11,6 +11,7 @@ import Paginator from '@/app/_shared/components/paginator/paginator';
 import RadioGroupWrapper, {
   RadioWrapper
 } from '@/app/_shared/components/radioGroupWrapper/radioGroupWrapper';
+import { DEFAULT_PAGE_SIZE } from '@/app/_shared/constants/constants';
 import iconButtonStyles from '@/app/_shared/styles/iconButton.module.css';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
 
@@ -29,7 +30,9 @@ export default function SpecimenFilters() {
     params.get('sortOrder') || 'asc'
   );
   const [pageSize, setPageSize] = React.useState(
-    params.get('pageSize') ? parseInt(params.get('pageSize') as string) : 12
+    params.get('pageSize')
+      ? parseInt(params.get('pageSize') as string)
+      : DEFAULT_PAGE_SIZE
   );
 
   const createQueryString = useCallback(

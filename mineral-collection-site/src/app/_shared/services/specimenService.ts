@@ -4,6 +4,8 @@ import qroq from 'groq';
 import { sanityFetch } from '@/sanity/live';
 import { SPECIMENS_QUERYResult } from '@/sanity/types';
 
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '../constants/constants';
+
 export interface SpecimenQueryFilters {
   sortBy: string;
   sortOrder: string;
@@ -14,9 +16,9 @@ export interface SpecimenQueryFilters {
 
 const DEFAULT_FILTERS: SpecimenQueryFilters = {
   sortBy: 'numericId',
-  sortOrder: 'asc',
+  sortOrder: DEFAULT_SORT_ORDER,
   page: 1,
-  pageSize: 24,
+  pageSize: DEFAULT_PAGE_SIZE,
   favorites: false,
 };
 

@@ -9,6 +9,7 @@ import Paginator from '@/app/_shared/components/paginator/paginator';
 import RadioGroupWrapper, {
   RadioWrapper
 } from '@/app/_shared/components/radioGroupWrapper/radioGroupWrapper';
+import { ASCENDING, DEFAULT_SORT_ORDER, DESCENDING } from '@/app/_shared/constants/constants';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
 
 export default function RockFilters() {
@@ -18,7 +19,7 @@ export default function RockFilters() {
 
   const params = new URLSearchParams(searchParams.toString());
   const [sortOrder, setSortOrder] = React.useState(
-    params.get('sortOrder') || 'asc'
+    params.get('sortOrder') || DEFAULT_SORT_ORDER
   );
 
   const createQueryString = useCallback(
@@ -41,8 +42,8 @@ export default function RockFilters() {
           value={sortOrder}
           label='Sort Order'
           onChange={updateSortOrder}>
-          <RadioWrapper value='asc'>Asc</RadioWrapper>
-          <RadioWrapper value='desc'>Desc</RadioWrapper>
+          <RadioWrapper value={ASCENDING}>Asc</RadioWrapper>
+          <RadioWrapper value={DESCENDING}>Desc</RadioWrapper>
         </RadioGroupWrapper>
       </FilterGroup>
       <FilterDivider />

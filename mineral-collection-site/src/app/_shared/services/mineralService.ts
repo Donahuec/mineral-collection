@@ -4,6 +4,8 @@ import qroq from 'groq';
 import { sanityFetch } from '@/sanity/live';
 import { MINERALS_QUERYResult } from '@/sanity/types';
 
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '../constants/constants';
+
 export interface MineralQueryFilters {
   sortOrder: string;
   page: number;
@@ -11,9 +13,9 @@ export interface MineralQueryFilters {
 }
 
 const DEFAULT_FILTERS: MineralQueryFilters = {
-  sortOrder: 'asc',
+  sortOrder: DEFAULT_SORT_ORDER,
   page: 1,
-  pageSize: 12,
+  pageSize: DEFAULT_PAGE_SIZE,
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */

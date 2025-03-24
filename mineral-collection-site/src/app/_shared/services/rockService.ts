@@ -4,6 +4,8 @@ import qroq from 'groq';
 import { sanityFetch } from '@/sanity/live';
 import { ROCKS_QUERYResult } from '@/sanity/types';
 
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '../constants/constants';
+
 export interface RockQueryFilters {
   sortOrder: string;
   page: number;
@@ -11,9 +13,9 @@ export interface RockQueryFilters {
 }
 
 const DEFAULT_FILTERS: RockQueryFilters = {
-  sortOrder: 'asc',
+  sortOrder: DEFAULT_SORT_ORDER,
   page: 1,
-  pageSize: 24,
+  pageSize: DEFAULT_PAGE_SIZE,
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
