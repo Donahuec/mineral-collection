@@ -18,6 +18,7 @@ export const specimenShapes = [
   {title: 'Tumbled', value: 'tumbled'},
   {title: 'Polished', value: 'polished'},
   {title: 'Cut', value: 'cut'},
+  {title: 'Sphere', value: 'sphere'},
   {title: 'Rough', value: 'rough'},
   {title: 'Crystal', value: 'crystal'},
   {title: 'Cluster', value: 'cluster'},
