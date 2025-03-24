@@ -1,9 +1,9 @@
 import { ListFilterPlus, X } from 'lucide-react';
 import { Button, DialogTrigger, Heading } from 'react-aria-components';
 
+import Sidebar from '@/app/_shared/components/sidebar/sidebar';
 import iconButtonStyles from '@/app/_shared/styles/iconButton.module.css';
 
-import Sidebar from '../sidebar/sidebar';
 import styles from './filterSidebar.module.css';
 
 export default function FilterSidebar({
@@ -27,7 +27,7 @@ export default function FilterSidebar({
             <X />
           </Button>
         </div>
-        {children}
+        <div className={styles.filters}>{children}</div>
       </Sidebar>
     </DialogTrigger>
   );
@@ -39,4 +39,8 @@ export function FilterGroup({ children }: { children: React.ReactNode }) {
 
 export function FilterDivider() {
   return <div className={styles.filterDivider} />;
+}
+
+export function FilterFooter({ children }: { children: React.ReactNode }) {
+  return <div className={styles.filterFooter}>{children}</div>;
 }

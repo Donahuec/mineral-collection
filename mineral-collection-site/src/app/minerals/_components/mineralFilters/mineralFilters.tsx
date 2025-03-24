@@ -3,12 +3,14 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 
 import FilterSidebar, {
-  FilterDivider, FilterGroup
-} from '@/app/_shared/components/filterSidebar/filterSidebar';
-import Paginator from '@/app/_shared/components/paginator/paginator';
+  FilterDivider, FilterFooter, FilterGroup
+} from '@/app/_shared/components/filterComponents/filterSidebar/filterSidebar';
+import PageSizeFilter from '@/app/_shared/components/filterComponents/pageSizeFilter/pageSizeFilter';
+import Paginator from '@/app/_shared/components/filterComponents/paginator/paginator';
 import RadioGroupWrapper, {
   RadioWrapper
-} from '@/app/_shared/components/radioGroupWrapper/radioGroupWrapper';
+} from '@/app/_shared/components/formComponents/radioGroupWrapper/radioGroupWrapper';
+import { ASCENDING, DEFAULT_SORT_ORDER, DESCENDING } from '@/app/_shared/constants/constants';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
 
 export default function MineralFilters() {
@@ -18,7 +20,7 @@ export default function MineralFilters() {
 
   const params = new URLSearchParams(searchParams.toString());
   const [sortOrder, setSortOrder] = React.useState(
-    params.get('sortOrder') || 'asc'
+    params.get('sortOrder') || DEFAULT_SORT_ORDER
   );
 
   const createQueryString = useCallback(
@@ -41,14 +43,17 @@ export default function MineralFilters() {
           value={sortOrder}
           label='Sort Order'
           onChange={updateSortOrder}>
-          <RadioWrapper value='asc'>Asc</RadioWrapper>
-          <RadioWrapper value='desc'>Desc</RadioWrapper>
+          <RadioWrapper value={ASCENDING}>Asc</RadioWrapper>
+          <RadioWrapper value={DESCENDING}>Desc</RadioWrapper>
         </RadioGroupWrapper>
       </FilterGroup>
       <FilterDivider />
       <FilterGroup>
-        <Paginator />
+        <PageSizeFilter />
       </FilterGroup>
+      <FilterFooter>
+        <Paginator />
+      </FilterFooter>
     </FilterSidebar>
   );
 }

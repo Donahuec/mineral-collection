@@ -1,9 +1,10 @@
 'use server';
 import qroq from 'groq';
-import { defineQuery } from 'next-sanity';
 
 import { sanityFetch } from '@/sanity/live';
 import { ROCKS_QUERYResult } from '@/sanity/types';
+
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '../constants/constants';
 
 export interface RockQueryFilters {
   sortOrder: string;
@@ -12,17 +13,10 @@ export interface RockQueryFilters {
 }
 
 const DEFAULT_FILTERS: RockQueryFilters = {
-  sortOrder: 'asc',
+  sortOrder: DEFAULT_SORT_ORDER,
   page: 1,
-  pageSize: 10,
+  pageSize: DEFAULT_PAGE_SIZE,
 };
-
-/* eslint-disable  @typescript-eslint/no-unused-vars */
-const ROCKS_QUERY = defineQuery(`*[
-  _type == "rock"
-  && defined(slug.current) 
-  && count(*[_type == "specimen" && references(^._id)]) > 0
-]{_id, name, slug, previewImage}|order(name asc)`);
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function getRocks(inputFilters: any): Promise<ROCKS_QUERYResult> {

@@ -6,7 +6,7 @@ export default function Sidebar({ children }: { children: React.ReactNode }) {
   return (
     <ModalOverlay className={styles.modalOverlay} isDismissable>
       <Modal className={styles.sidebar}>
-        <Dialog>{children}</Dialog>
+        <Dialog className={styles.dialog}>{children}</Dialog>
       </Modal>
     </ModalOverlay>
   );

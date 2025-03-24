@@ -3,12 +3,13 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 
 import FilterSidebar, {
-  FilterDivider, FilterGroup
-} from '@/app/_shared/components/filterSidebar/filterSidebar';
-import Paginator from '@/app/_shared/components/paginator/paginator';
+  FilterDivider, FilterFooter, FilterGroup
+} from '@/app/_shared/components/filterComponents/filterSidebar/filterSidebar';
+import PageSizeFilter from '@/app/_shared/components/filterComponents/pageSizeFilter/pageSizeFilter';
+import Paginator from '@/app/_shared/components/filterComponents/paginator/paginator';
 import RadioGroupWrapper, {
   RadioWrapper
-} from '@/app/_shared/components/radioGroupWrapper/radioGroupWrapper';
+} from '@/app/_shared/components/formComponents/radioGroupWrapper/radioGroupWrapper';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
 
 export default function SpecimenFilters() {
@@ -63,8 +64,13 @@ export default function SpecimenFilters() {
       </FilterGroup>
       <FilterDivider />
       <FilterGroup>
-        <Paginator />
+        <PageSizeFilter />
       </FilterGroup>
+      <FilterFooter>
+        <FilterGroup>
+          <Paginator />
+        </FilterGroup>
+      </FilterFooter>
     </FilterSidebar>
   );
 }

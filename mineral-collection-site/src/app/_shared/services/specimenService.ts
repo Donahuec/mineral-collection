@@ -1,9 +1,10 @@
 'use server';
 import qroq from 'groq';
-import { defineQuery } from 'next-sanity';
 
 import { sanityFetch } from '@/sanity/live';
 import { SPECIMENS_QUERYResult } from '@/sanity/types';
+
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '../constants/constants';
 
 export interface SpecimenQueryFilters {
   sortBy: string;
@@ -15,17 +16,11 @@ export interface SpecimenQueryFilters {
 
 const DEFAULT_FILTERS: SpecimenQueryFilters = {
   sortBy: 'numericId',
-  sortOrder: 'asc',
+  sortOrder: DEFAULT_SORT_ORDER,
   page: 1,
-  pageSize: 10,
+  pageSize: DEFAULT_PAGE_SIZE,
   favorites: false,
 };
-
-/* eslint-disable  @typescript-eslint/no-unused-vars */
-const SPECIMENS_QUERY = defineQuery(`*[
-  _type == "specimen"
-  && defined(slug.current) && defined(previewImage)
-]{_id,  name, numericId, slug, previewImage}|order(numericId asc)[0...3]`);
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function getSpecimens(

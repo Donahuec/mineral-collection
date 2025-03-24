@@ -5,6 +5,26 @@ export const specimenSizes = [
   {title: 'Tiny (< 3cm)', value: 'tiny'},
   {title: 'Chip (< 1.5cm)', value: 'chip'},
   {title: 'Tiny Chip (< 0.5cm)', value: 'tinyChip'},
+  {title: 'Micro (< 1cm)', value: 'micro'},
+  {title: 'Thumbnail (1-3cm)', value: 'thumbnail'},
+  {title: 'Small Miniature (3-4.5 cm)', value: 'smallMiniature'},
+  {title: 'Miniature (4.5-7 cm)', value: 'miniature'},
+  {title: 'Small Cabinet (7-10 cm)', value: 'smallCabinet'},
+  {title: 'Cabinet (10-18 cm)', value: 'cabinet'},
+  {title: 'Museum (> 18cm)', value: 'museum'},
+]
+
+export const specimenShapes = [
+  {title: 'Tumbled', value: 'tumbled'},
+  {title: 'Polished', value: 'polished'},
+  {title: 'Cut', value: 'cut'},
+  {title: 'Sphere', value: 'sphere'},
+  {title: 'Rough', value: 'rough'},
+  {title: 'Crystal', value: 'crystal'},
+  {title: 'Cluster', value: 'cluster'},
+  {title: 'Geode', value: 'geode'},
+  {title: 'Natural', value: 'natural'},
+  {title: 'Matrix', value: 'matrix'},
 ]
 
 export const colors = [

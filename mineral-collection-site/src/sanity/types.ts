@@ -248,7 +248,27 @@ export type Specimen = {
   _rev: string;
   name?: string;
   numericId?: number;
+  favorite?: boolean;
   slug?: Slug;
+  shortDescription?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   images?: Array<{
     asset?: {
       _ref: string;
@@ -279,7 +299,6 @@ export type Specimen = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "mineral";
   }>;
-  mineralsText?: Array<string>;
   rocks?: Array<{
     _ref: string;
     _type: "reference";
@@ -287,11 +306,12 @@ export type Specimen = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "rock";
   }>;
-  rocksText?: Array<string>;
   hesitantId?: boolean;
   shape?: string;
-  sizeCategory?: "large" | "medium" | "small" | "tiny" | "chip" | "tinyChip";
+  shapeCategory?: Array<"tumbled" | "polished" | "cut" | "rough" | "crystal" | "cluster" | "geode" | "natural" | "matrix">;
+  sizeCategory?: "large" | "medium" | "small" | "tiny" | "chip" | "tinyChip" | "micro" | "thumbnail" | "smallMiniature" | "miniature" | "smallCabinet" | "cabinet" | "museum";
   size?: number;
+  sizeDescription?: Array<string>;
   weight?: number;
   colors?: Array<string>;
   origin?: string;
@@ -320,7 +340,26 @@ export type Specimen = {
     _type: "block";
     _key: string;
   }>;
+  provenance?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   tags?: Array<string>;
+  lowInterest?: boolean;
 };
 
 export type SanityImageCrop = {
@@ -388,6 +427,67 @@ export type Slug = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Rock | Mineral | Specimen | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ../mineral-collection-site/src/app/_shared/services/mineralService.ts
+// Variable: MINERALS_QUERY
+// Query: *[  _type == "mineral"  && defined(slug.current)   && count(*[_type == "specimen" && references(^._id)]) > 0]{_id, name, slug, previewImage}|order(name asc)
+export type MINERALS_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  previewImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+}>;
+
+// Source: ../mineral-collection-site/src/app/_shared/services/rockService.ts
+// Variable: ROCKS_QUERY
+// Query: *[  _type == "rock"  && defined(slug.current)   && count(*[_type == "specimen" && references(^._id)]) > 0]{_id, name, slug, previewImage}|order(name asc)
+export type ROCKS_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  previewImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+}>;
+
+// Source: ../mineral-collection-site/src/app/_shared/services/specimenService.ts
+// Variable: SPECIMENS_QUERY
+// Query: *[  _type == "specimen"  && defined(slug.current) && defined(previewImage)]{_id,  name, numericId, slug, previewImage}|order(numericId asc)[0...3]
+export type SPECIMENS_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  numericId: number | null;
+  slug: Slug | null;
+  previewImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
+}>;
+
 // Source: ../mineral-collection-site/src/app/minerals/[slug]/page.tsx
 // Variable: MINERAL_QUERY
 // Query: *[    _type == "mineral" &&    slug.current == $slug  ][0]{  ...,  'specimens': *[_type == "specimen" && references(^._id)]{    _id,    name,    slug,    previewImage}}
@@ -523,26 +623,6 @@ export type MINERAL_QUERYResult = {
   }>;
 } | null;
 
-// Source: ../mineral-collection-site/src/app/minerals/page.tsx
-// Variable: MINERALS_QUERY
-// Query: *[  _type == "mineral"  && defined(slug.current)   && count(*[_type == "specimen" && references(^._id)]) > 0]{_id, name, slug, previewImage}|order(name asc)
-export type MINERALS_QUERYResult = Array<{
-  _id: string;
-  name: string | null;
-  slug: Slug | null;
-  previewImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-}>;
-
 // Source: ../mineral-collection-site/src/app/rocks/[slug]/page.tsx
 // Variable: ROCK_QUERY
 // Query: *[    _type == "rock" &&    slug.current == $slug  ][0]{  ...,  'specimens': *[_type == "specimen" && references(^._id)]{    _id,    name,    slug,    previewImage}}
@@ -618,26 +698,6 @@ export type ROCK_QUERYResult = {
   }>;
 } | null;
 
-// Source: ../mineral-collection-site/src/app/rocks/page.tsx
-// Variable: ROCKS_QUERY
-// Query: *[  _type == "rock"  && defined(slug.current)   && count(*[_type == "specimen" && references(^._id)]) > 0]{_id, name, slug, previewImage}|order(name asc)
-export type ROCKS_QUERYResult = Array<{
-  _id: string;
-  name: string | null;
-  slug: Slug | null;
-  previewImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-}>;
-
 // Source: ../mineral-collection-site/src/app/specimens/[slug]/page.tsx
 // Variable: SPECIMEN_QUERY
 // Query: *[    _type == "specimen" &&    slug.current == $slug  ][0]{  ...,  minerals[]->{name, _id, slug, previewImage},  rocks[]->{name, _id, slug, previewImage}}
@@ -649,7 +709,27 @@ export type SPECIMEN_QUERYResult = {
   _rev: string;
   name?: string;
   numericId?: number;
+  favorite?: boolean;
   slug?: Slug;
+  shortDescription?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   images?: Array<{
     asset?: {
       _ref: string;
@@ -689,7 +769,6 @@ export type SPECIMEN_QUERYResult = {
       _type: "image";
     } | null;
   }> | null;
-  mineralsText?: Array<string>;
   rocks: Array<{
     name: string | null;
     _id: string;
@@ -706,11 +785,12 @@ export type SPECIMEN_QUERYResult = {
       _type: "image";
     } | null;
   }> | null;
-  rocksText?: Array<string>;
   hesitantId?: boolean;
   shape?: string;
-  sizeCategory?: "chip" | "large" | "medium" | "small" | "tiny" | "tinyChip";
+  shapeCategory?: Array<"cluster" | "crystal" | "cut" | "geode" | "matrix" | "natural" | "polished" | "rough" | "tumbled">;
+  sizeCategory?: "cabinet" | "chip" | "large" | "medium" | "micro" | "miniature" | "museum" | "small" | "smallCabinet" | "smallMiniature" | "thumbnail" | "tiny" | "tinyChip";
   size?: number;
+  sizeDescription?: Array<string>;
   weight?: number;
   colors?: Array<string>;
   origin?: string;
@@ -739,39 +819,37 @@ export type SPECIMEN_QUERYResult = {
     _type: "block";
     _key: string;
   }>;
+  provenance?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
   tags?: Array<string>;
+  lowInterest?: boolean;
 } | null;
-
-// Source: ../mineral-collection-site/src/app/specimens/page.tsx
-// Variable: SPECIMENS_QUERY
-// Query: *[  _type == "specimen"  && defined(slug.current) && defined(previewImage) && numericId > $lastId]{_id,  name, numericId, slug, previewImage}|order(numericId asc)
-export type SPECIMENS_QUERYResult = Array<{
-  _id: string;
-  name: string | null;
-  numericId: number | null;
-  slug: Slug | null;
-  previewImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-}>;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[\n    _type == \"mineral\" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  'specimens': *[_type == \"specimen\" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n}\n}": MINERAL_QUERYResult;
     "*[\n  _type == \"mineral\"\n  && defined(slug.current) \n  && count(*[_type == \"specimen\" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)": MINERALS_QUERYResult;
-    "*[\n    _type == \"rock\" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  'specimens': *[_type == \"specimen\" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n}\n}": ROCK_QUERYResult;
     "*[\n  _type == \"rock\"\n  && defined(slug.current) \n  && count(*[_type == \"specimen\" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)": ROCKS_QUERYResult;
+    "*[\n  _type == \"specimen\"\n  && defined(slug.current) && defined(previewImage)\n]{_id,  name, numericId, slug, previewImage}|order(numericId asc)[0...3]": SPECIMENS_QUERYResult;
+    "*[\n    _type == \"mineral\" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  'specimens': *[_type == \"specimen\" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n}\n}": MINERAL_QUERYResult;
+    "*[\n    _type == \"rock\" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  'specimens': *[_type == \"specimen\" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n}\n}": ROCK_QUERYResult;
     "*[\n    _type == \"specimen\" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  minerals[]->{name, _id, slug, previewImage},\n  rocks[]->{name, _id, slug, previewImage}\n}": SPECIMEN_QUERYResult;
-    "*[\n  _type == \"specimen\"\n  && defined(slug.current) && defined(previewImage) && numericId > $lastId\n]{_id,  name, numericId, slug, previewImage}|order(numericId asc)": SPECIMENS_QUERYResult;
   }
 }
