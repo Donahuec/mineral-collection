@@ -1,8 +1,9 @@
 import { PropsWithChildren, Suspense } from 'react';
 
-import Paginator from '../filterComponents/paginator/paginator';
-import SearchFilter from '../filterComponents/searchFilter/searchFilter';
-import LoadingSpinner from '../loadingSpinner/loadingSpinner';
+import Paginator from '@/app/_shared/components/filterComponents/paginator/paginator';
+import SearchFilter from '@/app/_shared/components/filterComponents/searchFilter/searchFilter';
+import LoadingSpinner from '@/app/_shared/components/loadingSpinner/loadingSpinner';
+
 import styles from './gridListPage.module.css';
 
 interface GridListPageProps {

@@ -1,17 +1,13 @@
-"use client";
-import Image from "next/image";
-import styles from "./styles.module.css";
-import {
-  Button,
-  Dialog,
-  DialogTrigger,
-  Modal,
-  ModalOverlay,
-} from "react-aria-components";
-import { urlFor, getImageDimensions } from "@/app/_shared/utils/imageService";
-import { PropsWithChildren, useState } from "react";
-import LoadingSpinner from "../loadingSpinner/loadingSpinner";
-import { X } from "lucide-react";
+'use client';
+import { X } from 'lucide-react';
+import Image from 'next/image';
+import { PropsWithChildren, useState } from 'react';
+import { Button, Dialog, DialogTrigger, Modal, ModalOverlay } from 'react-aria-components';
+
+import LoadingSpinner from '@/app/_shared/components/loadingSpinner/loadingSpinner';
+import { getImageDimensions, urlFor } from '@/app/_shared/utils/imageService';
+
+import styles from './styles.module.css';
 
 interface ImageModalProps {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -34,9 +30,9 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
             {!imageLoaded && <LoadingSpinner />}
             <Image
               src={
-                urlFor(props.image)?.url() || "https://placehold.co/300x300/png"
+                urlFor(props.image)?.url() || 'https://placehold.co/300x300/png'
               }
-              alt=""
+              alt=''
               width={width}
               height={height}
               className={styles.modalImage}
@@ -44,7 +40,10 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
                 setImageLoaded(true);
               }}
             />
-            <Button slot="close" className={styles.closeButton} aria-label="Close">
+            <Button
+              slot='close'
+              className={styles.closeButton}
+              aria-label='Close'>
               <X size={16} />
             </Button>
           </Dialog>

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import GridListPage from '../_shared/components/gridListPage/gridListPage';
-import SpecimenFilters from '../specimens/_components/specimenFilters/specimenFilters';
-import SpecimenResults from '../specimens/_components/specimenResults/specimenResults';
+import GridListPage from '@/app/_shared/components/gridListPage/gridListPage';
+import SpecimenFilters from '@/app/specimens/_components/specimenFilters/specimenFilters';
+import SpecimenResults from '@/app/specimens/_components/specimenResults/specimenResults';
 
 export default async function FavoritesPage({
   searchParams,
