@@ -40,3 +40,7 @@ export function FilterGroup({ children }: { children: React.ReactNode }) {
 export function FilterDivider() {
   return <div className={styles.filterDivider} />;
 }
+
+export function FilterFooter({ children }: { children: React.ReactNode }) {
+  return <div className={styles.filterFooter}>{children}</div>;
+}

@@ -3,7 +3,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 
 import FilterSidebar, {
-  FilterDivider, FilterGroup
+  FilterFooter, FilterGroup
 } from '@/app/_shared/components/filterSidebar/filterSidebar';
 import Paginator from '@/app/_shared/components/paginator/paginator';
 import RadioGroupWrapper, {
@@ -46,10 +46,9 @@ export default function MineralFilters() {
           <RadioWrapper value={DESCENDING}>Desc</RadioWrapper>
         </RadioGroupWrapper>
       </FilterGroup>
-      <FilterDivider />
-      <FilterGroup>
+      <FilterFooter>
         <Paginator />
-      </FilterGroup>
+      </FilterFooter>
     </FilterSidebar>
   );
 }

@@ -5,7 +5,7 @@ import React, { useCallback } from 'react';
 import { Button, Group, Input, Label, NumberField } from 'react-aria-components';
 
 import FilterSidebar, {
-  FilterDivider, FilterGroup
+  FilterDivider, FilterFooter, FilterGroup
 } from '@/app/_shared/components/filterSidebar/filterSidebar';
 import Paginator from '@/app/_shared/components/paginator/paginator';
 import RadioGroupWrapper, {
@@ -104,9 +104,9 @@ export default function SpecimenFilters() {
             </Group>
           </NumberField>
         </FilterGroup>
-        <div className={styles.bottom}>
+        <FilterFooter>
           <Paginator />
-        </div>
+        </FilterFooter>
       </div>
     </FilterSidebar>
   );
