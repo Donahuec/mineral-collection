@@ -11,13 +11,9 @@
 }
 
 .nav a {
-  color: var(--lightShade);
-  text-decoration: none;
-  transition: all 250ms ease;
-}
-
-.nav a:hover {
-  color: var(--lightAccent);
+  --linkBaseColor: var(--lightShade);
+  --linkHoverColor: var(--lightAccent);
+  --linkActiveColor: var(--lightAccent);
 }
 
 .nav a:active {
