@@ -12,6 +12,7 @@ export interface SpecimenQueryFilters {
   page: number;
   pageSize: number;
   favorites: boolean;
+  search?: string;
 }
 
 const DEFAULT_FILTERS: SpecimenQueryFilters = {
@@ -31,10 +32,12 @@ export async function getSpecimens(
   const start = (filters.page - 1) * filters.pageSize;
   const end = start + filters.pageSize;
 
-  const QUERYTEMPLATE = qroq`*[
+  const QUERYTEMPLATE = qroq`
+  *[
     _type == "specimen"
     && defined(slug.current) && defined(previewImage)
     ${filters.favorites ? '&& favorite == true' : ''}
+    ${filters.search ? `&& [name, minerals[]->name, rocks[]->name] match "*${filters.search.toLowerCase()}*"` : ''}
   ]
   | order(${filters.sortBy} ${filters.sortOrder}, numericId asc)[${start}...${end}]
   {_id,  name, numericId, slug, previewImage}`;

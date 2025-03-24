@@ -1,10 +1,8 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import Paginator from '../_shared/components/filterComponents/paginator/paginator';
-import LoadingSpinner from '../_shared/components/loadingSpinner/loadingSpinner';
+import GridListPage from '../_shared/components/gridListPage/gridListPage';
 import SpecimenFilters from '../specimens/_components/specimenFilters/specimenFilters';
 import SpecimenResults from '../specimens/_components/specimenResults/specimenResults';
-import styles from './styles.module.css';
 
 export default async function FavoritesPage({
   searchParams,
@@ -17,17 +15,11 @@ export default async function FavoritesPage({
   params['favorites'] = 'true';
 
   return (
-    <>
-      <h1 className={styles.title}>Favorite Specimens</h1>
-      <Suspense fallback={<LoadingSpinner />}>
-        <SpecimenFilters />
-        <SpecimenResults
-          searchParams={new Promise((resolve) => resolve(params))}
-        />
-        <div className={styles.paginator}>
-          <Paginator />
-        </div>
-      </Suspense>
-    </>
+    <GridListPage title='Favorite Specimens' searchPlaceholder='Amethyst...'>
+      <SpecimenFilters />
+      <SpecimenResults
+        searchParams={new Promise((resolve) => resolve(params))}
+      />
+    </GridListPage>
   );
 }

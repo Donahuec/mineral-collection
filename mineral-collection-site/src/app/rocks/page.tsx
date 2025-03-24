@@ -1,10 +1,6 @@
-import { Suspense } from 'react';
-
-import Paginator from '../_shared/components/filterComponents/paginator/paginator';
-import LoadingSpinner from '../_shared/components/loadingSpinner/loadingSpinner';
+import GridListPage from '../_shared/components/gridListPage/gridListPage';
 import RockFilters from './_components/rockFilters/rockFilters';
 import RockResults from './_components/rockResults/rockResults';
-import styles from './styles.module.css';
 
 export default async function RocksPage({
   searchParams,
@@ -14,15 +10,9 @@ export default async function RocksPage({
   }>;
 }) {
   return (
-    <>
-      <h1 className={styles.title}>Rocks</h1>
-      <Suspense fallback={<LoadingSpinner />}>
-        <RockFilters />
-        <RockResults searchParams={searchParams} />
-        <div className={styles.paginator}>
-          <Paginator />
-        </div>
-      </Suspense>
-    </>
+    <GridListPage title='Rocks' searchPlaceholder='Basalt...'>
+      <RockFilters />
+      <RockResults searchParams={searchParams} />
+    </GridListPage>
   );
 }

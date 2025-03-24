@@ -39,14 +39,14 @@
   transition: all 0.2s ease-out;
 }
 
-.pageSizeInput:hover {
+.input:hover {
   &:not(:focus) {
     box-shadow: -3px 2px 0 0 var(--lightAccent);
     transform: scale(1.04);
   }
 }
 
-.pageSizeInput:focus {
+.input:focus {
   outline: none;
   color: var(--darkAccent);
   background-color: var(--lightAccent);
