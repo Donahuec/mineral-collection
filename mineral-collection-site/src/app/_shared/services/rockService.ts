@@ -10,6 +10,7 @@ export interface RockQueryFilters {
   sortOrder: string;
   page: number;
   pageSize: number;
+  search?: string;
 }
 
 const DEFAULT_FILTERS: RockQueryFilters = {
@@ -25,10 +26,12 @@ export async function getRocks(inputFilters: any): Promise<ROCKS_QUERYResult> {
   const start = (filters.page - 1) * filters.pageSize;
   const end = start + filters.pageSize;
 
-  const QUERYTEMPLATE = qroq`*[
+  const QUERYTEMPLATE = qroq`
+  *[
     _type == "rock"
-  && defined(slug.current) 
-  && count(*[_type == "specimen" && references(^._id)]) > 0
+    && defined(slug.current) 
+    && count(*[_type == "specimen" && references(^._id)]) > 0
+    ${filters.search ? `&& [name, parent->name, parent->parent->name] match "*${filters.search.toLowerCase()}*"` : ''}
   ]
   | order(name ${filters.sortOrder})[${start}...${end}]
   {_id, name, slug, previewImage}`;
