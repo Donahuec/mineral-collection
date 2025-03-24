@@ -3,6 +3,7 @@
   flex: 1;
   width: 100%;
   max-width: 500px;
+  min-width: 300px;
   height: auto;
   border-radius: var(--br2);
   border-bottom-left-radius: 30%;
