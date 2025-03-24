@@ -102,8 +102,3 @@ a:focus-visible {
 a:active {
   color: var(--linkActiveColor, var(--darkShade));
 }
-
-a:visited,
-a:-webkit-any-link {
-  color: var(--linkBaseColor, var(--lightAccent));
-}
