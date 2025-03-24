@@ -3,6 +3,11 @@
   width: 300px;
   background-color: var(--darkAccent);
   padding: var(--s3);
+  transition: transform 350ms ease-in-out;
+  &[data-entering],
+  &[data-exiting] {
+    transform: translatex(-500px);
+  }
 }
 
 .dialog {
@@ -10,25 +15,8 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.sidebar[data-entering] {
-  animation: slide-in 350ms ease-in-out forwards;
-}
-
-.sidebar[data-exiting] {
-  animation: slide-in 350ms ease-in-out reverse;
-}
-
-@keyframes slide-in {
-  from {
-    margin-inline-start: -500px;
-    display: none;
-  }
-
-  to {
-    margin-inline-start: 0;
-    display: block;
+  &:focus-visible {
+    outline: none;
   }
 }
 
@@ -41,17 +29,9 @@
   background: rgba(0 0 0 / 0.3);
   z-index: 100;
   backdrop-filter: blur(2px);
-  &[data-entering] {
-    animation: modal-fade 200ms ease-in forwards;
-  }
-}
-
-@keyframes modal-fade {
-  from {
+  transition: opacity 300ms ease-in-out;
+  &[data-entering],
+  &[data-exiting] {
     opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }

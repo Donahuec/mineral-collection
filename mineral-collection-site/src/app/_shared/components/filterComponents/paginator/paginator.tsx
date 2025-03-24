@@ -4,8 +4,9 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { Button } from 'react-aria-components';
 
-import iconButtonStyles from '../../styles/iconButton.module.css';
-import { updateQueryString } from '../../utils/urlService';
+import iconButtonStyles from '@/app/_shared/styles/iconButton.module.css';
+import { updateQueryString } from '@/app/_shared/utils/urlService';
+
 import styles from './paginator.module.css';
 
 export default function Paginator() {

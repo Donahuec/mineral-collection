@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 
+import Paginator from '../_shared/components/filterComponents/paginator/paginator';
 import LoadingSpinner from '../_shared/components/loadingSpinner/loadingSpinner';
-import Paginator from '../_shared/components/paginator/paginator';
 import SpecimenFilters from './_components/specimenFilters/specimenFilters';
 import SpecimenResults from './_components/specimenResults/specimenResults';
 import styles from './styles.module.css';

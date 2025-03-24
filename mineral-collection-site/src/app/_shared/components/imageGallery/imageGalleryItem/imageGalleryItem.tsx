@@ -1,9 +1,11 @@
-"use client";
-import Image from "next/image";
-import styles from "./styles.module.css";
-import { Button } from "react-aria-components";
-import { urlFor } from "@/app/_shared/utils/imageService";
-import ImageModal from "../../imageModal/imageModal";
+'use client';
+import Image from 'next/image';
+import { Button } from 'react-aria-components';
+
+import ImageModal from '@/app/_shared/components/imageModal/imageModal';
+import { urlFor } from '@/app/_shared/utils/imageService';
+
+import styles from './styles.module.css';
 
 interface ImageGalleryItemProps {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -23,9 +25,9 @@ export default function ImageGalleryItem({
         <Image
           src={
             urlFor(image, previewWidth * 2, previewHeight * 2)?.url() ||
-            "https://placehold.co/300x300/png"
+            'https://placehold.co/300x300/png'
           }
-          alt=""
+          alt=''
           className={styles.image}
           width={previewWidth}
           height={previewHeight}

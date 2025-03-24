@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
+import Paginator from '../_shared/components/filterComponents/paginator/paginator';
 import LoadingSpinner from '../_shared/components/loadingSpinner/loadingSpinner';
-import Paginator from '../_shared/components/paginator/paginator';
 import MineralFilters from './_components/mineralFilters/mineralFilters';
 import MineralResults from './_components/mineralResults/mineralResults';
 import styles from './styles.module.css';
