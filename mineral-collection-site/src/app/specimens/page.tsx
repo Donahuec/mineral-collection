@@ -1,4 +1,5 @@
-import GridListPage from '../_shared/components/gridListPage/gridListPage';
+import GridListPage from '@/app/_shared/components/gridListPage/gridListPage';
+
 import SpecimenFilters from './_components/specimenFilters/specimenFilters';
 import SpecimenResults from './_components/specimenResults/specimenResults';
 

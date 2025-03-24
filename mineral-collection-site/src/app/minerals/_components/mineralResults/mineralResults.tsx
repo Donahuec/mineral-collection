@@ -1,5 +1,3 @@
-
-
 import ResultCard from '@/app/_shared/components/resultGrid/resultCard/resultCard';
 import ResultGrid from '@/app/_shared/components/resultGrid/resultGrid';
 import { getMinerals } from '@/app/_shared/services/mineralService';

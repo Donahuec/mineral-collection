@@ -1,10 +1,9 @@
 'use server';
 import qroq from 'groq';
 
+import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '@/app/_shared/constants/constants';
 import { sanityFetch } from '@/sanity/live';
 import { MINERALS_QUERYResult } from '@/sanity/types';
-
-import { DEFAULT_PAGE_SIZE, DEFAULT_SORT_ORDER } from '../constants/constants';
 
 export interface MineralQueryFilters {
   sortOrder: string;

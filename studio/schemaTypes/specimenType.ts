@@ -9,30 +9,51 @@ export const specimenType = defineType({
   title: 'Specimen',
   type: 'document',
   groups: [
-    {name: 'details', title: 'Details', default: true},
-    {name: 'properties', title: 'Properties'},
-    {name: 'purchase', title: 'Purchase'},
+    { name: 'details', title: 'Details', default: true },
+    { name: 'size', title: 'Size/Shape' },
+    { name: 'properties', title: 'Properties' },
+    { name: 'purchase', title: 'Purchase' },
   ],
   orderings: [
     {
       title: 'Name, Asc',
       name: 'nameAsc',
-      by: [{field: 'name', direction: 'asc'}],
+      by: [{ field: 'name', direction: 'asc' }],
     },
     {
       title: 'Name, Desc',
       name: 'nameDesc',
-      by: [{field: 'name', direction: 'desc'}],
+      by: [{ field: 'name', direction: 'desc' }],
     },
     {
       title: 'numericId, Asc',
       name: 'numericIdAsc',
-      by: [{field: 'numericId', direction: 'asc'}],
+      by: [{ field: 'numericId', direction: 'asc' }],
     },
     {
       title: 'numericId, Desc',
       name: 'numericIdDesc',
-      by: [{field: 'numericId', direction: 'desc'}],
+      by: [{ field: 'numericId', direction: 'desc' }],
+    },
+    {
+      title: 'Weight, Asc',
+      name: 'weightAsc',
+      by: [{ field: 'weight', direction: 'asc' }],
+    },
+    {
+      title: 'Weight, Desc',
+      name: 'weightDesc',
+      by: [{ field: 'weight', direction: 'desc' }],
+    },
+    {
+      title: 'Size, Asc',
+      name: 'sizeAsc',
+      by: [{ field: 'size', direction: 'asc' }],
+    },
+    {
+      title: 'Size, Desc',
+      name: 'sizeDesc',
+      by: [{ field: 'size', direction: 'desc' }],
     },
   ],
   fields: [
@@ -54,7 +75,7 @@ export const specimenType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      options: {source: (doc, options) => `${doc.name}-${doc.numericId}`},
+      options: { source: (doc, options) => `${doc.name}-${doc.numericId}` },
       group: 'details',
       validation: (rule) => rule.required().error(`Required to generate a page on the website`),
     }),
@@ -66,12 +87,12 @@ export const specimenType = defineType({
     defineField({
       name: 'description',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'images',
       type: 'array',
-      of: [{type: 'image'}],
+      of: [{ type: 'image' }],
       group: 'details',
     }),
     defineField({
@@ -83,13 +104,13 @@ export const specimenType = defineType({
       name: 'minerals',
       type: 'array',
       group: 'details',
-      of: [{type: 'reference', to: [{type: 'mineral'}]}],
+      of: [{ type: 'reference', to: [{ type: 'mineral' }] }],
     }),
     defineField({
       name: 'rocks',
       type: 'array',
       group: 'details',
-      of: [{type: 'reference', to: [{type: 'rock'}]}],
+      of: [{ type: 'reference', to: [{ type: 'rock' }] }],
     }),
     defineField({
       name: 'hesitantId',
@@ -99,12 +120,12 @@ export const specimenType = defineType({
     defineField({
       name: 'shape',
       type: 'string',
-      group: 'properties',
+      group: ['properties', 'size'],
     }),
     defineField({
       name: 'shapeCategory',
       type: 'array',
-      group: 'properties',
+      group: ['properties', 'size'],
       of: [
         {
           type: 'string',
@@ -117,7 +138,7 @@ export const specimenType = defineType({
     defineField({
       name: 'sizeCategory',
       type: 'string',
-      group: 'properties',
+      group: ['properties', 'size'],
       options: {
         list: specimenSizes,
       },
@@ -125,27 +146,27 @@ export const specimenType = defineType({
     defineField({
       name: 'size',
       type: 'number',
-      group: 'properties',
+      group: ['properties', 'size'],
       description: 'Measured in cm, along the longest axis',
     }),
     defineField({
       name: 'sizeDescription',
       type: 'array',
-      group: 'properties',
-      of: [{type: 'string'}],
+      group: ['properties', 'size'],
+      of: [{ type: 'string' }],
       description: 'Measured in cm, along notable axes',
     }),
     defineField({
       name: 'weight',
       type: 'number',
-      group: 'properties',
+      group: ['properties', 'size'],
       description: 'Measured in grams',
     }),
     defineField({
       name: 'colors',
       type: 'array',
       group: 'properties',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
     }),
     defineField({
       name: 'origin',
@@ -191,22 +212,23 @@ export const specimenType = defineType({
     defineField({
       name: 'notes',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'provenance',
       type: 'array',
-      of: [{type: 'block'}],
+      of: [{ type: 'block' }],
     }),
     defineField({
       name: 'tags',
       type: 'array',
       group: 'details',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
     }),
     defineField({
       name: 'lowInterest',
       type: 'boolean',
+      group: ['details', 'size'],
     }),
   ],
   preview: {
@@ -214,14 +236,18 @@ export const specimenType = defineType({
       name: 'name',
       id: 'numericId',
       image: 'previewImage',
+      shapeCategory: 'shapeCategory',
+      sizeCategory: 'sizeCategory',
+      weight: 'weight',
     },
-    prepare({name, id, image}) {
-      const nameFormatted = name || 'Untitled Specimen'
-      const idFormatted = id ? `#${id}` : ''
+    prepare({ name, id, image, shapeCategory, sizeCategory, weight }) {
+      const nameFormatted = name || 'Untitled Specimen';
+      const idFormatted = id ? `#${id}` : '';
       return {
         title: `${nameFormatted} - ${idFormatted}`,
+        subtitle: `${weight ? `${weight} g` : 'NA'} - ${sizeCategory || 'NA'} - ${shapeCategory ? shapeCategory.join(', ') : 'NA'}`,
         media: image || DiamondIcon,
-      }
+      };
     },
   },
-})
+});

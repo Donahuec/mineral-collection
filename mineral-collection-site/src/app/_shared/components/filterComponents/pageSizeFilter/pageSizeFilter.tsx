@@ -2,10 +2,9 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 
+import NumberFieldWrapper from '@/app/_shared/components/formComponents/numberFieldWrapper/numberFieldWrapper';
 import { DEFAULT_PAGE_SIZE } from '@/app/_shared/constants/constants';
 import { updateQueryString } from '@/app/_shared/utils/urlService';
-
-import NumberFieldWrapper from '../../formComponents/numberFieldWrapper/numberFieldWrapper';
 
 export default function PageSizeFilter() {
   const router = useRouter();

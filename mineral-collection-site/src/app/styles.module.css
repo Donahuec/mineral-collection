@@ -5,20 +5,10 @@
   justify-content: flex-start;
   width: clamp(var(--s8), 50%, var(--s9));
 }
-
-a.link,
-a.link:visited,
-a.link:-webkit-any-link {
-  color: var(--lightShade);
-}
-
-a.link:hover,
-a.link:focus-visible {
-  color: var(--lightAccent);
-}
-
-a.link:active {
-  color: var(--darkShade);
+a.link {
+  --linkBaseColor: var(--lightShade);
+  --linkHoverColor: var(--lightAccent);
+  --linkActiveColor: var(--darkShade);
 }
 
 .link .linkUnderline {

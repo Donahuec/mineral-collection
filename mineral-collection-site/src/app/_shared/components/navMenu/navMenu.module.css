@@ -38,18 +38,15 @@
   }
 }
 
-a.menuLink,
-a.menuLink:visited,
-a.menuLink:-webkit-any-link {
+a.menuLink {
+  --linkBaseColor: var(--lightShade);
+  --linkHoverColor: var(--lightAccent);
   font-size: 1.25rem;
-  color: var(--lightShade);
   text-decoration: none;
   padding: var(--s1);
   transition: all 250ms ease;
 }
-.menuButton:hover,
-a.menuLink:hover,
-a.menuLink:focus-visible {
+.menuButton:hover {
   color: var(--lightAccent);
 }
 .menuButton:active,

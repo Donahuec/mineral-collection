@@ -1,4 +1,5 @@
-import GridListPage from '../_shared/components/gridListPage/gridListPage';
+import GridListPage from '@/app/_shared/components/gridListPage/gridListPage';
+
 import MineralFilters from './_components/mineralFilters/mineralFilters';
 import MineralResults from './_components/mineralResults/mineralResults';
 

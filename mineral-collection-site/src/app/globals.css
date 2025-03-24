@@ -1,8 +1,8 @@
 :root {
   --fontBody: 1rem;
   --fontWeight: 400;
-  --headerFontFamily: "Vollkorn", serif;
-  --fontFamily: "Montserrat", sans-serif;
+  --headerFontFamily: 'Vollkorn', serif;
+  --fontFamily: 'Montserrat', sans-serif;
 
   /* Sizing */
   --s1: 4px;
@@ -84,24 +84,21 @@ h6,
   font-family: var(--headerFontFamily);
 }
 
-a,
-a:visited,
-a:-webkit-any-link {
-  color: var(--lightAccent);
+a {
+  color: var(--linkBaseColor, var(--lightAccent));
   text-decoration: none;
-  transition: color 250ms ease;
-}
-a:hover,
-a:focus-visible {
-  color: var(--lightShade);
+  transition: all 250ms ease;
 }
 
+a:hover,
 a:focus-visible {
-  outline: 2px solid var(--lightAccent);
+  color: var(--linkHoverColor, var(--lightShade));
+}
+a:focus-visible {
+  outline: 2px solid var(--linkFocusBorderColor, var(--lightAccent));
   outline-offset: var(--s1);
   border-radius: 2px;
 }
-
 a:active {
-  color: var(--darkShade);
+  color: var(--linkActiveColor, var(--darkShade));
 }

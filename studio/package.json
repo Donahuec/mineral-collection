@@ -18,11 +18,11 @@
   "dependencies": {
     "@sanity/icons": "^3.7.0",
     "@sanity/ui": "^2.15.2",
-    "@sanity/vision": "^3.78.0",
+    "@sanity/vision": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sanity": "^3.78.0",
-    "sanity-plugin-documents-pane": "^2.3.0",
+    "sanity": "latest",
+    "sanity-plugin-documents-pane": "latest",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
@@ -33,9 +33,19 @@
     "typescript": "^5.1.6"
   },
   "prettier": {
-    "semi": false,
-    "printWidth": 100,
-    "bracketSpacing": false,
-    "singleQuote": true
+    "semi": true,
+    "printWidth": 80,
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "useTabs": false,
+    "jsxSingleQuote": true,
+    "jsxBracketSameLine": true,
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "quoteProps": "as-needed",
+    "htmlWhitespaceSensitivity": "ignore",
+    "objectWrap": "preserve"
   }
 }
