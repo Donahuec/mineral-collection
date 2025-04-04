@@ -102,18 +102,7 @@ export default async function SpecimenPage({
           )}
           {specimen.sizeDescription && specimen.sizeDescription.length > 0 ? (
             <Property title='Size'>
-              {specimen.sizeDescription.reduce(
-                (
-                  previousValue: string,
-                  currentValue: string,
-                  currentIndex: number
-                ) => {
-                  if (currentIndex === 1) {
-                    previousValue = `${previousValue}cm`;
-                  }
-                  return `${previousValue} x ${currentValue}cm`;
-                }
-              )}
+              {specimen.sizeDescription.map((size) => `${size}cm`).join(' x ')}
             </Property>
           ) : (
             specimen.size && (
