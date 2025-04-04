@@ -26,10 +26,11 @@
   margin-inline: var(--s5);
   margin-block: var(--s6);
   border-radius: var(--br2);
-  p {
-    margin-bottom: var(--s2);
-    min-height: 1rem;
-  }
+}
+
+.notes p {
+  margin-bottom: var(--s2);
+  min-height: 1rem;
 }
 
 .sectionTitle {
