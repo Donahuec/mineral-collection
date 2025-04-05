@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity';
 
 import { DiamondIcon } from '@sanity/icons';
 
-import { specimenShapes, specimenSizes } from './constants';
+import { crystalForms, specimenShapes, specimenSizes } from './constants';
 
 export const specimenType = defineType({
   name: 'specimen',
@@ -77,7 +77,8 @@ export const specimenType = defineType({
       type: 'slug',
       options: { source: (doc, options) => `${doc.name}-${doc.numericId}` },
       group: 'details',
-      validation: (rule) => rule.required().error(`Required to generate a page on the website`),
+      validation: (rule) =>
+        rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
       name: 'shortDescription',
@@ -169,6 +170,19 @@ export const specimenType = defineType({
       of: [{ type: 'string' }],
     }),
     defineField({
+      name: 'form',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+          options: {
+            list: crystalForms,
+          },
+        },
+      ],
+      group: ['properties', 'size'],
+    }),
+    defineField({
       name: 'origin',
       type: 'string',
       group: 'properties',
@@ -224,6 +238,9 @@ export const specimenType = defineType({
       type: 'array',
       group: 'details',
       of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
     }),
     defineField({
       name: 'lowInterest',

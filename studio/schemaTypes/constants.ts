@@ -67,7 +67,9 @@ export const luster = [
   { title: 'Waxy', value: 'waxy' },
 ];
 
-export const mohsScale = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10];
+export const mohsScale = [
+  1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
+];
 
 export const specimenTypes = [
   { title: 'Mineral', value: 'mineral' },
@@ -76,4 +78,54 @@ export const specimenTypes = [
   { title: 'Meteorite', value: 'meteorite' },
   { title: 'Gemstone', value: 'gemstone' },
   { title: 'Other', value: 'other' },
+];
+
+export const crystalForms = [
+  { title: 'Cubic', value: 'cubic' },
+  { title: 'Dodecahedral', value: 'dodecahedral' },
+  { title: 'Octahedral', value: 'octahedral' },
+  { title: 'Tetrahedral', value: 'tetrahedral' },
+  { title: 'Rhombohedral', value: 'rhombohedral' },
+  { title: 'Scalenohedral', value: 'scalenohedral' },
+  { title: 'Hexagonal', value: 'hexagonal' },
+  { title: 'Prismatic', value: 'prismatic' },
+  { title: 'Hopper', value: 'hopper' },
+  { title: 'Hemimorphic', value: 'hemimorphic' },
+  { title: 'Sceptered', value: 'sceptered' },
+  { title: 'Acicular', value: 'acicular' },
+  { title: 'Capillary', value: 'capillary' },
+  { title: 'Columnar', value: 'columnar' },
+  { title: 'Fibrous', value: 'fibrous' },
+  { title: 'Radiating', value: 'radiating' },
+  { title: 'Plumose', value: 'plumose' },
+  { title: 'Stellate', value: 'stellate' },
+  { title: 'Foliated', value: 'foliated' },
+  { title: 'Lamellar', value: 'lamellar' },
+  { title: 'Micaceous', value: 'micaceous' },
+  { title: 'Platy', value: 'platy' },
+  { title: 'Tabular', value: 'tabular' },
+  { title: 'Arborescent', value: 'arborescent' },
+  { title: 'Dendritic', value: 'dendritic' },
+  { title: 'Reticulated', value: 'reticulated' },
+  { title: 'Botryoidal', value: 'botryoidal' },
+  { title: 'Colloform', value: 'colloform' },
+  { title: 'Concentric', value: 'concentric' },
+  { title: 'Globular', value: 'globular' },
+  { title: 'Mammillary', value: 'mammillary' },
+  { title: 'Reniform', value: 'reniform' },
+  { title: 'Oolitic', value: 'oolitic' },
+  { title: 'Pisolitic', value: 'pisolitic' },
+  { title: 'Rosette', value: 'rosette' },
+  { title: 'Lenticular', value: 'lenticular' },
+  { title: 'Druse', value: 'druse' },
+  { title: 'Stalactitic', value: 'stalactitic' },
+  { title: 'Concretions', value: 'concretions' },
+  { title: 'Massive', value: 'massive' },
+  { title: 'Compact', value: 'compact' },
+  { title: 'Granular', value: 'granular' },
+  { title: 'Amygdaloidal', value: 'amygdaloidal' },
+  { title: 'Banded', value: 'banded' },
+  { title: 'Other', value: 'other' },
+  { title: 'Unknown', value: 'unknown' },
+  { title: 'Not Applicable', value: 'notApplicable' },
 ];
