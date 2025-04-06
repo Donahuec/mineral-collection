@@ -43,6 +43,7 @@ function convertStringToBoolean(value: string): boolean {
   return false;
 }
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 function formatInputFilters(inputFilters: any): SpecimenQueryFilters {
   if (inputFilters.favorites) {
     inputFilters.favorites = convertStringToBoolean(inputFilters.favorites);
