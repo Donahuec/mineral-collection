@@ -410,6 +410,13 @@
               },
               "optional": true
             },
+            "media": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "unknown"
+              },
+              "optional": true
+            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -808,6 +815,13 @@
               },
               "optional": true
             },
+            "media": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "unknown"
+              },
+              "optional": true
+            },
             "hotspot": {
               "type": "objectAttribute",
               "value": {
@@ -889,7 +903,216 @@
         },
         "optional": true
       },
+      "formula": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "scientificName": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "strunzClassification": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "classification": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
+            "description": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "array",
+                "of": {
+                  "type": "object",
+                  "attributes": {
+                    "children": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "array",
+                        "of": {
+                          "type": "object",
+                          "attributes": {
+                            "marks": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "array",
+                                "of": {
+                                  "type": "string"
+                                }
+                              },
+                              "optional": true
+                            },
+                            "text": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "span"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "optional": true
+                    },
+                    "style": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "union",
+                        "of": [
+                          {
+                            "type": "string",
+                            "value": "normal"
+                          },
+                          {
+                            "type": "string",
+                            "value": "h1"
+                          },
+                          {
+                            "type": "string",
+                            "value": "h2"
+                          },
+                          {
+                            "type": "string",
+                            "value": "h3"
+                          },
+                          {
+                            "type": "string",
+                            "value": "h4"
+                          },
+                          {
+                            "type": "string",
+                            "value": "h5"
+                          },
+                          {
+                            "type": "string",
+                            "value": "h6"
+                          },
+                          {
+                            "type": "string",
+                            "value": "blockquote"
+                          }
+                        ]
+                      },
+                      "optional": true
+                    },
+                    "listItem": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "union",
+                        "of": [
+                          {
+                            "type": "string",
+                            "value": "bullet"
+                          },
+                          {
+                            "type": "string",
+                            "value": "number"
+                          }
+                        ]
+                      },
+                      "optional": true
+                    },
+                    "markDefs": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "array",
+                        "of": {
+                          "type": "object",
+                          "attributes": {
+                            "href": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string"
+                              },
+                              "optional": true
+                            },
+                            "_type": {
+                              "type": "objectAttribute",
+                              "value": {
+                                "type": "string",
+                                "value": "link"
+                              }
+                            }
+                          },
+                          "rest": {
+                            "type": "object",
+                            "attributes": {
+                              "_key": {
+                                "type": "objectAttribute",
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "optional": true
+                    },
+                    "level": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "number"
+                      },
+                      "optional": true
+                    },
+                    "_type": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string",
+                        "value": "block"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "object",
+                    "attributes": {
+                      "_key": {
+                        "type": "objectAttribute",
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "optional": true
+            }
+          }
+        },
+        "optional": true
+      },
+      "IMASymbol": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -2071,6 +2294,13 @@
                 },
                 "optional": true
               },
+              "media": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "unknown"
+                },
+                "optional": true
+              },
               "hotspot": {
                 "type": "objectAttribute",
                 "value": {
@@ -2142,6 +2372,13 @@
                   }
                 },
                 "dereferencesTo": "sanity.imageAsset"
+              },
+              "optional": true
+            },
+            "media": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "unknown"
               },
               "optional": true
             },
@@ -2295,6 +2532,26 @@
               },
               {
                 "type": "string",
+                "value": "cabochon"
+              },
+              {
+                "type": "string",
+                "value": "faceted"
+              },
+              {
+                "type": "string",
+                "value": "sphere"
+              },
+              {
+                "type": "string",
+                "value": "obelisk"
+              },
+              {
+                "type": "string",
+                "value": "carved"
+              },
+              {
+                "type": "string",
                 "value": "rough"
               },
               {
@@ -2316,6 +2573,18 @@
               {
                 "type": "string",
                 "value": "matrix"
+              },
+              {
+                "type": "string",
+                "value": "chip"
+              },
+              {
+                "type": "string",
+                "value": "flake"
+              },
+              {
+                "type": "string",
+                "value": "group"
               }
             ]
           }
@@ -2329,10 +2598,6 @@
           "of": [
             {
               "type": "string",
-              "value": "large"
-            },
-            {
-              "type": "string",
               "value": "medium"
             },
             {
@@ -2342,14 +2607,6 @@
             {
               "type": "string",
               "value": "tiny"
-            },
-            {
-              "type": "string",
-              "value": "chip"
-            },
-            {
-              "type": "string",
-              "value": "tinyChip"
             },
             {
               "type": "string",
@@ -2413,6 +2670,218 @@
           "type": "array",
           "of": {
             "type": "string"
+          }
+        },
+        "optional": true
+      },
+      "form": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "cubic"
+              },
+              {
+                "type": "string",
+                "value": "dodecahedral"
+              },
+              {
+                "type": "string",
+                "value": "octahedral"
+              },
+              {
+                "type": "string",
+                "value": "tetrahedral"
+              },
+              {
+                "type": "string",
+                "value": "rhombohedral"
+              },
+              {
+                "type": "string",
+                "value": "scalenohedral"
+              },
+              {
+                "type": "string",
+                "value": "hexagonal"
+              },
+              {
+                "type": "string",
+                "value": "prismatic"
+              },
+              {
+                "type": "string",
+                "value": "hopper"
+              },
+              {
+                "type": "string",
+                "value": "hemimorphic"
+              },
+              {
+                "type": "string",
+                "value": "sceptered"
+              },
+              {
+                "type": "string",
+                "value": "acicular"
+              },
+              {
+                "type": "string",
+                "value": "capillary"
+              },
+              {
+                "type": "string",
+                "value": "columnar"
+              },
+              {
+                "type": "string",
+                "value": "fibrous"
+              },
+              {
+                "type": "string",
+                "value": "radiating"
+              },
+              {
+                "type": "string",
+                "value": "plumose"
+              },
+              {
+                "type": "string",
+                "value": "stellate"
+              },
+              {
+                "type": "string",
+                "value": "foliated"
+              },
+              {
+                "type": "string",
+                "value": "lamellar"
+              },
+              {
+                "type": "string",
+                "value": "micaceous"
+              },
+              {
+                "type": "string",
+                "value": "bladed"
+              },
+              {
+                "type": "string",
+                "value": "platy"
+              },
+              {
+                "type": "string",
+                "value": "tabular"
+              },
+              {
+                "type": "string",
+                "value": "arborescent"
+              },
+              {
+                "type": "string",
+                "value": "dendritic"
+              },
+              {
+                "type": "string",
+                "value": "reticulated"
+              },
+              {
+                "type": "string",
+                "value": "botryoidal"
+              },
+              {
+                "type": "string",
+                "value": "colloform"
+              },
+              {
+                "type": "string",
+                "value": "concentric"
+              },
+              {
+                "type": "string",
+                "value": "globular"
+              },
+              {
+                "type": "string",
+                "value": "mammillary"
+              },
+              {
+                "type": "string",
+                "value": "reniform"
+              },
+              {
+                "type": "string",
+                "value": "oolitic"
+              },
+              {
+                "type": "string",
+                "value": "pisolitic"
+              },
+              {
+                "type": "string",
+                "value": "rosette"
+              },
+              {
+                "type": "string",
+                "value": "lenticular"
+              },
+              {
+                "type": "string",
+                "value": "druse"
+              },
+              {
+                "type": "string",
+                "value": "stalactitic"
+              },
+              {
+                "type": "string",
+                "value": "concretions"
+              },
+              {
+                "type": "string",
+                "value": "massive"
+              },
+              {
+                "type": "string",
+                "value": "compact"
+              },
+              {
+                "type": "string",
+                "value": "granular"
+              },
+              {
+                "type": "string",
+                "value": "amygdaloidal"
+              },
+              {
+                "type": "string",
+                "value": "banded"
+              },
+              {
+                "type": "string",
+                "value": "striated"
+              },
+              {
+                "type": "string",
+                "value": "geode"
+              },
+              {
+                "type": "string",
+                "value": "other"
+              },
+              {
+                "type": "string",
+                "value": "unknown"
+              },
+              {
+                "type": "string",
+                "value": "notApplicable"
+              }
+            ]
           }
         },
         "optional": true
