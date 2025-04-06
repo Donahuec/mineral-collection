@@ -11,7 +11,6 @@ import {
   specimenShapes,
   specimenSizes,
 } from '@/app/_shared/constants/constants';
-import { urlFor } from '@/app/_shared/utils/imageService';
 import { sanityFetch } from '@/sanity/live';
 import { SPECIMEN_QUERYResult } from '@/sanity/types';
 
@@ -51,16 +50,13 @@ export default async function SpecimenPage({
   if (!specimen) {
     notFound();
   }
-  const imageUrl = specimen.previewImage
-    ? urlFor(specimen.previewImage)?.url()
-    : undefined;
 
   return (
     <>
       <BackLink title='Back to Specimens' href='/specimens' />
       <ImageHeader
         title={`${specimen.name} - #${specimen.numericId}`}
-        imageUrl={imageUrl}
+        image={specimen.previewImage}
         alt={specimen.name || 'Specimen'}>
         <PropertyList>
           <Property title='Classifications'>

@@ -29,6 +29,9 @@ export const mineralType = defineType({
       name: 'previewImage',
       type: 'image',
       group: 'details',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'mindatUrl',
@@ -53,7 +56,33 @@ export const mineralType = defineType({
       group: ['details', 'relationships'],
     }),
     defineField({
+      name: 'formula',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
       name: 'scientificName',
+      type: 'string',
+      group: 'details',
+    }),
+    defineField({
+      name: 'strunzClassification',
+      type: 'object',
+      group: 'details',
+      fields: [
+        defineField({
+          name: 'classification',
+          type: 'string',
+        }),
+        defineField({
+          name: 'description',
+          type: 'array',
+          of: [{ type: 'block' }],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'IMASymbol',
       type: 'string',
       group: 'details',
     }),
@@ -99,7 +128,7 @@ export const mineralType = defineType({
       name: 'commonAssociations',
       type: 'array',
       group: 'relationships',
-      of: [{ type: 'reference', to: [{ type: 'mineral' }] }],
+      of: [{ type: 'reference', weak: true, to: [{ type: 'mineral' }] }],
     }),
     defineField({
       name: 'commonAssociationsString',

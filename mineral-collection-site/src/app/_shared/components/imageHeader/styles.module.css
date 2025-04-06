@@ -1,15 +1,18 @@
 .previewImage {
   display: block;
   flex: 1;
-  width: 100%;
-  max-width: 500px;
-  min-width: 300px;
-  height: auto;
   border-radius: var(--br2);
   border-bottom-left-radius: 30%;
   border-top-right-radius: 30%;
   outline: var(--s1) solid var(--lightAccent);
   outline-offset: var(--s3);
+  max-width: 800px;
+  max-height: 800px;
+  min-width: 300px;
+  min-height: 300px;
+  aspect-ratio: 1 / 1;
+  align-self: center;
+  height: auto;
 }
 
 .infoBlock {
@@ -29,6 +32,7 @@
   gap: var(--s3);
   padding-block: var(--s5);
   margin-inline: var(--s5);
+  min-width: 300px;
 }
 
 .title {

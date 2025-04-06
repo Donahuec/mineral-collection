@@ -1,12 +1,13 @@
-import { sanityFetch } from "@/sanity/live";
-import { defineQuery } from "next-sanity";
-import { notFound } from "next/navigation";
-import ImageHeader from "@/app/_shared/components/imageHeader/imageHeader";
-import { ROCK_QUERYResult } from "@/sanity/types";
-import ResultGrid from "@/app/_shared/components/resultGrid/resultGrid";
-import ResultCard from "@/app/_shared/components/resultGrid/resultCard/resultCard";
-import { urlFor } from "@/app/_shared/utils/imageService";
-import BackLink from "@/app/_shared/components/backLink/backLink";
+import { defineQuery } from 'next-sanity';
+import { notFound } from 'next/navigation';
+
+import BackLink from '@/app/_shared/components/backLink/backLink';
+import ImageHeader from '@/app/_shared/components/imageHeader/imageHeader';
+import ResultCard from '@/app/_shared/components/resultGrid/resultCard/resultCard';
+import ResultGrid from '@/app/_shared/components/resultGrid/resultGrid';
+import { urlFor } from '@/app/_shared/utils/imageService';
+import { sanityFetch } from '@/sanity/live';
+import { ROCK_QUERYResult } from '@/sanity/types';
 
 const ROCK_QUERY = defineQuery(`*[
     _type == "rock" &&
@@ -35,26 +36,23 @@ export default async function RockPage({
   if (!rock) {
     notFound();
   }
-  const imageUrl = rock.previewImage
-    ? urlFor(rock.previewImage)?.url()
-    : undefined;
 
   return (
     <>
-      <BackLink title="Back to Rocks" href="/rocks" />
+      <BackLink title='Back to Rocks' href='/rocks' />
       <ImageHeader
-        title={rock.name || ""}
-        imageUrl={imageUrl}
-        alt={rock.name || "Rock"}></ImageHeader>
+        title={rock.name || ''}
+        image={rock.previewImage}
+        alt={rock.name || 'Rock'}></ImageHeader>
 
       <ResultGrid>
         {rock.specimens?.map((specimen) => (
           <ResultCard
             key={specimen._id}
-            title={specimen.name || "Missing Title"}
+            title={specimen.name || 'Missing Title'}
             imageUrl={
               urlFor(specimen.previewImage, 600, 600)?.url() ||
-              "https://placehold.co/300x300/png"
+              'https://placehold.co/300x300/png'
             }
             link={`/specimens/${specimen?.slug?.current}`}
           />
