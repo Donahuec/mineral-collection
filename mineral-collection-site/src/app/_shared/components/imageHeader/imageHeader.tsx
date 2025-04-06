@@ -9,6 +9,7 @@ interface imageHeaderProps {
   alt?: string;
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   image?: any;
+  staticImageUrl?: string;
 }
 
 export default async function imageHeader(
@@ -20,10 +21,16 @@ export default async function imageHeader(
   const width = 1080;
   const height = 1080;
 
-  const imageUrl =
-    (props.image?.asset?._ref
-      ? urlFor(props.image, width, height)?.url()
-      : '') || 'https://placehold.co/500x500/png';
+  let imageUrl;
+
+  if (props.staticImageUrl) {
+    imageUrl = props.staticImageUrl;
+  } else {
+    imageUrl =
+      (props.image?.asset?._ref
+        ? urlFor(props.image, width, height)?.url()
+        : '') || 'https://placehold.co/500x500/png';
+  }
 
   return (
     <div className={styles.infoBlock}>
