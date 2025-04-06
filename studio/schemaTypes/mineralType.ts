@@ -29,6 +29,9 @@ export const mineralType = defineType({
       name: 'previewImage',
       type: 'image',
       group: 'details',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'mindatUrl',
