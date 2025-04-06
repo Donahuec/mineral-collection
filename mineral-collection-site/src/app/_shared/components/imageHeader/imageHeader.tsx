@@ -4,7 +4,7 @@ import { PropsWithChildren } from 'react';
 import { urlFor } from '../../utils/imageService';
 import styles from './styles.module.css';
 
-interface imageHeaderProps {
+interface ImageHeaderProps {
   title: string;
   alt?: string;
   /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -12,8 +12,8 @@ interface imageHeaderProps {
   staticImageUrl?: string;
 }
 
-export default async function imageHeader(
-  props: PropsWithChildren<imageHeaderProps>
+export default async function ImageHeader(
+  props: PropsWithChildren<ImageHeaderProps>
 ) {
   const title = props.title;
   const alt = props.alt;
