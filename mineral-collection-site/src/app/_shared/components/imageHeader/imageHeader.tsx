@@ -1,11 +1,14 @@
-import { PropsWithChildren } from "react";
-import Image from "next/image";
-import styles from "./styles.module.css";
+import Image from 'next/image';
+import { PropsWithChildren } from 'react';
+
+import { urlFor } from '../../utils/imageService';
+import styles from './styles.module.css';
 
 interface imageHeaderProps {
   title: string;
   alt?: string;
-  imageUrl?: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
+  image?: any;
 }
 
 export default async function imageHeader(
@@ -13,19 +16,28 @@ export default async function imageHeader(
 ) {
   const title = props.title;
   const alt = props.alt;
-  const imageUrl = props.imageUrl || "https://placehold.co/550x410/png";
+
+  const width = 1080;
+  const height = 1080;
+
+  const imageUrl =
+    (props.image?.asset?._ref
+      ? urlFor(props.image, width, height)?.url()
+      : '') || 'https://placehold.co/500x500/png';
+
   return (
     <div className={styles.infoBlock}>
       <Image
-        src={imageUrl || "https://placehold.co/550x410/png"}
-        alt={alt || ""}
+        src={imageUrl}
+        alt={alt || ''}
         className={styles.previewImage}
-        height="410"
-        width="550"
+        height={height}
+        width={width}
         priority
-        placeholder="blur"
-        blurDataURL="/blur.png"
+        placeholder='blur'
+        blurDataURL='/blur.png'
       />
+
       <div className={styles.primaryDetails}>
         {<h1 className={styles.title}>{title}</h1>}
         {props.children}

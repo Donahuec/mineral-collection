@@ -1,12 +1,12 @@
-import { client } from "@/sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
+import { client } from '@/sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+import { ImageUrlBuilder } from '@sanity/image-url/lib/types/builder';
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export function urlFor(
   source: any,
   width?: number,
-  height?: number,
+  height?: number
 ): ImageUrlBuilder | null {
   const { projectId, dataset } = client.config();
   let builder =
@@ -16,15 +16,15 @@ export function urlFor(
   if (!builder) return null;
   if (width) builder = builder.width(width);
   if (height) builder = builder.height(height);
-  builder = builder.auto("format");
-  builder = builder.fit("max");
+  builder = builder.auto('format');
+  builder = builder.fit('max');
   return builder;
 }
 
 export function getImageDimensions(
   image: any,
   defaultWidth: number = 300,
-  defaultHeight: number = 300,
+  defaultHeight: number = 300
 ) {
   const ref = image?.asset?._ref;
   const regex = /-(\d*)x(\d*)-/;
