@@ -34,11 +34,56 @@ const DEFAULT_FILTERS: SpecimenQueryFilters = {
   showLowInterest: false,
 };
 
+function convertStringToBoolean(value: string): boolean {
+  if (value === 'true') {
+    return true;
+  } else if (value === 'false') {
+    return false;
+  }
+  return false;
+}
+
+function formatInputFilters(inputFilters: any): SpecimenQueryFilters {
+  if (inputFilters.favorites) {
+    inputFilters.favorites = convertStringToBoolean(inputFilters.favorites);
+  }
+  if (inputFilters.showManMade) {
+    inputFilters.showManMade = convertStringToBoolean(inputFilters.showManMade);
+  }
+  if (inputFilters.showArtificial) {
+    inputFilters.showArtificial = convertStringToBoolean(
+      inputFilters.showArtificial
+    );
+  }
+  if (inputFilters.showLowInterest) {
+    inputFilters.showLowInterest = convertStringToBoolean(
+      inputFilters.showLowInterest
+    );
+  }
+  if (inputFilters.manMade) {
+    inputFilters.manMade = convertStringToBoolean(inputFilters.manMade);
+  }
+  if (inputFilters.artificiallyModified) {
+    inputFilters.artificiallyModified = convertStringToBoolean(
+      inputFilters.artificiallyModified
+    );
+  }
+  if (inputFilters.lowInterest) {
+    inputFilters.lowInterest = convertStringToBoolean(inputFilters.lowInterest);
+  }
+  return inputFilters as SpecimenQueryFilters;
+}
+
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function getSpecimens(
   inputFilters: any
 ): Promise<SPECIMENS_QUERYResult> {
-  const filters = { ...DEFAULT_FILTERS, ...inputFilters };
+  inputFilters = formatInputFilters(inputFilters);
+
+  const filters = {
+    ...DEFAULT_FILTERS,
+    ...inputFilters,
+  } as SpecimenQueryFilters;
 
   const start = (filters.page - 1) * filters.pageSize;
   const end = start + filters.pageSize;
