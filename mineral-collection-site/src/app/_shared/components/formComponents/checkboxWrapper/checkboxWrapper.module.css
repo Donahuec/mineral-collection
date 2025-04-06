@@ -21,7 +21,7 @@
     flex-shrink: 0;
   }
 
-  svg {
+  .checkbox svg {
     width: 1rem;
     height: 1rem;
     fill: none;
@@ -53,13 +53,13 @@
       background: var(--selected-color-pressed);
     }
 
-    svg {
+    .checkbox svg {
       stroke-dashoffset: 44;
     }
   }
 
   &[data-indeterminate] {
-    & svg {
+    & .checkbox svg {
       stroke: none;
       fill: var(--checkmark-color);
     }
