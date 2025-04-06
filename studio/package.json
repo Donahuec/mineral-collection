@@ -16,6 +16,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@sanity/client": "^6.28.4",
     "@sanity/icons": "^3.7.0",
     "@sanity/ui": "^2.15.2",
     "@sanity/vision": "latest",
@@ -23,6 +24,8 @@
     "react-dom": "^18.2.0",
     "sanity": "latest",
     "sanity-plugin-documents-pane": "latest",
+    "sanity-plugin-draft-review-v3": "^0.1.0",
+    "sanity-plugin-groq-snippet": "^1.1.0",
     "styled-components": "^6.1.8"
   },
   "devDependencies": {

@@ -1,8 +1,16 @@
 import { defineField, defineType } from 'sanity';
 
+import { createClient } from '@sanity/client';
 import { DiamondIcon } from '@sanity/icons';
 
 import { crystalForms, specimenShapes, specimenSizes } from './constants';
+
+const client = createClient({
+  projectId: 'rg81x492',
+  dataset: 'production',
+  apiVersion: '2025-03-11',
+  useCdn: false,
+});
 
 export const specimenType = defineType({
   name: 'specimen',
@@ -66,6 +74,15 @@ export const specimenType = defineType({
       name: 'numericId',
       type: 'number',
       group: 'details',
+      initialValue: async () => {
+        const response = await client.fetch(
+          '*[_type == "specimen"]{numericId}|order(numericId desc)[0]'
+        );
+        console.log('Response:', response);
+        const lastId = response.numericId || 0;
+        const newId = lastId + 1;
+        return newId;
+      },
     }),
     defineField({
       name: 'favorite',
