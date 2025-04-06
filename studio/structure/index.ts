@@ -1,5 +1,5 @@
-import type {StructureResolver} from 'sanity/structure'
-import {DiamondIcon, FolderIcon} from '@sanity/icons'
+import type { StructureResolver } from 'sanity/structure';
+import { DiamondIcon, FolderIcon } from '@sanity/icons';
 
 export const structure: StructureResolver = (S) =>
   S.list()
@@ -15,6 +15,23 @@ export const structure: StructureResolver = (S) =>
           S.documentList()
             .title('Specimens')
             .filter('_type == "specimen" && !defined(previewImage)')
-            .defaultOrdering([{field: 'numericId', direction: 'asc'}]),
+            .defaultOrdering([{ field: 'numericId', direction: 'asc' }])
         ),
-    ])
+      S.listItem()
+        .title('To Edit Specimens')
+        .child(
+          S.documentList()
+            .title('Specimens')
+            .filter(
+              `_type == "specimen" && 
+  (!defined(previewImage)
+  || sizeCategory == 'tiny'
+  || sizeCategory == 'small'
+  || sizeCategory == 'medium'
+  || !defined(sizeCategory)
+  || !defined(shapeCategory)
+   )`
+            )
+            .defaultOrdering([{ field: 'numericId', direction: 'asc' }])
+        ),
+    ]);
