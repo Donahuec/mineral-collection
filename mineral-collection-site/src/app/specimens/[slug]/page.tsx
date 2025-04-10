@@ -44,6 +44,13 @@ function shapeDisplayValue(shape: string | undefined) {
   return shapeDisplayValue ? shapeDisplayValue.title : shape;
 }
 
+function getCurrencyString(price: number) {
+  return price.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+}
+
 export default async function SpecimenPage({
   params,
 }: {
@@ -168,6 +175,9 @@ export default async function SpecimenPage({
         <div className={styles.metadataSection}>
           <h2 className={styles.sectionTitle}>Details</h2>
           <PropertyList spacing={0.5}>
+            {specimen.shape && (
+              <Property title='Shape'>{specimen.shape}</Property>
+            )}
             <Property title='Shape'>{specimen.shape || '---'}</Property>
             {specimen.colors && (
               <Property title='Colors'>{specimen.colors.join(', ')}</Property>
@@ -202,7 +212,7 @@ export default async function SpecimenPage({
           <PropertyList spacing={0.5}>
             <Property title='Price'>
               {specimen.price !== undefined
-                ? `$${specimen.price} (${specimen.exactPrice ? 'Exact' : 'Estimate'})`
+                ? `${getCurrencyString(specimen.price)} (${specimen.exactPrice ? 'Exact' : 'Estimate'})`
                 : 'Unknown'}
             </Property>
             {specimen.purchaseDate && (
