@@ -42,7 +42,12 @@ export default async function MineralPage({
 
   return (
     <>
-      <BackLink title='Back to Minerals' href='/minerals' />
+      <BackLink
+        title='Minerals'
+        href='/minerals'
+        useDynamic
+        currentSlug={mineral.slug?.current}
+      />
       <ImageHeader
         title={mineral.name || ''}
         image={mineral.previewImage}

@@ -91,13 +91,14 @@ export default async function SpecimenPage({
     notFound();
   }
 
-  const { referrerPath, referrerTitle } = await getBackLink(
-    specimen.slug?.current || ''
-  );
-
   return (
     <>
-      <BackLink title={`Back to ${referrerTitle}`} href={referrerPath} />
+      <BackLink
+        title='Specimens'
+        href='/specimens'
+        useDynamic
+        currentSlug={specimen.slug?.current}
+      />
       <ImageHeader
         title={`${specimen.name} - #${specimen.numericId}`}
         image={specimen.previewImage}
