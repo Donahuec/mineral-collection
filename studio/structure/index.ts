@@ -33,12 +33,10 @@ export const structure: StructureResolver = (S) =>
             .title('Specimens')
             .filter(
               `_type == "specimen" && 
-              (!defined(previewImage)
-              || sizeCategory == 'tiny'
-              || sizeCategory == 'small'
-              || sizeCategory == 'medium'
+              (!defined(previewImage
               || !defined(sizeCategory)
               || !defined(shapeCategory)
+              || !defined(weight)
               )`
             )
             .defaultOrdering([{ field: 'numericId', direction: 'asc' }])

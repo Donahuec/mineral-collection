@@ -78,7 +78,6 @@ export const specimenType = defineType({
         const response = await client.fetch(
           '*[_type == "specimen"]{numericId}|order(numericId desc)[0]'
         );
-        console.log('Response:', response);
         const lastId = response.numericId || 0;
         const newId = lastId + 1;
         return newId;
