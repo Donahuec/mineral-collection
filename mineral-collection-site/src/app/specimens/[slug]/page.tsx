@@ -6,7 +6,6 @@ import {
   Star,
 } from 'lucide-react';
 import { defineQuery, PortableText } from 'next-sanity';
-import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -50,31 +49,6 @@ function getCurrencyString(price: number) {
     style: 'currency',
     currency: 'USD',
   });
-}
-
-async function getBackLink(currentSlug: string): Promise<{
-  referrerPath: string;
-  referrerTitle: string;
-}> {
-  const headersList = await headers();
-  const referrer = headersList.get('referer');
-  const baseUrl = process.env.NEXT_PUBLIC_URL;
-  if (!referrer || !baseUrl || referrer.match(`/${currentSlug}`)) {
-    return { referrerPath: '/specimens', referrerTitle: 'Specimens' };
-  }
-  const referrerPath = referrer.replace(baseUrl, '');
-  const referrerSegments = referrerPath.split('/');
-
-  let referrerTitle =
-    referrerSegments[referrerSegments.length - 1]
-      .split('?')[0]
-      .replace('-', ' ') || 'Specimens';
-  // convert to title case
-  referrerTitle = referrerTitle
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-  return { referrerPath, referrerTitle };
 }
 
 export default async function SpecimenPage({
