@@ -18,7 +18,8 @@
 .infoBlock {
   display: flex;
   background-color: var(--darkAccent);
-  margin: var(--s5);
+  margin-block: var(--s5);
+  margin-inline: clamp(var(--s3), 5%, (--s5));
   border-radius: var(--s3);
   flex-wrap: wrap;
   justify-content: center;

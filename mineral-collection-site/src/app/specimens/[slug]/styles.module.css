@@ -8,8 +8,8 @@
   display: flex;
   gap: var(--s5);
   flex-wrap: wrap;
-  margin-inline: var(--s5);
-  margin-block: var(--s6);
+  margin-inline: clamp(var(--s3), 5%, (--s5));
+  margin-block: var(--s5);
 }
 
 .metadataSection {
@@ -23,8 +23,8 @@
 .notes {
   background-color: var(--darkAccent);
   padding: var(--s5);
-  margin-inline: var(--s5);
-  margin-block: var(--s6);
+  margin-inline: clamp(var(--s3), 5%, (--s5));
+  margin-block: var(--s5);
   border-radius: var(--br2);
 }
 
