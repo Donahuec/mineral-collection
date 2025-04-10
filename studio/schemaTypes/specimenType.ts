@@ -98,6 +98,14 @@ export const specimenType = defineType({
         rule.required().error(`Required to generate a page on the website`),
     }),
     defineField({
+      name: 'previewImage',
+      type: 'image',
+      group: 'details',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
       name: 'shortDescription',
       type: 'text',
       group: 'details',
@@ -112,14 +120,6 @@ export const specimenType = defineType({
       type: 'array',
       of: [{ type: 'image' }],
       group: 'details',
-    }),
-    defineField({
-      name: 'previewImage',
-      type: 'image',
-      group: 'details',
-      options: {
-        hotspot: true,
-      },
     }),
     defineField({
       name: 'minerals',
@@ -157,18 +157,18 @@ export const specimenType = defineType({
       ],
     }),
     defineField({
+      name: 'size',
+      type: 'number',
+      group: ['properties', 'size'],
+      description: 'Measured in cm, along the longest axis',
+    }),
+    defineField({
       name: 'sizeCategory',
       type: 'string',
       group: ['properties', 'size'],
       options: {
         list: specimenSizes,
       },
-    }),
-    defineField({
-      name: 'size',
-      type: 'number',
-      group: ['properties', 'size'],
-      description: 'Measured in cm, along the longest axis',
     }),
     defineField({
       name: 'sizeDescription',
@@ -273,16 +273,22 @@ export const specimenType = defineType({
       name: 'name',
       id: 'numericId',
       image: 'previewImage',
-      shapeCategory: 'shapeCategory',
       sizeCategory: 'sizeCategory',
       weight: 'weight',
+      favorite: 'favorite',
+      lowInterest: 'lowInterest',
     },
-    prepare({ name, id, image, shapeCategory, sizeCategory, weight }) {
+    prepare({ name, id, image, sizeCategory, weight, favorite, lowInterest }) {
       const nameFormatted = name || 'Untitled Specimen';
-      const idFormatted = id ? `#${id}` : '';
+      const idFormatted = id ? `${id}` : '';
+      const ratingFormatted = `${favorite ? '★ ' : ''}${lowInterest ? '▼ ' : ''}`;
+      const weightFormatted = weight ? `${weight} g` : 'NA';
+      const sizeFormatted = sizeCategory
+        ? specimenSizes.find((size) => size.value === sizeCategory)?.title
+        : 'NA';
       return {
-        title: `${nameFormatted} - ${idFormatted}`,
-        subtitle: `${weight ? `${weight} g` : 'NA'} - ${sizeCategory || 'NA'} - ${shapeCategory ? shapeCategory.join(', ') : 'NA'}`,
+        title: `${idFormatted} - ${nameFormatted}`,
+        subtitle: `${ratingFormatted}${sizeFormatted} - ${weightFormatted}`,
         media: image || DiamondIcon,
       };
     },

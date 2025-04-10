@@ -5,9 +5,6 @@ export const DESCENDING = 'desc';
 export const DEFAULT_SORT_ORDER = ASCENDING;
 
 export const specimenSizes = [
-  { title: 'Medium (< 12cm)', value: 'medium' },
-  { title: 'Small (< 6cm)', value: 'small' },
-  { title: 'Tiny (< 3cm)', value: 'tiny' },
   { title: 'Micro (< 1cm)', value: 'micro' },
   { title: 'Thumbnail (1-3cm)', value: 'thumbnail' },
   { title: 'Small Miniature (3-4.5 cm)', value: 'smallMiniature' },
