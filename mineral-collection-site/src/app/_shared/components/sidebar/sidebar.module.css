@@ -4,6 +4,7 @@
   background-color: var(--darkAccent);
   padding: var(--s3);
   transition: transform 350ms ease-in-out;
+  overflow-y: auto;
   &[data-entering],
   &[data-exiting] {
     transform: translatex(-500px);

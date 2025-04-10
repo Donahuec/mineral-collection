@@ -28,7 +28,7 @@ export default function SpecimenFilters() {
     params.get('sortBy') || 'numericId'
   );
   const [sortOrder, setSortOrder] = React.useState(
-    params.get('sortOrder') || 'asc'
+    params.get('sortOrder') || 'desc'
   );
   const [showLowInterest, setShowLowInterest] = React.useState(
     params.get('showLowInterest') === 'true' ? true : false

@@ -3,7 +3,7 @@ import qroq from 'groq';
 
 import {
   DEFAULT_PAGE_SIZE,
-  DEFAULT_SORT_ORDER,
+  DESCENDING,
 } from '@/app/_shared/constants/constants';
 import { sanityFetch } from '@/sanity/live';
 import { SPECIMENS_QUERYResult } from '@/sanity/types';
@@ -25,7 +25,7 @@ export interface SpecimenQueryFilters {
 
 const DEFAULT_FILTERS: SpecimenQueryFilters = {
   sortBy: 'numericId',
-  sortOrder: DEFAULT_SORT_ORDER,
+  sortOrder: DESCENDING,
   page: 1,
   pageSize: DEFAULT_PAGE_SIZE,
   favorites: false,
