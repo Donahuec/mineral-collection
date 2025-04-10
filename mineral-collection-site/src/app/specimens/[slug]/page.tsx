@@ -208,10 +208,6 @@ export default async function SpecimenPage({
             {specimen.shape && (
               <Property title='Shape'>{specimen.shape}</Property>
             )}
-            <Property title='Shape'>{specimen.shape || '---'}</Property>
-            {specimen.colors && (
-              <Property title='Colors'>{specimen.colors.join(', ')}</Property>
-            )}
             {specimen.tags && (
               <Property title='Tags'>{specimen.tags.join(', ')}</Property>
             )}
