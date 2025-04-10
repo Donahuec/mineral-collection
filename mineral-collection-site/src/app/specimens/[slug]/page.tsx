@@ -6,6 +6,7 @@ import {
   Star,
 } from 'lucide-react';
 import { defineQuery, PortableText } from 'next-sanity';
+import { headers } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -44,6 +45,38 @@ function shapeDisplayValue(shape: string | undefined) {
   return shapeDisplayValue ? shapeDisplayValue.title : shape;
 }
 
+function getCurrencyString(price: number) {
+  return price.toLocaleString('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  });
+}
+
+async function getBackLink(currentSlug: string): Promise<{
+  referrerPath: string;
+  referrerTitle: string;
+}> {
+  const headersList = await headers();
+  const referrer = headersList.get('referer');
+  const baseUrl = process.env.NEXT_PUBLIC_URL;
+  if (!referrer || !baseUrl || referrer.match(`/${currentSlug}`)) {
+    return { referrerPath: '/specimens', referrerTitle: 'Specimens' };
+  }
+  const referrerPath = referrer.replace(baseUrl, '');
+  const referrerSegments = referrerPath.split('/');
+
+  let referrerTitle =
+    referrerSegments[referrerSegments.length - 1]
+      .split('?')[0]
+      .replace('-', ' ') || 'Specimens';
+  // convert to title case
+  referrerTitle = referrerTitle
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+  return { referrerPath, referrerTitle };
+}
+
 export default async function SpecimenPage({
   params,
 }: {
@@ -58,9 +91,13 @@ export default async function SpecimenPage({
     notFound();
   }
 
+  const { referrerPath, referrerTitle } = await getBackLink(
+    specimen.slug?.current || ''
+  );
+
   return (
     <>
-      <BackLink title='Back to Specimens' href='/specimens' />
+      <BackLink title={`Back to ${referrerTitle}`} href={referrerPath} />
       <ImageHeader
         title={`${specimen.name} - #${specimen.numericId}`}
         image={specimen.previewImage}
@@ -168,9 +205,8 @@ export default async function SpecimenPage({
         <div className={styles.metadataSection}>
           <h2 className={styles.sectionTitle}>Details</h2>
           <PropertyList spacing={0.5}>
-            <Property title='Shape'>{specimen.shape || '---'}</Property>
-            {specimen.colors && (
-              <Property title='Colors'>{specimen.colors.join(', ')}</Property>
+            {specimen.shape && (
+              <Property title='Shape'>{specimen.shape}</Property>
             )}
             {specimen.tags && (
               <Property title='Tags'>{specimen.tags.join(', ')}</Property>
@@ -202,7 +238,7 @@ export default async function SpecimenPage({
           <PropertyList spacing={0.5}>
             <Property title='Price'>
               {specimen.price !== undefined
-                ? `$${specimen.price} (${specimen.exactPrice ? 'Exact' : 'Estimate'})`
+                ? `${getCurrencyString(specimen.price)} (${specimen.exactPrice ? 'Exact' : 'Estimate'})`
                 : 'Unknown'}
             </Property>
             {specimen.purchaseDate && (
