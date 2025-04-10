@@ -39,7 +39,12 @@ export default async function RockPage({
 
   return (
     <>
-      <BackLink title='Back to Rocks' href='/rocks' />
+      <BackLink
+        title='Rocks'
+        href='/rocks'
+        useDynamic
+        currentSlug={rock.slug?.current}
+      />
       <ImageHeader
         title={rock.name || ''}
         image={rock.previewImage}
