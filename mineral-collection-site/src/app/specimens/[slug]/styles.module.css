@@ -1,7 +1,7 @@
 .minerals {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--s5);
+  gap: var(--s3);
   list-style: none;
 }
 .additionalProperties {
@@ -36,4 +36,17 @@
 .sectionTitle {
   margin-bottom: var(--s3);
   border-bottom: var(--s1) solid var(--lightAccent);
+}
+
+.iconSet {
+  display: flex;
+  column-gap: var(--s4);
+  row-gap: var(--s2);
+  flex-wrap: wrap;
+}
+
+.iconGroup {
+  display: flex;
+  gap: var(--s2);
+  align-items: center;
 }

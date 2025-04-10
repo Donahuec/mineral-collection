@@ -1,3 +1,10 @@
+import {
+  Brush,
+  CircleArrowDown,
+  CircleHelp,
+  Factory,
+  Star,
+} from 'lucide-react';
 import { defineQuery, PortableText } from 'next-sanity';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -58,6 +65,33 @@ export default async function SpecimenPage({
         title={`${specimen.name} - #${specimen.numericId}`}
         image={specimen.previewImage}
         alt={specimen.name || 'Specimen'}>
+        <div className={styles.iconSet}>
+          {specimen.favorite && (
+            <span className={styles.iconGroup}>
+              <Star /> Favorite
+            </span>
+          )}
+          {specimen.manMade && (
+            <span className={styles.iconGroup}>
+              <Factory /> Man Made
+            </span>
+          )}
+          {specimen.artificiallyModified && (
+            <span className={styles.iconGroup}>
+              <Brush /> Artificially Modified
+            </span>
+          )}
+          {specimen.hesitantId && (
+            <span className={styles.iconGroup}>
+              <CircleHelp /> Hesitant Id
+            </span>
+          )}
+          {specimen.lowInterest && (
+            <span className={styles.iconGroup}>
+              <CircleArrowDown /> Low Interest
+            </span>
+          )}
+        </div>
         <PropertyList>
           <Property title='Classifications'>
             <ul className={styles.minerals}>
@@ -119,25 +153,6 @@ export default async function SpecimenPage({
           ) : (
             <Property title='Shape'>{specimen.shape || '---'}</Property>
           )}
-          {specimen.hesitantId && (
-            <Property title='Hesitant Id'>
-              {specimen.hesitantId?.toString()}
-            </Property>
-          )}
-          {specimen.artificiallyModified && (
-            <Property title='Artificially Modified'>
-              {specimen.artificiallyModified?.toString()}
-            </Property>
-          )}
-          {specimen.manMade && (
-            <Property title='Man Made'>{specimen.manMade?.toString()}</Property>
-          )}
-
-          {specimen.favorite && (
-            <Property title='Favorite'>
-              {specimen.favorite?.toString()}
-            </Property>
-          )}
         </PropertyList>
       </ImageHeader>
 
@@ -159,11 +174,6 @@ export default async function SpecimenPage({
             )}
             {specimen.tags && (
               <Property title='Tags'>{specimen.tags.join(', ')}</Property>
-            )}
-            {specimen.lowInterest && (
-              <Property title='Low Interest'>
-                {specimen.lowInterest?.toString() || '---'}
-              </Property>
             )}
             <Property title='Created At'>
               {new Date(specimen._createdAt).toLocaleTimeString('en-US', {
