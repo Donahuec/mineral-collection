@@ -1,4 +1,4 @@
-import { Checkbox, CheckboxProps } from 'react-aria-components';
+import { Checkbox, CheckboxProps, Label } from 'react-aria-components';
 
 import styles from './checkboxWrapper.module.css';
 
@@ -20,5 +20,22 @@ export default function CheckboxWrapper({ children, ...props }: CheckboxProps) {
         </>
       )}
     </Checkbox>
+  );
+}
+
+export class CheckboxGroupProps {
+  label?: string;
+}
+
+export function CheckboxGroupWrapper({
+  label,
+  children,
+  ...props
+}: CheckboxGroupProps & { children: React.ReactNode }) {
+  return (
+    <div className={styles.checkboxGroup} {...props}>
+      <Label className={styles.label}>{label}</Label>
+      {children}
+    </div>
   );
 }

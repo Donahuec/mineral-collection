@@ -1,12 +1,12 @@
 .radioGroup {
   display: flex;
   flex-direction: column;
-  gap: var(--s3);
+  gap: var(--s2);
   color: inherit;
 }
 
 .label {
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
