@@ -15,9 +15,9 @@ export interface SpecimenQueryFilters {
   pageSize: number;
   search?: string;
   favorites: boolean;
-  showManMade?: boolean;
-  showArtificial?: boolean;
-  showLowInterest?: boolean;
+  hideManMade?: boolean;
+  hideArtificial?: boolean;
+  hideLowInterest?: boolean;
   manMade?: boolean;
   artificiallyModified?: boolean;
   lowInterest?: boolean;
@@ -29,9 +29,9 @@ const DEFAULT_FILTERS: SpecimenQueryFilters = {
   page: 1,
   pageSize: DEFAULT_PAGE_SIZE,
   favorites: false,
-  showManMade: false,
-  showArtificial: false,
-  showLowInterest: false,
+  hideManMade: true,
+  hideArtificial: true,
+  hideLowInterest: true,
 };
 
 function convertStringToBoolean(value: string): boolean {
@@ -48,17 +48,17 @@ function formatInputFilters(inputFilters: any): SpecimenQueryFilters {
   if (inputFilters.favorites) {
     inputFilters.favorites = convertStringToBoolean(inputFilters.favorites);
   }
-  if (inputFilters.showManMade) {
-    inputFilters.showManMade = convertStringToBoolean(inputFilters.showManMade);
+  if (inputFilters.hideManMade) {
+    inputFilters.hideManMade = convertStringToBoolean(inputFilters.hideManMade);
   }
-  if (inputFilters.showArtificial) {
-    inputFilters.showArtificial = convertStringToBoolean(
-      inputFilters.showArtificial
+  if (inputFilters.hideArtificial) {
+    inputFilters.hideArtificial = convertStringToBoolean(
+      inputFilters.hideArtificial
     );
   }
-  if (inputFilters.showLowInterest) {
-    inputFilters.showLowInterest = convertStringToBoolean(
-      inputFilters.showLowInterest
+  if (inputFilters.hideLowInterest) {
+    inputFilters.hideLowInterest = convertStringToBoolean(
+      inputFilters.hideLowInterest
     );
   }
   if (inputFilters.manMade) {
@@ -93,9 +93,9 @@ export async function getSpecimens(
     _type == "specimen"
     && defined(slug.current) && defined(previewImage)
     ${filters.favorites ? '&& favorite == true' : ''}
-    ${filters.showManMade || filters.manMade ? '' : '&& manMade != true'}
-    ${filters.showArtificial || filters.artificiallyModified ? '' : '&& artificiallyModified != true'}
-    ${filters.showLowInterest || filters.lowInterest ? '' : '&& lowInterest != true'}
+    ${!filters.hideManMade || filters.manMade ? '' : '&& manMade != true'}
+    ${!filters.hideArtificial || filters.artificiallyModified ? '' : '&& artificiallyModified != true'}
+    ${!filters.hideLowInterest || filters.lowInterest ? '' : '&& lowInterest != true'}
     ${filters.manMade ? '&& manMade == true' : ''}
     ${filters.artificiallyModified ? '&& artificiallyModified == true' : ''}
     ${filters.lowInterest ? '&& lowInterest == true' : ''}
