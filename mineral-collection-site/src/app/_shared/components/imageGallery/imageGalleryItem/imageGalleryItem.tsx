@@ -1,5 +1,6 @@
 'use client';
 import Image from 'next/image';
+import React from 'react';
 import { Button } from 'react-aria-components';
 
 import ImageModal from '@/app/_shared/components/imageModal/imageModal';
@@ -12,15 +13,17 @@ interface ImageGalleryItemProps {
   image: any;
   previewWidth?: number;
   previewHeight?: number;
+  index?: number;
 }
 
 export default function ImageGalleryItem({
   image,
   previewWidth = 300,
   previewHeight = 300,
+  index = 0,
 }: ImageGalleryItemProps) {
   return (
-    <ImageModal image={image} maxWidth={1000} maxHeight={500}>
+    <ImageModal image={image} maxWidth={1000} maxHeight={500} index={index}>
       <Button className={styles.imageButton}>
         <Image
           src={

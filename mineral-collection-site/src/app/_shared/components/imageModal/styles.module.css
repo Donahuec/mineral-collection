@@ -65,7 +65,6 @@
   max-height: 80vh;
   border-radius: var(--br2);
   transition: all 0.2s ease-in-out;
-  z-index: 98;
 }
 
 .closeButton {
