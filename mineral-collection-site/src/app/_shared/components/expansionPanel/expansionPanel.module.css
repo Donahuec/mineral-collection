@@ -1,0 +1,75 @@
+.disclosure {
+  color: var(--lightShade);
+  .disclosureButton[slot='trigger'] {
+    border: none;
+    box-shadow: none;
+    transition:
+      transform 200ms,
+      color 200ms;
+    display: flex;
+    align-items: center;
+    gap: var(--s2);
+    z-index: 2;
+    background: var(--darkAccent);
+    color: var(--lightShade);
+    font-weight: var(--fontBold);
+    font-size: var(--fontBody);
+    cursor: pointer;
+    &:hover,
+    &:focus-visible {
+      color: var(--lightAccent);
+      svg.disclosureButtonIcon {
+        transform: scale(1.2);
+      }
+    }
+    &:active {
+      color: var(--lightShade);
+      svg.disclosureButtonIcon {
+        transform: scale(1.25);
+      }
+    }
+
+    svg.disclosureButtonIcon {
+      rotate: 0deg;
+      transition:
+        rotate 250ms,
+        transform 250ms;
+      width: var(--s3);
+      height: var(--s3);
+      fill: none;
+      stroke: var(--lightAccent);
+      stroke-width: 3px;
+    }
+  }
+
+  &[data-expanded] .disclosureButton[slot='trigger'] svg.disclosureButtonIcon {
+    rotate: 90deg;
+  }
+  &[data-expanded] .disclosurePanel {
+    transform-origin: top;
+    padding-block: var(--s2);
+    border-left: 2px solid var(--lightAccent);
+    animation: expand 300ms ease-out;
+  }
+}
+
+.disclosurePanel {
+  z-index: 1;
+  margin-left: calc(var(--s2) - 1px);
+  padding-left: calc(var(--s4) + 1px);
+  padding-block: 0;
+  transition:
+    transform 250ms,
+    opacity 50ms;
+}
+
+@keyframes expand {
+  from {
+    transform: translateY(-24px) scaleY(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scaleY(1);
+  }
+}
