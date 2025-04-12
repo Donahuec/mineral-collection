@@ -1,6 +1,7 @@
 :root {
   --fontBody: 1rem;
   --fontWeight: 400;
+  --fontBold: 500;
   --headerFontFamily: 'Vollkorn', serif;
   --fontFamily: 'Montserrat', sans-serif;
 

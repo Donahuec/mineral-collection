@@ -2,6 +2,7 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useCallback } from 'react';
 
+import ExpansionPanel from '@/app/_shared/components/expansionPanel/expansionPanel';
 import FilterSidebar, {
   FilterDivider,
   FilterFooter,
@@ -173,41 +174,42 @@ export default function SpecimenFilters() {
         </RadioGroupWrapper>
       </FilterGroup>
       <FilterDivider />
-
-      <FilterGroup>
-        <CheckboxGroupWrapper label='Hide'>
-          <CheckboxWrapper
-            isSelected={hideLowInterest}
-            onChange={updateHideLowInterest}>
-            Hide Low Interest
-          </CheckboxWrapper>
-          <CheckboxWrapper
-            isSelected={hideArtificial}
-            onChange={updateHideArtificial}>
-            Hide Artificial
-          </CheckboxWrapper>
-          <CheckboxWrapper
-            isSelected={hideManMade}
-            onChange={updateHideManMade}>
-            Hide Man Made
-          </CheckboxWrapper>
-        </CheckboxGroupWrapper>
-        <CheckboxGroupWrapper label='Filter By'>
-          <CheckboxWrapper isSelected={manMade} onChange={updateManMade}>
-            Man Made
-          </CheckboxWrapper>
-          <CheckboxWrapper
-            isSelected={artificiallyModified}
-            onChange={updateArtificiallyModified}>
-            Artificially Modified
-          </CheckboxWrapper>
-          <CheckboxWrapper
-            isSelected={lowInterest}
-            onChange={updateLowInterest}>
-            Low Interest
-          </CheckboxWrapper>
-        </CheckboxGroupWrapper>
-      </FilterGroup>
+      <ExpansionPanel title='Low Interest Filters'>
+        <FilterGroup>
+          <CheckboxGroupWrapper label='Hide'>
+            <CheckboxWrapper
+              isSelected={hideLowInterest}
+              onChange={updateHideLowInterest}>
+              Hide Low Interest
+            </CheckboxWrapper>
+            <CheckboxWrapper
+              isSelected={hideArtificial}
+              onChange={updateHideArtificial}>
+              Hide Artificial
+            </CheckboxWrapper>
+            <CheckboxWrapper
+              isSelected={hideManMade}
+              onChange={updateHideManMade}>
+              Hide Man Made
+            </CheckboxWrapper>
+          </CheckboxGroupWrapper>
+          <CheckboxGroupWrapper label='Filter By'>
+            <CheckboxWrapper isSelected={manMade} onChange={updateManMade}>
+              Man Made
+            </CheckboxWrapper>
+            <CheckboxWrapper
+              isSelected={artificiallyModified}
+              onChange={updateArtificiallyModified}>
+              Artificially Modified
+            </CheckboxWrapper>
+            <CheckboxWrapper
+              isSelected={lowInterest}
+              onChange={updateLowInterest}>
+              Low Interest
+            </CheckboxWrapper>
+          </CheckboxGroupWrapper>
+        </FilterGroup>
+      </ExpansionPanel>
       <FilterDivider />
       <FilterGroup>
         <PageSizeFilter />
