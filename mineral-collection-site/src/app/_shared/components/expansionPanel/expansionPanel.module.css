@@ -1,26 +1,33 @@
 .disclosure {
-  color: var(--lightShade);
   .disclosureButton[slot='trigger'] {
     border: none;
     box-shadow: none;
     transition:
       transform 200ms,
-      color 200ms;
+      color 200ms,
+      outline 200ms;
+    width: 100%;
+    margin-block: var(--s2);
     display: flex;
     align-items: center;
     gap: var(--s2);
-    z-index: 2;
-    background: var(--darkAccent);
+    background-color: var(--darkAccent);
     color: var(--lightShade);
     font-weight: var(--fontBold);
     font-size: var(--fontBody);
     cursor: pointer;
+    z-index: 2;
+    border-radius: var(--s1);
     &:hover,
     &:focus-visible {
       color: var(--lightAccent);
       svg.disclosureButtonIcon {
         transform: scale(1.2);
       }
+    }
+    &:focus-visible {
+      outline: 2px solid var(--lightAccent);
+      outline-offset: 2px;
     }
     &:active {
       color: var(--lightShade);
