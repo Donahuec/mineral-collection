@@ -5,10 +5,11 @@
 
   display: flex;
   align-items: center;
-  gap: 0.571rem;
+  gap: var(--s2);
   font-size: 1rem;
   cursor: pointer;
   forced-color-adjust: none;
+  border-radius: 4px;
   transition: all 200ms;
   &:hover {
     color: var(--lightAccent);
@@ -41,16 +42,18 @@
   }
 
   &[data-pressed] .checkbox {
-    border-color: var(--border-color-pressed);
+    border-color: var(--lightShade);
   }
 
-  &[data-focus-visible] .checkbox {
-    outline: 2px solid var(--focus-ring-color);
-    outline-offset: 2px;
+  &[data-focus-visible] {
+    color: var(--lightAccent);
+    .checkbox {
+      outline: 2px solid var(--lightAccent);
+      outline-offset: 2px;
+    }
   }
 
-  &[data-selected],
-  &[data-indeterminate] {
+  &[data-selected] {
     .checkbox {
       border-color: var(--selected-color);
       background: var(--selected-color);
@@ -63,13 +66,6 @@
 
     .checkbox svg {
       stroke-dashoffset: 44;
-    }
-  }
-
-  &[data-indeterminate] {
-    & .checkbox svg {
-      stroke: none;
-      fill: var(--checkmark-color);
     }
   }
 }
