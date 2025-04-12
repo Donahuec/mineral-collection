@@ -1,5 +1,5 @@
 'use client';
-import { X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, X } from 'lucide-react';
 import Image from 'next/image';
 import {
   JSX,
@@ -130,8 +130,22 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
               slot='close'
               className={styles.closeButton}
               aria-label='Close'>
-              <X size={16} />
+              <X size={48} />
             </Button>
+            <div className={styles.buttonContainer}>
+              <Button
+                className={styles.navigationButton}
+                onPress={handlePreviousImage}
+                aria-label='Previous'>
+                <ArrowLeft size={48} />
+              </Button>
+              <Button
+                className={styles.navigationButton}
+                onPress={handleNextImage}
+                aria-label='Next'>
+                <ArrowRight size={48} />
+              </Button>
+            </div>
           </Dialog>
         </Modal>
       </ModalOverlay>

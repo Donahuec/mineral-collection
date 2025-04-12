@@ -69,11 +69,11 @@
 
 .closeButton {
   position: absolute;
-  top: calc(-1 * var(--s3));
-  right: calc(-1 * var(--s3));
+  top: calc(-1 * var(--s4));
+  right: calc(-1 * var(--s4));
   padding: var(--s1) var(--s2);
-  width: var(--s5);
-  height: var(--s5);
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   background-color: var(--darkAccent);
   border: none;
@@ -89,7 +89,7 @@
 
 .closeButton:hover,
 .closeButton:focus-visible {
-  transform: scale(1.03);
+  transform: scale(1.1);
   box-shadow: -2px 3px 0 var(--darkShade);
   color: var(--lightShade);
 }
@@ -102,4 +102,41 @@
 .closeButton:active {
   transform: scale(0.97);
   box-shadow: -2px 1px 0 var(--darkShade);
+}
+
+.buttonContainer {
+  width: 100%;
+  position: absolute;
+  bottom: calc(-1 * var(--s6));
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navigationButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: none;
+  border: none;
+  color: var(--lightAccent);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.1);
+    color: var(--lightShade);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--lightAccent);
+    outline-offset: var(--s1);
+  }
+  &:active {
+    color: var(--lightAccent);
+    transform: scale(0.9);
+  }
 }
