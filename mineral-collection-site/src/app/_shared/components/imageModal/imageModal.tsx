@@ -61,7 +61,7 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
         }}
       />
     );
-  }, [currentIndex, currentModal]);
+  }, [currentIndex, currentModal, height, images, width]);
 
   const handleNextImage = useCallback(() => {
     setImageLoaded(false);
@@ -71,7 +71,7 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
     } else {
       setCurrentIndex(nextIndex);
     }
-  }, [currentIndex, currentModal]);
+  }, [currentIndex, images.length]);
 
   const handlePreviousImage = useCallback(() => {
     setImageLoaded(false);
@@ -81,7 +81,7 @@ export default function ImageModal(props: PropsWithChildren<ImageModalProps>) {
     } else {
       setCurrentIndex(previousIndex);
     }
-  }, [currentIndex, currentModal]);
+  }, [currentIndex, images.length]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
