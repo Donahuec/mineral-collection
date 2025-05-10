@@ -44,7 +44,7 @@ export async function getRocks(inputFilters: any): Promise<ROCKS_QUERYResult> {
   return rocks;
 }
 
-export async function getRockDescendents(
+export async function getRockDescendants(
   id: string,
   depth: number = 0
 ): Promise<ROCKS_QUERYResult> {
