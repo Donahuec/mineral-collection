@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import BackLink from '@/app/_shared/components/backLink/backLink';
 import ImageHeader from '@/app/_shared/components/imageHeader/imageHeader';
 import { ResultGridGroup } from '@/app/_shared/components/resultGrid/resultGrid';
-import { getRockDescendents } from '@/app/_shared/services/rockService';
+import { getRockDescendants } from '@/app/_shared/services/rockService';
 import { sanityFetch } from '@/sanity/live';
 import { ROCK_QUERYResult } from '@/sanity/types';
 
@@ -58,7 +58,7 @@ export default async function RockPage({
     notFound();
   }
 
-  const descendents = await getRockDescendents(rock._id, 1);
+  const descendents = await getRockDescendants(rock._id, 1);
 
   return (
     <>

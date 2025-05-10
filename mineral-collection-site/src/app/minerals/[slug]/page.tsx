@@ -7,7 +7,7 @@ import ImageHeader from '@/app/_shared/components/imageHeader/imageHeader';
 import Property from '@/app/_shared/components/propertyList/property/property';
 import PropertyList from '@/app/_shared/components/propertyList/propertyList';
 import { ResultGridGroup } from '@/app/_shared/components/resultGrid/resultGrid';
-import { getMineralDescendents } from '@/app/_shared/services/mineralService';
+import { getMineralDescendants } from '@/app/_shared/services/mineralService';
 import { sanityFetch } from '@/sanity/live';
 import { MINERAL_QUERYResult } from '@/sanity/types';
 
@@ -54,7 +54,7 @@ export default async function MineralPage({
     notFound();
   }
 
-  const descendents = await getMineralDescendents(mineral._id, 1);
+  const descendents = await getMineralDescendants(mineral._id, 1);
 
   return (
     <>
