@@ -1,6 +1,6 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 300px);
+  grid-template-columns: repeat(auto-fit, 300px);
   gap: var(--s3);
   justify-items: center;
   justify-content: center;
@@ -8,4 +8,26 @@
 
 .container {
   width: 100%;
+}
+
+.gridSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block: var(--s6);
+  .gridTitle {
+    font-size: 2rem;
+    text-align: center;
+    line-height: 1;
+    margin-block-end: calc(-1 * calc(var(--s3) + 2px));
+    padding-inline: var(--s3);
+    background-color: var(--darkShade);
+    z-index: 1;
+  }
+}
+
+.gridSection > div {
+  border-top: var(--s1) solid var(--lightAccent);
+  padding-inline: var(--s3);
+  padding-block-start: var(--s5);
 }

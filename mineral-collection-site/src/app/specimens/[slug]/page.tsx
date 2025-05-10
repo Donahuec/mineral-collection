@@ -14,6 +14,7 @@ import ImageGallery from '@/app/_shared/components/imageGallery/imageGallery';
 import ImageHeader from '@/app/_shared/components/imageHeader/imageHeader';
 import Property from '@/app/_shared/components/propertyList/property/property';
 import PropertyList from '@/app/_shared/components/propertyList/propertyList';
+import { ResultGridGroup } from '@/app/_shared/components/resultGrid/resultGrid';
 import {
   specimenShapes,
   specimenSizes,
@@ -257,8 +258,21 @@ export default async function SpecimenPage({
           </div>
         </div>
       )}
+      {specimen.minerals && specimen.minerals.length > 0 && (
+        <ResultGridGroup
+          title='Minerals'
+          urlBase='minerals'
+          items={specimen.minerals}
+        />
+      )}
+      {specimen.rocks && specimen.rocks.length > 0 && (
+        <ResultGridGroup title='Rocks' urlBase='rocks' items={specimen.rocks} />
+      )}
       {specimen.images && specimen.images.length > 0 && (
-        <ImageGallery images={specimen.images} />
+        <div className={styles.imageSection}>
+          <h2 className={styles.imageSectionTitle}>Images</h2>
+          <ImageGallery images={specimen.images} />
+        </div>
       )}
     </>
   );
