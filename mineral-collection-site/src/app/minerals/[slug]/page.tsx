@@ -95,26 +95,29 @@ export default async function MineralPage({
       )}
       {mineral.parent && (
         <div className={styles.gridSection}>
-          <h2>Parents</h2>
-          {/* <ResultGrid>
-            {mineral.parents.map((descendent) => (
-              <ResultCard
-                key={descendent._id}
-                title={descendent.name || 'Missing Title'}
-                imageUrl={
-                  urlFor(descendent.previewImage, 600, 600)?.url() ||
-                  'https://placehold.co/300x300/png'
-                }
-                link={`/minerals/${descendent?.slug?.current}`}
-              />
-            ))}
-          </ResultGrid> */}
+          <h2 className={styles.gridTitle}>Parents</h2>
+          <ResultGrid>
+            {mineral.parents.map(
+              (parent) =>
+                parent && (
+                  <ResultCard
+                    key={parent._id}
+                    title={parent.name || 'Missing Title'}
+                    imageUrl={
+                      urlFor(parent.previewImage, 600, 600)?.url() ||
+                      'https://placehold.co/300x300/png'
+                    }
+                    link={`/minerals/${parent?.slug?.current}`}
+                  />
+                )
+            )}
+          </ResultGrid>
         </div>
       )}
 
       {descendents.length > 0 && (
         <div className={styles.gridSection}>
-          <h2>Descendents</h2>
+          <h2 className={styles.gridTitle}>Descendents</h2>
           <ResultGrid>
             {descendents.map((descendent) => (
               <ResultCard
@@ -133,7 +136,7 @@ export default async function MineralPage({
 
       {mineral.specimens?.length > 0 && (
         <div className={styles.gridSection}>
-          <h2>Specimens</h2>
+          <h2 className={styles.gridTitle}>Specimens</h2>
           <ResultGrid>
             {mineral.specimens?.map((specimen) => (
               <ResultCard
