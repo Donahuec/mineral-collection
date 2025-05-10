@@ -8,9 +8,12 @@ import Property from '@/app/_shared/components/propertyList/property/property';
 import PropertyList from '@/app/_shared/components/propertyList/propertyList';
 import ResultCard from '@/app/_shared/components/resultGrid/resultCard/resultCard';
 import ResultGrid from '@/app/_shared/components/resultGrid/resultGrid';
+import { getMineralDescendents } from '@/app/_shared/services/mineralService';
 import { urlFor } from '@/app/_shared/utils/imageService';
 import { sanityFetch } from '@/sanity/live';
 import { MINERAL_QUERYResult } from '@/sanity/types';
+
+import styles from './styles.module.css';
 
 const MINERAL_QUERY = defineQuery(`*[
     _type == "mineral" &&
@@ -22,7 +25,21 @@ const MINERAL_QUERY = defineQuery(`*[
     name,
     slug,
     previewImage
-}
+},
+'parents': [
+parent->{_id,
+    name,
+    slug,
+    previewImage},
+parent->parent->{_id,
+    name,
+    slug,
+    previewImage},
+parent->parent->parent->{_id,
+    name,
+    slug,
+    previewImage}
+]
 }`);
 
 export default async function MineralPage({
@@ -34,11 +51,12 @@ export default async function MineralPage({
     query: MINERAL_QUERY,
     params: await params,
   });
-
   const mineral = result?.data as MINERAL_QUERYResult;
   if (!mineral) {
     notFound();
   }
+
+  const descendents = await getMineralDescendents(mineral._id, 1);
 
   return (
     <>
@@ -69,26 +87,68 @@ export default async function MineralPage({
           <Property title='Colors'>{mineral.color?.colorDescription}</Property>
         </PropertyList>
       </ImageHeader>
-      <div>
-        {mineral.notes && mineral.notes.length > 0 && (
-          <div>
-            <PortableText value={mineral.notes} />
-          </div>
-        )}
-      </div>
-      <ResultGrid>
-        {mineral.specimens?.map((specimen) => (
-          <ResultCard
-            key={specimen._id}
-            title={specimen.name || 'Missing Title'}
-            imageUrl={
-              urlFor(specimen.previewImage, 600, 600)?.url() ||
-              'https://placehold.co/300x300/png'
-            }
-            link={`/specimens/${specimen?.slug?.current}`}
-          />
-        ))}
-      </ResultGrid>
+      {mineral.notes && mineral.notes.length > 0 && (
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Notes</h2>
+          <PortableText value={mineral.notes} />
+        </div>
+      )}
+      {mineral.parent && (
+        <div className={styles.gridSection}>
+          <h2>Parents</h2>
+          {/* <ResultGrid>
+            {mineral.parents.map((descendent) => (
+              <ResultCard
+                key={descendent._id}
+                title={descendent.name || 'Missing Title'}
+                imageUrl={
+                  urlFor(descendent.previewImage, 600, 600)?.url() ||
+                  'https://placehold.co/300x300/png'
+                }
+                link={`/minerals/${descendent?.slug?.current}`}
+              />
+            ))}
+          </ResultGrid> */}
+        </div>
+      )}
+
+      {descendents.length > 0 && (
+        <div className={styles.gridSection}>
+          <h2>Descendents</h2>
+          <ResultGrid>
+            {descendents.map((descendent) => (
+              <ResultCard
+                key={descendent._id}
+                title={descendent.name || 'Missing Title'}
+                imageUrl={
+                  urlFor(descendent.previewImage, 600, 600)?.url() ||
+                  'https://placehold.co/300x300/png'
+                }
+                link={`/minerals/${descendent?.slug?.current}`}
+              />
+            ))}
+          </ResultGrid>
+        </div>
+      )}
+
+      {mineral.specimens?.length > 0 && (
+        <div className={styles.gridSection}>
+          <h2>Specimens</h2>
+          <ResultGrid>
+            {mineral.specimens?.map((specimen) => (
+              <ResultCard
+                key={specimen._id}
+                title={specimen.name || 'Missing Title'}
+                imageUrl={
+                  urlFor(specimen.previewImage, 600, 600)?.url() ||
+                  'https://placehold.co/300x300/png'
+                }
+                link={`/specimens/${specimen?.slug?.current}`}
+              />
+            ))}
+          </ResultGrid>
+        </div>
+      )}
     </>
   );
 }

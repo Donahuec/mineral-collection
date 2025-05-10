@@ -658,10 +658,29 @@ export type SPECIMENS_QUERYResult = Array<{
     _type: 'image';
   } | null;
 }>;
+// Variable: MINERAL_CHILDREN_QUERY
+// Query: *[  _type == "mineral"  && defined(slug.current)  && parent._ref == $id  && count(*[_type == "specimen" && references(^._id)]) > 0]{_id, name, slug, previewImage}|order(name asc)
+export type MINERAL_CHILDREN_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  previewImage: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  } | null;
+}>;
 
 // Source: ../mineral-collection-site/src/app/minerals/[slug]/page.tsx
 // Variable: MINERAL_QUERY
-// Query: *[    _type == "mineral" &&    slug.current == $slug  ][0]{  ...,  'specimens': *[_type == "specimen" && references(^._id)]{    _id,    name,    slug,    previewImage}}
+// Query: *[    _type == "mineral" &&    slug.current == $slug  ][0]{  ...,  'specimens': *[_type == "specimen" && references(^._id)]{    _id,    name,    slug,    previewImage},'parents': [parent->{_id,    name,    slug,    previewImage},parent->parent->{_id,    name,    slug,    previewImage},parent->parent->parent->{_id,    name,    slug,    previewImage}]}
 export type MINERAL_QUERYResult = {
   _id: string;
   _type: 'mineral';
@@ -868,6 +887,23 @@ export type MINERAL_QUERYResult = {
       _type: 'image';
     } | null;
   }>;
+  parents: Array<{
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
+    previewImage: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    } | null;
+  } | null>;
 } | null;
 
 // Source: ../mineral-collection-site/src/app/rocks/[slug]/page.tsx
@@ -1181,7 +1217,8 @@ declare module '@sanity/client' {
     '*[\n  _type == "mineral"\n  && defined(slug.current) \n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': MINERALS_QUERYResult;
     '*[\n  _type == "rock"\n  && defined(slug.current) \n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': ROCKS_QUERYResult;
     '*[\n  _type == "specimen"\n  && defined(slug.current) && defined(previewImage)\n]{_id,  name, numericId, slug, previewImage}|order(numericId asc)[0...3]': SPECIMENS_QUERYResult;
-    '*[\n    _type == "mineral" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  \'specimens\': *[_type == "specimen" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n}\n}': MINERAL_QUERYResult;
+    '*[\n  _type == "mineral"\n  && defined(slug.current)\n  && parent._ref == $id\n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': MINERAL_CHILDREN_QUERYResult;
+    '*[\n    _type == "mineral" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  \'specimens\': *[_type == "specimen" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n},\n\'parents\': [\nparent->{_id,\n    name,\n    slug,\n    previewImage},\nparent->parent->{_id,\n    name,\n    slug,\n    previewImage},\nparent->parent->parent->{_id,\n    name,\n    slug,\n    previewImage}\n]\n}': MINERAL_QUERYResult;
     '*[\n    _type == "rock" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  \'specimens\': *[_type == "specimen" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n}\n}': ROCK_QUERYResult;
     '*[\n    _type == "specimen" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  minerals[]->{name, _id, slug, previewImage},\n  rocks[]->{name, _id, slug, previewImage}\n}': SPECIMEN_QUERYResult;
   }

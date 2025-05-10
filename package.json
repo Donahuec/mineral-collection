@@ -1,1 +1,13 @@
-{}
+{
+  "name": "mineral-collection",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
+  "scripts": {
+    "typegen:extract": "npm --prefix ./studio run update-types",
+    "typegen": "npm --prefix ./studio run typegen",
+    "studio:dev": "npm --prefix ./studio run dev",
+    "site:dev": "npm --prefix ./mineral-collection-site run dev"
+  }
+}

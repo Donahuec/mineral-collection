@@ -1,1 +1,17 @@
+.section {
+  background-color: var(--darkAccent);
+  padding: var(--s5);
+  margin-inline: clamp(var(--s3), 5%, (--s5));
+  margin-block: var(--s5);
+  border-radius: var(--br2);
+}
 
+.section p {
+  margin-bottom: var(--s2);
+  min-height: 1rem;
+}
+
+.sectionTitle {
+  margin-bottom: var(--s3);
+  border-bottom: var(--s1) solid var(--lightAccent);
+}
