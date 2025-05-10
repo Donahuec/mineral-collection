@@ -10,6 +10,7 @@ interface ResultGridProps {
 
 interface ResultGridGroupProps {
   title: string;
+  /* eslint-disable  @typescript-eslint/no-explicit-any */
   items: any[];
   urlBase: string;
 }

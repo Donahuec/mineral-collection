@@ -8,6 +8,7 @@
     "typegen:extract": "npm --prefix ./studio run update-types",
     "typegen": "npm --prefix ./studio run typegen",
     "studio:dev": "npm --prefix ./studio run dev",
-    "site:dev": "npm --prefix ./mineral-collection-site run dev"
+    "site:dev": "npm --prefix ./mineral-collection-site run dev",
+    "lint": "npm --prefix ./mineral-collection-site run lint"
   }
 }
