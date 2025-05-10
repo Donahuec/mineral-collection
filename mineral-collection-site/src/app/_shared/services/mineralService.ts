@@ -46,7 +46,6 @@ export async function getMinerals(
   return minerals;
 }
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 export async function getMineralDescendents(
   id: string,
   depth: number = 0

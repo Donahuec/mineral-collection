@@ -6,10 +6,8 @@ import BackLink from '@/app/_shared/components/backLink/backLink';
 import ImageHeader from '@/app/_shared/components/imageHeader/imageHeader';
 import Property from '@/app/_shared/components/propertyList/property/property';
 import PropertyList from '@/app/_shared/components/propertyList/propertyList';
-import ResultCard from '@/app/_shared/components/resultGrid/resultCard/resultCard';
-import ResultGrid from '@/app/_shared/components/resultGrid/resultGrid';
+import { ResultGridGroup } from '@/app/_shared/components/resultGrid/resultGrid';
 import { getMineralDescendents } from '@/app/_shared/services/mineralService';
-import { urlFor } from '@/app/_shared/utils/imageService';
 import { sanityFetch } from '@/sanity/live';
 import { MINERAL_QUERYResult } from '@/sanity/types';
 
@@ -94,63 +92,27 @@ export default async function MineralPage({
         </div>
       )}
       {mineral.parent && (
-        <div className={styles.gridSection}>
-          <h2 className={styles.gridTitle}>Parents</h2>
-          <ResultGrid>
-            {mineral.parents.map(
-              (parent) =>
-                parent && (
-                  <ResultCard
-                    key={parent._id}
-                    title={parent.name || 'Missing Title'}
-                    imageUrl={
-                      urlFor(parent.previewImage, 600, 600)?.url() ||
-                      'https://placehold.co/300x300/png'
-                    }
-                    link={`/minerals/${parent?.slug?.current}`}
-                  />
-                )
-            )}
-          </ResultGrid>
-        </div>
+        <ResultGridGroup
+          title='Parents'
+          items={mineral.parents}
+          urlBase='minerals'
+        />
       )}
 
       {descendents.length > 0 && (
-        <div className={styles.gridSection}>
-          <h2 className={styles.gridTitle}>Descendents</h2>
-          <ResultGrid>
-            {descendents.map((descendent) => (
-              <ResultCard
-                key={descendent._id}
-                title={descendent.name || 'Missing Title'}
-                imageUrl={
-                  urlFor(descendent.previewImage, 600, 600)?.url() ||
-                  'https://placehold.co/300x300/png'
-                }
-                link={`/minerals/${descendent?.slug?.current}`}
-              />
-            ))}
-          </ResultGrid>
-        </div>
+        <ResultGridGroup
+          title='Descendents'
+          items={descendents}
+          urlBase='minerals'
+        />
       )}
 
       {mineral.specimens?.length > 0 && (
-        <div className={styles.gridSection}>
-          <h2 className={styles.gridTitle}>Specimens</h2>
-          <ResultGrid>
-            {mineral.specimens?.map((specimen) => (
-              <ResultCard
-                key={specimen._id}
-                title={specimen.name || 'Missing Title'}
-                imageUrl={
-                  urlFor(specimen.previewImage, 600, 600)?.url() ||
-                  'https://placehold.co/300x300/png'
-                }
-                link={`/specimens/${specimen?.slug?.current}`}
-              />
-            ))}
-          </ResultGrid>
-        </div>
+        <ResultGridGroup
+          title='Specimens'
+          items={mineral.specimens}
+          urlBase='specimens'
+        />
       )}
     </>
   );

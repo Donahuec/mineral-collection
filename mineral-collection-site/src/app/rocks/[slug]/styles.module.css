@@ -1,0 +1,4 @@
+.notes p {
+  margin-bottom: var(--s2);
+  min-height: 1rem;
+}
