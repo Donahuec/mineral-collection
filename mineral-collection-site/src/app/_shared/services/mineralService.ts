@@ -46,7 +46,7 @@ export async function getMinerals(
   return minerals;
 }
 
-export async function getMineralDescendents(
+export async function getMineralDescendants(
   id: string,
   depth: number = 0
 ): Promise<MINERALS_QUERYResult> {
