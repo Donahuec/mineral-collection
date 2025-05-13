@@ -13,8 +13,8 @@
   "dependencies": {
     "@sanity/image-url": "^1.1.0",
     "lucide-react": "^0.482.0",
-    "next": "15.2.1",
-    "next-sanity": "^9.8.61",
+    "next": "^15.3.2",
+    "next-sanity": "^9.11.0",
     "react": "^19.0.0",
     "react-aria-components": "^1.7.1",
     "react-dom": "^19.0.0"
@@ -23,6 +23,7 @@
     "@chromatic-com/storybook": "^3.2.6",
     "@eslint/eslintrc": "^3",
     "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
     "@storybook/addon-onboarding": "^8.6.12",
     "@storybook/blocks": "^8.6.12",
     "@storybook/experimental-addon-test": "^8.6.12",
