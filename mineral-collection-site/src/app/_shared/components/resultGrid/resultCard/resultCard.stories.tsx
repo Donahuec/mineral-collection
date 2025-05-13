@@ -13,7 +13,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof ResultCard>;
 
-export const FirstStory: Story = {
+export const Default: Story = {
   args: {
     title: 'First Story',
     imageUrl: 'https://placehold.co/300x300/png',
