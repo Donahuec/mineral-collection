@@ -19,6 +19,7 @@ import {
   specimenShapes,
   specimenSizes,
 } from '@/app/_shared/constants/constants';
+import { getBackLink } from '@/app/_shared/services/navigationHelpersService';
 import { sanityFetch } from '@/sanity/live';
 import { SPECIMEN_QUERYResult } from '@/sanity/types';
 
@@ -61,19 +62,21 @@ export default async function SpecimenPage({
     query: SPECIMEN_QUERY,
     params: await params,
   });
+
   const specimen = result?.data as SPECIMEN_QUERYResult;
   if (!specimen) {
     notFound();
   }
 
+  const { referrerPath, referrerTitle } = await getBackLink(
+    '/specimens',
+    'Specimens',
+    specimen.slug!.current!
+  );
+
   return (
     <>
-      <BackLink
-        title='Specimens'
-        href='/specimens'
-        useDynamic
-        currentSlug={specimen.slug?.current}
-      />
+      <BackLink title={referrerTitle} href={referrerPath} />
       <ImageHeader
         title={`${specimen.name} - #${specimen.numericId}`}
         image={specimen.previewImage}

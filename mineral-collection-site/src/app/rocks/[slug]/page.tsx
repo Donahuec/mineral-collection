@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import BackLink from '@/app/_shared/components/backLink/backLink';
 import ImageHeader from '@/app/_shared/components/imageHeader/imageHeader';
 import { ResultGridGroup } from '@/app/_shared/components/resultGrid/resultGrid';
+import { getBackLink } from '@/app/_shared/services/navigationHelpersService';
 import { getRockDescendants } from '@/app/_shared/services/rockService';
 import { sanityFetch } from '@/sanity/live';
 import { ROCK_QUERYResult } from '@/sanity/types';
@@ -60,14 +61,15 @@ export default async function RockPage({
 
   const descendents = await getRockDescendants(rock._id, 1);
 
+  const { referrerPath, referrerTitle } = await getBackLink(
+    '/rocks',
+    'Rocks',
+    rock.slug!.current!
+  );
+
   return (
     <>
-      <BackLink
-        title='Rocks'
-        href='/rocks'
-        useDynamic
-        currentSlug={rock.slug?.current}
-      />
+      <BackLink title={referrerTitle} href={referrerPath} />
       <ImageHeader
         title={rock.name || ''}
         image={rock.previewImage}

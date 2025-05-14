@@ -8,6 +8,7 @@ import Property from '@/app/_shared/components/propertyList/property/property';
 import PropertyList from '@/app/_shared/components/propertyList/propertyList';
 import { ResultGridGroup } from '@/app/_shared/components/resultGrid/resultGrid';
 import { getMineralDescendants } from '@/app/_shared/services/mineralService';
+import { getBackLink } from '@/app/_shared/services/navigationHelpersService';
 import { sanityFetch } from '@/sanity/live';
 import { MINERAL_QUERYResult } from '@/sanity/types';
 
@@ -49,6 +50,7 @@ export default async function MineralPage({
     query: MINERAL_QUERY,
     params: await params,
   });
+
   const mineral = result?.data as MINERAL_QUERYResult;
   if (!mineral) {
     notFound();
@@ -56,14 +58,15 @@ export default async function MineralPage({
 
   const descendents = await getMineralDescendants(mineral._id, 1);
 
+  const { referrerPath, referrerTitle } = await getBackLink(
+    '/minerals',
+    'Minerals',
+    mineral.slug!.current!
+  );
+
   return (
     <>
-      <BackLink
-        title='Minerals'
-        href='/minerals'
-        useDynamic
-        currentSlug={mineral.slug?.current}
-      />
+      <BackLink title={referrerTitle} href={referrerPath} />
       <ImageHeader
         title={mineral.name || ''}
         image={mineral.previewImage}

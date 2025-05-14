@@ -17,7 +17,5 @@ export const Static: Story = {
   args: {
     title: 'test',
     href: '/test',
-    useDynamic: false,
-    currentSlug: '',
   },
 };
