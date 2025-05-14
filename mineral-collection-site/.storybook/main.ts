@@ -7,7 +7,7 @@ const config: StorybookConfig = {
     '@storybook/addon-onboarding',
     '@chromatic-com/storybook',
     '@storybook/experimental-addon-test',
-    '@storybook/addon-interactions',
+    '@storybook/addon-a11y'
   ],
   framework: {
     name: '@storybook/experimental-nextjs-vite',

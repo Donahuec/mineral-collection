@@ -21,12 +21,3 @@ export const Static: Story = {
     currentSlug: '',
   },
 };
-
-export const Dynamic: Story = {
-  args: {
-    title: 'test',
-    href: '/test',
-    useDynamic: true,
-    currentSlug: 'current',
-  },
-};
