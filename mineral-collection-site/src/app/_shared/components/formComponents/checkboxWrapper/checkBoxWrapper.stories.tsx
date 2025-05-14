@@ -6,7 +6,7 @@ import { expect, userEvent, within } from '@storybook/test';
 import CheckboxWrapper from './checkboxWrapper';
 
 const meta = {
-  title: 'FormComponents/CheckboxWrapper',
+  title: 'FormComponents/Checkbox/CheckboxWrapper',
   component: CheckboxWrapper,
   parameters: {
     layout: 'centered',
