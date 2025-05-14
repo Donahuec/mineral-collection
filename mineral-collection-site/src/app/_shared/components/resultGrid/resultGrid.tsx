@@ -1,6 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { urlFor } from '../../utils/imageService';
+import { urlFor } from '@/app/_shared/utils/imageService';
+
 import ResultCard from './resultCard/resultCard';
 import styles from './styles.module.css';
 
