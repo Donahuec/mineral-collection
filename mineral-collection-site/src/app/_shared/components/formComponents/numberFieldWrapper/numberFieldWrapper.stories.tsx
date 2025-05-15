@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 
-import { expect, userEvent, within } from '@storybook/test';
+import { userEvent, within } from '@storybook/test';
 
 import NumberFieldWrapper, { NumberFieldWrapperProps } from './numberFieldWrapper';
 
@@ -16,12 +16,6 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof NumberFieldWrapper>;
-
-// label='Page Size'
-//       minValue={1}
-//       step={1}
-//       value={pageSize}
-//       onChange={updatePageSize}
 
 interface NumberFieldWithHooksProps extends NumberFieldWrapperProps {
   startValue?: number;
