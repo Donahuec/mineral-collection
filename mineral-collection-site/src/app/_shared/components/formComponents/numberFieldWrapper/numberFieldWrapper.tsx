@@ -7,7 +7,7 @@ import iconButtonStyles from '@/app/_shared/styles/iconButton.module.css';
 
 import styles from './numberFieldWrapper.module.css';
 
-interface NumberFieldWrapperProps extends NumberFieldProps {
+export interface NumberFieldWrapperProps extends NumberFieldProps {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
@@ -26,13 +26,15 @@ export default function NumberFieldWrapper({
       <Group className={styles.group}>
         <Button
           slot='decrement'
-          className={`${iconButtonStyles.iconButton} ${styles.button}`}>
+          className={`${iconButtonStyles.iconButton} ${styles.button}`}
+          data-testid='decrement-button'>
           <Minus />
         </Button>
-        <Input className={styles.input} />
+        <Input data-testid='number-input' className={styles.input} />
         <Button
           slot='increment'
-          className={`${iconButtonStyles.iconButton} ${styles.button}`}>
+          className={`${iconButtonStyles.iconButton} ${styles.button}`}
+          data-testid='increment-button'>
           <Plus />
         </Button>
       </Group>

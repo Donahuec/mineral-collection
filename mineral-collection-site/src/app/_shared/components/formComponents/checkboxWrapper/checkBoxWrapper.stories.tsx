@@ -3,11 +3,12 @@ import { JSX, useState } from 'react';
 
 import { expect, userEvent, within } from '@storybook/test';
 
-import CheckboxWrapper from './checkboxWrapper';
+import CheckboxWrapper, { CheckboxGroupWrapper } from './checkboxWrapper';
 
 const meta = {
   title: 'FormComponents/Checkbox/CheckboxWrapper',
   component: CheckboxWrapper,
+  subcomponents: { CheckboxGroupWrapper },
   parameters: {
     layout: 'centered',
   },
@@ -64,4 +65,14 @@ export const ClickSelected: Story = {
       (canvas.getByLabelText('Checkbox Label') as HTMLInputElement).checked
     ).toBeFalsy();
   },
+};
+
+export const Group: Story = {
+  render: () => (
+    <CheckboxGroupWrapper label='Checkbox Group Label'>
+      <CheckboxWithHooks defaultState={false} />
+      <CheckboxWithHooks defaultState={false} />
+      <CheckboxWithHooks defaultState={false} />
+    </CheckboxGroupWrapper>
+  ),
 };

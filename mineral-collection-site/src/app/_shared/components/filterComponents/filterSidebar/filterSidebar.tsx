@@ -13,7 +13,10 @@ export default function FilterSidebar({
 }) {
   return (
     <DialogTrigger>
-      <Button className={styles.sidebarButton} aria-label='Open Filters'>
+      <Button
+        className={styles.sidebarButton}
+        aria-label='Open Filters'
+        data-testid='open-filters'>
         <ListFilterPlus size={24} />
       </Button>
       <Sidebar>
@@ -23,7 +26,9 @@ export default function FilterSidebar({
           </Heading>
           <Button
             slot='close'
-            className={`${styles.closeButton} ${iconButtonStyles.iconButton}`}>
+            className={`${styles.closeButton} ${iconButtonStyles.iconButton}`}
+            data-testid='close-filters'
+            aria-label='Close Filters'>
             <X />
           </Button>
         </div>
