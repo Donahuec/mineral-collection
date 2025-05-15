@@ -43,3 +43,12 @@ next-env.d.ts
 *storybook.log
 
 storybook-examples
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+*examples*
