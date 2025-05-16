@@ -12,10 +12,14 @@ jobs:
         with:
           ref: ${{ github.event.client_payload.git.sha }}
       - name: Install dependencies
-        run: npm --prefix ./mineral-collection-site ci
+        run: npm ci
+        working-directory: ./mineral-collection-site
       - name: Install playwright
         run: npx playwright install --with-deps
+        working-directory: ./mineral-collection-site
       - name: Run tests
         run: npm run playwright
+        working-directory: ./mineral-collection-site
         env:
-          NEXT_PUBLIC_URL: ${{ github.event.client_payload.url }}
+          BASE_URL: ${{ github.event.client_payload.url }}
+          CI: true
