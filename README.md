@@ -81,7 +81,10 @@ npm run playwright:codegen
 
 ### Other Utilities
 
-Use `npm run lint` to make sure the build passes linting for the Vercel deployment.
+```sh
+# make sure the build passes linting for the Vercel deployment
+npm run lint
+```
 
 ## Sanity Studio
 
