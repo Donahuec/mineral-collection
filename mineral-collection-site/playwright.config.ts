@@ -3,14 +3,7 @@ import dotenv from 'dotenv';
 import { defineConfig, devices } from '@playwright/test';
 
 dotenv.config();
-console.log('Using - BASE_URL:', process.env.BASE_URL);
-console.log('Using - CI:', process.env.CI);
-if (process.env.VERCEL_AUTOMATION_BYPASS_SECRET) {
-  console.log(
-    'Using - VERCEL_AUTOMATION_BYPASS_SECRET:',
-    process.env.VERCEL_AUTOMATION_BYPASS_SECRET.charAt(0) + '...'
-  ); // Log only the first character for security
-}
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -36,8 +29,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [['html', { outputFolder: 'playwright-report' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     headless: true,
