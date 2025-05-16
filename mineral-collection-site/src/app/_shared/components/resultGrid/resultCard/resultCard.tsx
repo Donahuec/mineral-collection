@@ -1,7 +1,8 @@
+import Image from 'next/image';
 // react component to display an image and title that is clickable to go to the supplied link
-import Link from "next/link";
-import Image from "next/image";
-import styles from "./styles.module.css";
+import Link from 'next/link';
+
+import styles from './styles.module.css';
 
 type ResultCardProps = {
   title: string;
@@ -9,18 +10,14 @@ type ResultCardProps = {
   link: string;
 };
 
-export default function ResultCard({
-  title,
-  imageUrl,
-  link,
-}: ResultCardProps) {
+export default function ResultCard({ title, imageUrl, link }: ResultCardProps) {
   return (
     <li className={styles.card}>
       <Link href={link}>
         <div className={styles.container}>
           <Image
             src={imageUrl}
-            alt={title}
+            alt=''
             className={styles.image}
             width={300}
             height={300}
