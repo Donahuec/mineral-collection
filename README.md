@@ -1,9 +1,11 @@
-# CrystalDB - Mineral Collection Catalog
+# ![Logo](icon.png) CrystalDB - Mineral Collection Catalog
 
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fmineral-collection.vercel.app%2F&link=https%3A%2F%2Fmineral-collection.vercel.app%2F)
+![Website](https://img.shields.io/website?url=https%3A%2F%2Fmineral-collection.vercel.app%2F&)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/donahuec/mineral-collection/playwright-pr.yaml?branch=main&label=Playwright%20Tests)
 
 A NextJS and Sanity CMS based website for sharing and cataloging my crystal and mineral collection.
+
+https://mineral-collection.vercel.app/
 
 ## Tech Stack
 
