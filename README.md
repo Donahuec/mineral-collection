@@ -21,21 +21,22 @@ NextJS and React Site deployed to Vercel.
 
 Located under `/mineral-collection-site`
 
-```
+```sh
+# initial setup
 cd mineral-collection-site
 npm install
 ```
 
 ### Build and Run
 
-```
-// dev build and run
+```sh
+# dev build and run
 npm run dev
 
-// build only
+# build only
 npm run build
 
-// run production build
+# run production build
 npm run start
 ```
 
@@ -47,7 +48,7 @@ Open in http://localhost:3000
 
 Storybook story files are stored alongside their related components.
 
-```
+```sh
 npm run storybook
 ```
 
@@ -59,17 +60,17 @@ Playwright tests are saved under the `mineral-collection-site/tests` folder.
 
 If a local server is currently running, the tests will run against that. Otherwise they will start their own server, but require an existing build.
 
-```
-// create build
+```sh
+# create build
 npm run build
 
-// run tests
+# run tests
 npm run test
 
-// open playwright UI
+# open playwright UI
 npm run playwright:open
 
-// run playwright codegen
+# run playwright codegen
 npm run playwright:codegen
 ```
 
@@ -86,18 +87,19 @@ Use `npm run lint` to make sure the build passes linting for the Vercel deployme
 
 Sanity Studio code, located under `/studio`
 
-```
+```sh
+# initial setup
 cd studio
 npm install
 ```
 
 ### Build and Run
 
-```
-// build and run dev server
+```sh
+# build and run dev server
 npm run dev
 
-// preview static build
+# preview static build
 npm run start
 ```
 
@@ -107,7 +109,7 @@ View at http://localhost:3333/
 
 To update typescript types based on query or schema changes run the following:
 
-```
+```sh
 npm run update-types
 ```
 
@@ -115,6 +117,6 @@ npm run update-types
 
 Deploy updates to Sanity Studio with the following:
 
-```
+```sh
 npm run sanity deploy
 ```
