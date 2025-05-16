@@ -1,5 +1,16 @@
+import dotenv from 'dotenv';
+
 import { defineConfig, devices } from '@playwright/test';
 
+dotenv.config();
+console.log('Using - BASE_URL:', process.env.BASE_URL);
+console.log('Using - CI:', process.env.CI);
+if (process.env.VERCEL_AUTOMATION_BYPASS_SECRET) {
+  console.log(
+    'Using - VERCEL_AUTOMATION_BYPASS_SECRET:',
+    process.env.VERCEL_AUTOMATION_BYPASS_SECRET.charAt(0) + '...'
+  ); // Log only the first character for security
+}
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -29,15 +40,22 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    headless: true,
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: process.env.BASE_URL
-      ? process.env.BASE_URL
-      : 'http://localhost:3000',
+    baseURL: process.env.BASE_URL ?? 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    extraHTTPHeaders: {
+      ...(process.env.VERCEL_AUTOMATION_BYPASS_SECRET
+        ? {
+            'x-vercel-protection-bypass':
+              process.env.VERCEL_AUTOMATION_BYPASS_SECRET,
+            //'x-vercel-set-bypass-cookie': 'samesitenone' // Set SameSite to None if deploying through an iframe or other indirect way.
+          }
+        : {}),
+    },
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
