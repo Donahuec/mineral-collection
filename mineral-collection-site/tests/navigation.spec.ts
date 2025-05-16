@@ -125,7 +125,7 @@ test.describe('Navigate to Individual Pages', () => {
   });
 });
 
-test.describe('Navigate Through Chained Paged', () => {
+test.describe('Navigate Through Chained Pages', () => {
   test('Navigate Between Multiple Pages with BackLink', async ({ page }) => {
     await page
       .getByRole('main')
