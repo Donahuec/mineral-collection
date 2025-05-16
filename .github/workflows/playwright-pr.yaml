@@ -1,29 +1,27 @@
-name: Playwright Tests on Vercel Deployment Success
+name: Playwright Tests on PR or Push
 on:
-  repository_dispatch:
-    types:
-      - 'vercel.deployment.success'
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
-  run-e2es:
-    if: github.event_name == 'repository_dispatch'
-    timeout-minutes: 10
+  test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          ref: ${{ github.event.client_payload.git.sha }}
+          node-version: lts/*
       - name: Install dependencies
         run: npm ci
         working-directory: ./mineral-collection-site
-      - name: Install playwright
+      - name: Install Playwright Browsers
         run: npx playwright install --with-deps
         working-directory: ./mineral-collection-site
-      - name: Run tests
-        run: npm run playwright
+      - name: Run Playwright tests
+        run: npx playwright test
         working-directory: ./mineral-collection-site
-        env:
-          BASE_URL: ${{ github.event.client_payload.url }}
-          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:

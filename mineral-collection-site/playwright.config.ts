@@ -8,7 +8,7 @@ dotenv.config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  webServer: process.env.CI
+  webServer: process.env.VERCEL_AUTOMATION_BYPASS_SECRET // If the secret is set, we are running against a Vercel deployment
     ? undefined
     : {
         // Use a custom web server for development
