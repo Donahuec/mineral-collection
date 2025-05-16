@@ -16,4 +16,4 @@ jobs:
       - name: Run tests
         run: npm run playwright
         env:
-          BASE_URL: ${{ github.event.client_payload.url }}
+          NEXT_PUBLIC_URL: ${{ github.event.client_payload.url }}
