@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Playwright Tests on Vercel Deployment Success
 on:
   repository_dispatch:
     types:
