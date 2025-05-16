@@ -105,9 +105,11 @@ test.describe('Navigate to Individual Pages', () => {
     await page.getByRole('searchbox', { name: 'Search' }).click();
     await page.getByRole('searchbox', { name: 'Search' }).fill('Basalt');
     await page.waitForURL('**/rocks?search=Basalt');
-    await page.getByRole('link', { name: 'Basalt' }).click();
+    await page.getByRole('link', { name: 'Basalt', exact: true }).click();
     await page.waitForURL('**/rocks/basalt');
-    await expect(page.getByRole('heading', { name: 'Basalt' })).toBeVisible();
+    await expect(
+      page.getByRole('heading', { name: 'Basalt', exact: true })
+    ).toBeVisible();
   });
 
   test('Navigate to Specific Specimen', async ({ page }) => {
