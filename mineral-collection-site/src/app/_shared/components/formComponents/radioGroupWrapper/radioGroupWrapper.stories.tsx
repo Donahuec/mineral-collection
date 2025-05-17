@@ -1,20 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
-import { userEvent, within } from '@storybook/test';
-
 import RadioGroupWrapper, { RadioGroupWrapperProps, RadioWrapper } from './radioGroupWrapper';
-
-{
-  /* <RadioGroupWrapper
-          name='sortBy'
-          value={sortBy}
-          label='Sort By'
-          onChange={updateSortBy}>
-          <RadioWrapper value='numericId'>Id</RadioWrapper>
-          <RadioWrapper value='name'>Name</RadioWrapper>
-        </RadioGroupWrapper> */
-}
 
 const meta = {
   title: 'FormComponents/RadioGroupWrapper',
