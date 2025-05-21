@@ -4,7 +4,8 @@ import { FieldError, Label, Radio, RadioGroup, Text } from 'react-aria-component
 
 import styles from './radioGroupWrapper.module.css';
 
-interface RadioGroupWrapperProps extends Omit<RadioGroupProps, 'children'> {
+export interface RadioGroupWrapperProps
+  extends Omit<RadioGroupProps, 'children'> {
   children?: React.ReactNode;
   label?: string;
   description?: string;

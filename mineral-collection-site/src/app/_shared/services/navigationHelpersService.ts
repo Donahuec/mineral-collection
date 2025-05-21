@@ -13,7 +13,11 @@ export async function getBackLink(
   const referrer = headersList.get('referer');
   const baseUrl = process.env.NEXT_PUBLIC_URL;
 
-  if (!referrer || !baseUrl || referrer.match(`/${currentSlug}`)) {
+  if (
+    !referrer ||
+    !baseUrl ||
+    referrer.match(new RegExp(`//${currentSlug}$`))
+  ) {
     return { referrerPath: href, referrerTitle: title };
   }
   const referrerPath = referrer.replace(baseUrl, '');
