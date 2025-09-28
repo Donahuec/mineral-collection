@@ -26,6 +26,10 @@ export default async function IndexPage() {
           <h2>Rocks</h2>
           <div className={styles.linkUnderline} />
         </Link>
+        <Link href={`/collections`} className={styles.link}>
+          <h2>Collections</h2>
+          <div className={styles.linkUnderline} />
+        </Link>
       </div>
     </ImageHeader>
   );

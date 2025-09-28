@@ -2,7 +2,12 @@
 import { Menu as MenuIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import {
-  Button, Menu, MenuItem, MenuTrigger, Popover, RouterProvider
+  Button,
+  Menu,
+  MenuItem,
+  MenuTrigger,
+  Popover,
+  RouterProvider,
 } from 'react-aria-components';
 
 import styles from './navMenu.module.css';
@@ -40,6 +45,9 @@ export default function NavMenu() {
               </MenuItem>
               <MenuItem href='/rocks' className={styles.menuLink}>
                 Rocks
+              </MenuItem>
+              <MenuItem href='/collections' className={styles.menuLink}>
+                Collections
               </MenuItem>
             </Menu>
           </RouterProvider>

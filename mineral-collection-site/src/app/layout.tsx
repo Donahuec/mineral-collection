@@ -41,6 +41,7 @@ export default function RootLayout({
             <Link href='/specimens'>Specimens</Link>
             <Link href='/minerals'>Minerals</Link>
             <Link href='/rocks'>Rocks</Link>
+            <Link href='/collections'>Collections</Link>
           </div>
           <div className={styles.mobileNav}>
             <NavMenu />
