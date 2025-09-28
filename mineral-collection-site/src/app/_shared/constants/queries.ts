@@ -26,3 +26,9 @@ const MINERAL_CHILDREN_QUERY = defineQuery(`*[
   && parent._ref == $id
   && count(*[_type == "specimen" && references(^._id)]) > 0
 ]{_id, name, slug, previewImage}|order(name asc)`);
+
+/* eslint-disable  @typescript-eslint/no-unused-vars */
+const COLLECTIONS_QUERY = defineQuery(`*[
+    _type == "collection"
+    && defined(slug.current)
+  ]{_id, name, slug, previewImage}|order(name asc)`);

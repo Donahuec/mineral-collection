@@ -13,59 +13,69 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: 'sanity.imagePaletteSwatch';
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: 'sanity.imagePalette';
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: 'sanity.imageDimensions';
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
+export type Collection = {
   _id: string;
-  _type: 'sanity.fileAsset';
+  _type: 'collection';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: 'geopoint';
-  lat?: number;
-  lng?: number;
-  alt?: number;
+  name?: string;
+  slug?: Slug;
+  shortDescription?: string;
+  previewImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  specimens?: Array<{
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: 'specimen';
+  }>;
+  notes?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  source?: string;
+  sourceUrl?: string;
+  acquiredDate?: string;
+  price?: number;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+    _key: string;
+  }>;
 };
 
 export type Rock = {
@@ -326,6 +336,18 @@ export type Specimen = {
   numericId?: number;
   favorite?: boolean;
   slug?: Slug;
+  previewImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
   shortDescription?: string;
   description?: Array<{
     children?: Array<{
@@ -358,18 +380,6 @@ export type Specimen = {
     _type: 'image';
     _key: string;
   }>;
-  previewImage?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
   minerals?: Array<{
     _ref: string;
     _type: 'reference';
@@ -405,10 +415,8 @@ export type Specimen = {
     | 'flake'
     | 'group'
   >;
+  size?: number;
   sizeCategory?:
-    | 'medium'
-    | 'small'
-    | 'tiny'
     | 'micro'
     | 'thumbnail'
     | 'smallMiniature'
@@ -416,11 +424,11 @@ export type Specimen = {
     | 'smallCabinet'
     | 'cabinet'
     | 'museum';
-  size?: number;
   sizeDescription?: Array<string>;
   weight?: number;
   colors?: Array<string>;
   form?: Array<
+    | 'trigonal'
     | 'cubic'
     | 'dodecahedral'
     | 'octahedral'
@@ -520,12 +528,30 @@ export type Specimen = {
   lowInterest?: boolean;
 };
 
-export type SanityImageCrop = {
-  _type: 'sanity.imageCrop';
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
+export type SanityImagePaletteSwatch = {
+  _type: 'sanity.imagePaletteSwatch';
+  background?: string;
+  foreground?: string;
+  population?: number;
+  title?: string;
+};
+
+export type SanityImagePalette = {
+  _type: 'sanity.imagePalette';
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
+};
+
+export type SanityImageDimensions = {
+  _type: 'sanity.imageDimensions';
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
 };
 
 export type SanityImageHotspot = {
@@ -534,6 +560,36 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type SanityImageCrop = {
+  _type: 'sanity.imageCrop';
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: 'sanity.fileAsset';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type SanityImageAsset = {
@@ -559,13 +615,6 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityAssetSourceData = {
-  _type: 'sanity.assetSourceData';
-  name?: string;
-  id?: string;
-  url?: string;
-};
-
 export type SanityImageMetadata = {
   _type: 'sanity.imageMetadata';
   location?: Geopoint;
@@ -577,27 +626,42 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
+export type Geopoint = {
+  _type: 'geopoint';
+  lat?: number;
+  lng?: number;
+  alt?: number;
+};
+
 export type Slug = {
   _type: 'slug';
   current?: string;
   source?: string;
 };
 
+export type SanityAssetSourceData = {
+  _type: 'sanity.assetSourceData';
+  name?: string;
+  id?: string;
+  url?: string;
+};
+
 export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | SanityFileAsset
-  | Geopoint
+  | Collection
   | Rock
   | Mineral
   | Specimen
-  | SanityImageCrop
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
   | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
   | SanityImageAsset
-  | SanityAssetSourceData
   | SanityImageMetadata
-  | Slug;
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ../mineral-collection-site/src/app/_shared/constants/queries.ts
 // Variable: MINERALS_QUERY
@@ -677,6 +741,103 @@ export type MINERAL_CHILDREN_QUERYResult = Array<{
     _type: 'image';
   } | null;
 }>;
+// Variable: COLLECTIONS_QUERY
+// Query: *[    _type == "collection"    && defined(slug.current)  ]{_id, name, slug, previewImage}|order(name asc)
+export type COLLECTIONS_QUERYResult = Array<{
+  _id: string;
+  name: string | null;
+  slug: Slug | null;
+  previewImage: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  } | null;
+}>;
+
+// Source: ../mineral-collection-site/src/app/collections/[slug]/page.tsx
+// Variable: COLLECTION_QUERY
+// Query: *[    _type == "collection" &&    slug.current == $slug  ][0]{  ...,  specimens[]->{ _id, name, slug, previewImage }}
+export type COLLECTION_QUERYResult = {
+  _id: string;
+  _type: 'collection';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  shortDescription?: string;
+  previewImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  specimens: Array<{
+    _id: string;
+    name: string | null;
+    slug: Slug | null;
+    previewImage: {
+      asset?: {
+        _ref: string;
+        _type: 'reference';
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: 'image';
+    } | null;
+  }> | null;
+  notes?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: 'span';
+      _key: string;
+    }>;
+    style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal';
+    listItem?: 'bullet' | 'number';
+    markDefs?: Array<{
+      href?: string;
+      _type: 'link';
+      _key: string;
+    }>;
+    level?: number;
+    _type: 'block';
+    _key: string;
+  }>;
+  source?: string;
+  sourceUrl?: string;
+  acquiredDate?: string;
+  price?: number;
+  images?: Array<{
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+    _key: string;
+  }>;
+} | null;
 
 // Source: ../mineral-collection-site/src/app/minerals/[slug]/page.tsx
 // Variable: MINERAL_QUERY
@@ -1023,6 +1184,18 @@ export type SPECIMEN_QUERYResult = {
   numericId?: number;
   favorite?: boolean;
   slug?: Slug;
+  previewImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
   shortDescription?: string;
   description?: Array<{
     children?: Array<{
@@ -1055,18 +1228,6 @@ export type SPECIMEN_QUERYResult = {
     _type: 'image';
     _key: string;
   }>;
-  previewImage?: {
-    asset?: {
-      _ref: string;
-      _type: 'reference';
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: 'image';
-  };
   minerals: Array<{
     name: string | null;
     _id: string;
@@ -1122,18 +1283,15 @@ export type SPECIMEN_QUERYResult = {
     | 'sphere'
     | 'tumbled'
   >;
+  size?: number;
   sizeCategory?:
     | 'cabinet'
-    | 'medium'
     | 'micro'
     | 'miniature'
     | 'museum'
-    | 'small'
     | 'smallCabinet'
     | 'smallMiniature'
-    | 'thumbnail'
-    | 'tiny';
-  size?: number;
+    | 'thumbnail';
   sizeDescription?: Array<string>;
   weight?: number;
   colors?: Array<string>;
@@ -1187,6 +1345,7 @@ export type SPECIMEN_QUERYResult = {
     | 'striated'
     | 'tabular'
     | 'tetrahedral'
+    | 'trigonal'
     | 'unknown'
   >;
   origin?: string;
@@ -1239,12 +1398,15 @@ export type SPECIMEN_QUERYResult = {
 
 // Query TypeMap
 import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[\n  _type == "mineral"\n  && defined(slug.current) \n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': MINERALS_QUERYResult;
     '*[\n  _type == "rock"\n  && defined(slug.current) \n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': ROCKS_QUERYResult;
     '*[\n  _type == "specimen"\n  && defined(slug.current) && defined(previewImage)\n]{_id,  name, numericId, slug, previewImage}|order(numericId asc)[0...3]': SPECIMENS_QUERYResult;
     '*[\n  _type == "mineral"\n  && defined(slug.current)\n  && parent._ref == $id\n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': MINERAL_CHILDREN_QUERYResult;
+    '*[\n    _type == "collection"\n    && defined(slug.current)\n  ]{_id, name, slug, previewImage}|order(name asc)': COLLECTIONS_QUERYResult;
+    '*[\n    _type == "collection" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  specimens[]->{ _id, name, slug, previewImage }\n}': COLLECTION_QUERYResult;
     '*[\n    _type == "mineral" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  \'specimens\': *[_type == "specimen" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n},\n\'parents\': [\nparent->{_id,\n    name,\n    slug,\n    previewImage},\nparent->parent->{_id,\n    name,\n    slug,\n    previewImage},\nparent->parent->parent->{_id,\n    name,\n    slug,\n    previewImage}\n]\n}': MINERAL_QUERYResult;
     '*[\n    _type == "rock" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  componentMinerals[]->{\n    _id,\n    name,\n    slug,\n    previewImage\n  },\n  \'specimens\': *[_type == "specimen" && references(^._id)]{\n    _id,\n    name,\n    slug,\n    previewImage\n  },\n  \'parents\': [\n  parent->{_id,\n      name,\n      slug,\n      previewImage},\n  parent->parent->{_id,\n      name,\n      slug,\n      previewImage},\n  parent->parent->parent->{_id,\n      name,\n      slug,\n      previewImage}\n  ]\n}': ROCK_QUERYResult;
     '*[\n    _type == "specimen" &&\n    slug.current == $slug\n  ][0]{\n  ...,\n  minerals[]->{name, _id, slug, previewImage},\n  rocks[]->{name, _id, slug, previewImage}\n}': SPECIMEN_QUERYResult;
