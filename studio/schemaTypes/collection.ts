@@ -62,7 +62,7 @@ export const collectionType = defineType({
       group: 'notes',
     }),
     defineField({
-      name: 'aquiredDate',
+      name: 'acquiredDate',
       type: 'date',
       group: 'details',
     }),

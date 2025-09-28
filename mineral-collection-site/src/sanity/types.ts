@@ -61,7 +61,7 @@ export type Collection = {
   }>;
   source?: string;
   sourceUrl?: string;
-  aquiredDate?: string;
+  acquiredDate?: string;
   price?: number;
   images?: Array<{
     asset?: {
@@ -822,7 +822,7 @@ export type COLLECTION_QUERYResult = {
   }>;
   source?: string;
   sourceUrl?: string;
-  aquiredDate?: string;
+  acquiredDate?: string;
   price?: number;
   images?: Array<{
     asset?: {
@@ -1398,6 +1398,7 @@ export type SPECIMEN_QUERYResult = {
 
 // Query TypeMap
 import '@sanity/client';
+
 declare module '@sanity/client' {
   interface SanityQueries {
     '*[\n  _type == "mineral"\n  && defined(slug.current) \n  && count(*[_type == "specimen" && references(^._id)]) > 0\n]{_id, name, slug, previewImage}|order(name asc)': MINERALS_QUERYResult;

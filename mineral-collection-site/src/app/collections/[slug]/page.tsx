@@ -69,9 +69,9 @@ export default async function CollectionPage({
               </Link>
             </Property>
           )}
-          {collection.aquiredDate && (
+          {collection.acquiredDate && (
             <Property title='Acquired'>
-              {new Date(collection.aquiredDate).toLocaleDateString('en-US', {
+              {new Date(collection.acquiredDate).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',

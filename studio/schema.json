@@ -362,7 +362,7 @@
         },
         "optional": true
       },
-      "aquiredDate": {
+      "acquiredDate": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
